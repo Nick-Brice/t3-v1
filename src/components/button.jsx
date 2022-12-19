@@ -8,9 +8,10 @@ export default function Button(props) {
     let className = classNames(
         props.intent == 'primary'
             ? 'bg-primary'
-            : "bg-secondary",
-        'rounded-md',
-        'p-1'
+            : "bg-white",
+        'rounded-full',
+        'p-2',
+        'drop-shadow'
     );
 
     return (

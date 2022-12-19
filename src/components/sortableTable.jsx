@@ -85,47 +85,49 @@ const SortableTable = ({ data }) => {
     }
 
     return (
-        <div>
+        <div className=''>
             <Button onClick={handleLayoutChange}>Change Layout</Button>
             {layout === 'table' && (
-                <Table striped bordered hover>
-                    <thead>
-                        <tr className='cursor-pointer text-black'>
-                            <th className='hover:text-black-500 select-none' onClick={() => {
-                                toggleSort(nameOrder, "name");
-                                handleSort('name', nameOrder)
-                            }}>Name</th>
-                            <th className='hover:text-black-500 select-none' onClick={() => {
-                                toggleSort(usedOrder, "used");
-                                handleSort('used', usedOrder)
-                            }}>Used</th>
-                            <th className='hover:text-black-500 select-none' onClick={() => {
-                                toggleSort(capturedOrder, "captured");
-                                handleSort('captured', capturedOrder)
-                            }}>Captured</th>
-                            <th className='hover:text-black-500 select-none' onClick={() => {
-                                toggleSort(rateOrder, "rate");
-                                handleSort('rate', rateOrder)
-                            }}>Rate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableData.map((row) => (
-                            <tr key={row.name}>
-                                <td>{row.name}</td>
-                                <td>{row.used}</td>
-                                <td>{row.captured}</td>
-                                <td>{row.rate}</td>
+                <div className='bg-white w-fit p-8 rounded-xl'>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr className='cursor-pointer text-black'>
+                                <th className='hover:text-black-500 select-none' onClick={() => {
+                                    toggleSort(nameOrder, "name");
+                                    handleSort('name', nameOrder)
+                                }}>Name</th>
+                                <th className='hover:text-black-500 select-none' onClick={() => {
+                                    toggleSort(usedOrder, "used");
+                                    handleSort('used', usedOrder)
+                                }}>Used</th>
+                                <th className='hover:text-black-500 select-none' onClick={() => {
+                                    toggleSort(capturedOrder, "captured");
+                                    handleSort('captured', capturedOrder)
+                                }}>Captured</th>
+                                <th className='hover:text-black-500 select-none' onClick={() => {
+                                    toggleSort(rateOrder, "rate");
+                                    handleSort('rate', rateOrder)
+                                }}>Rate</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody>
+                            {tableData.map((row) => (
+                                <tr key={row.name}>
+                                    <td>{row.name}</td>
+                                    <td>{row.used}</td>
+                                    <td>{row.captured}</td>
+                                    <td>{row.rate}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
             )}
             {layout === 'grid' && (
                 <div className="grid grid-cols-3 gap-4">
                     {tableData.map((row) => (
                         <div key={row.name}>
-                            <ProductCard title={row.name} img="favicon.ico" used={row.used} captured={row.captured} stream="Waste" rate={row.rate}>
+                            <ProductCard title={row.name} img="/favicon.ico" used={row.used} captured={row.captured} stream="Waste" rate={row.rate}>
                             </ProductCard>
                         </div>
                     ))}
