@@ -21,10 +21,22 @@ const AreaChart = ({ data, width, height }) => {
             .y1(d => yScale(d))
             .y0(yScale(0));
 
+        // create line generator
+        const lineGenerator = d3.line()
+            .x((d, index) => xScale(index))
+            .y(d => yScale(d));
+
         // draw area
         svg.append('path')
-            .attr('fill', 'steelblue')
+            .attr('fill', '#00a2c360')
             .attr('d', area(data));
+
+        // draw line
+        svg.append("path")
+            .attr("d", lineGenerator(data))
+            .attr("fill", "none")
+            .attr("stroke", "#00738B")
+            .attr("stroke-width", "5px");
     }, [data, width, height]);
 
     return (

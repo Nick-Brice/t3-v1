@@ -367,7 +367,7 @@ module.exports = {
         }
       },
       fontFamily: {
-        'sans': ['Montserrat', 'SF Compact', ...defaultTheme.fontFamily.sans]
+        'sans': ['Montserrat','Inter var', 'SF Compact', ...defaultTheme.fontFamily.sans]
       }
     },
   },

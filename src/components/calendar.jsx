@@ -4,10 +4,9 @@ import { createCalendar, getWeeksInMonth } from '@internationalized/date';
 import * as React from 'react';
 import Button from '../components/button';
 
-
 // Reuse the Button from your component library. See below for details.
 
-export default function Calendar(props) {
+export default function Calendar(props, setIsOpen) {
     let { locale } = useLocale();
     let state = useCalendarState({
         ...props,
@@ -31,13 +30,13 @@ export default function Calendar(props) {
                     <Button {...nextButtonProps}>&gt;</Button>
                 </div>
             </div>
-            <CalendarGrid state={state} />
+            <CalendarGrid state={state} setIsOpen={setIsOpen} />
         </div>
     );
 }
 
 
-function CalendarGrid({ state, ...props }) {
+function CalendarGrid({ state, setIsOpen, ...props }) {
     let { locale } = useLocale();
     let { gridProps, headerProps, weekDays } = useCalendarGrid(props, state);
 
@@ -61,6 +60,8 @@ function CalendarGrid({ state, ...props }) {
                                         key={i}
                                         state={state}
                                         date={date}
+                                        setIsOpen={setIsOpen}
+                                        
                                     />
                                 )
                                 : <td key={i} />
@@ -73,7 +74,7 @@ function CalendarGrid({ state, ...props }) {
 }
 
 
-function CalendarCell({ state, date }) {
+function CalendarCell({ state, date, setIsOpen }) {
     let ref = React.useRef();
     let {
         cellProps,
@@ -91,6 +92,7 @@ function CalendarCell({ state, date }) {
         <td {...cellProps}>
             <div
                 {...buttonProps}
+                onClick={setIsOpen}
                 ref={ref}
                 hidden={isOutsideVisibleRange}
                 className={`cell p-1 rounded-xl font-semibold ${isDisabled ? 'text-gray-400' : 'hover:bg-gray-300'

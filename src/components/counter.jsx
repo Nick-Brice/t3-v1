@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const Counter = ({ targetValue }) => {
+const Counter = ({ className, targetValue, duration }) => {
   const [currentValue, setCurrentValue] = useState(0);
+
+  let amountPerMS = targetValue / duration;
+
+  function precise(x) {
+    return Number.parseFloat(x).toFixed(0);
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -11,13 +17,13 @@ const Counter = ({ targetValue }) => {
           return targetValue;
           // return 0;
         }
-        return prevValue + Math.ceil(targetValue / 33 * 1.123456789);
+        return prevValue + 10*amountPerMS;
       });
-    }, 50);
+    }, 10);
     return () => clearInterval(interval);
   }, [targetValue]);
 
-  return <span>{currentValue}</span>;
+  return <span className={`font-bold ${ className }`}>{precise(currentValue)}</span>;
 }
 
 export default Counter;
