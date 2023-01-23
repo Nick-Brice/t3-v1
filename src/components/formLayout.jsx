@@ -3,10 +3,14 @@ import DropdownMenu from '../components/newDropdownMenu';
 import Button from './button';
 import DateField from './dateField';
 
-export default function FormLayout() {
+export default function FormLayout({setOpenForm}) {
+
+    const handleSubmit = () => {
+        setOpenForm(false);
+    }
 
     return (
-        <div className='flex flex-col select-none gap-y-6 py-8 px-24 rounded-2xl bg-gradient-to-l from-primary to-secondary w-1/2 text-white'>
+        <div className='flex flex-col select-none gap-y-6 py-8 px-24 rounded-2xl bg-gradient-to-l from-primary to-secondary text-white'>
             <div className='flex justify-end'>
                 <div className='flex rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
                     <div className='px-8 py-2'>
@@ -96,7 +100,7 @@ export default function FormLayout() {
                 </div>
             </div>
             <div>
-                <button className='bg-white mb-12 drop-shadow-2xl text-black rounded-xl w-full h-16 font-semibold text-lg'>
+                <button className='bg-white mb-12 drop-shadow-2xl text-black rounded-xl w-full h-16 font-semibold text-lg' onClick={() => {handleSubmit();}}>
                     Finish
                 </button>
             </div>

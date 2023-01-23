@@ -130,7 +130,7 @@ const Test: NextPage = () => {
     const [bottomTableData, setBottomTableData] = React.useState(data);
 
     const handleSort = (key, order) => {
-        if (sort.order == "ascending") {
+        if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (a[key] < b[key]) return -1;
                 if (a[key] > b[key]) return 1;
@@ -157,11 +157,10 @@ const Test: NextPage = () => {
 
     const toggleSort = (column) => {
         if (sort.column == column) {
-            setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
+            setSort({ column, order: sort.order === 'ascending' ? 'descending' : 'ascending' });
         } else {
             setSort({ column, order: 'descending' });
         }
-        console.log(sort)
     }
 
     const handleLayoutChange = () => {
@@ -202,7 +201,7 @@ const Test: NextPage = () => {
                 <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-md px-8 py-4">
-                        <div>
+                    <div>
                             <h5 className="text-2xl">[Client Name] Products</h5>
                             <h6>
                                 <Link href={{ pathname: '/home' }} >
@@ -210,12 +209,11 @@ const Test: NextPage = () => {
                                         Portal /
                                     </span>
                                 </Link>
-                                <Link href={{ pathname: '/products' }} >
+                                
                                     <span>
                                         &nbsp;Products&nbsp;
                                     </span>
-                                </Link>
-                                / Overview</h6>
+                                </h6>
                         </div>
                         {/* <div className="flex gap-16 place-self-center">
                             <h6>Overview</h6>
@@ -300,13 +298,13 @@ const Test: NextPage = () => {
                         </HeaderButton>
                         {openForm && (
                             <div className='absolute modal left-0 top-0 z-50'>
-                                <div className=' fixed grid place-content-center inset-0 z-50'>
-                                    <div className=' inset-0 z-50 w-full h-full'>
-                                        <FormLayout setOpenForm={setOpenForm} />
-                                    </div>
-                                    <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                            <div className=' fixed grid place-content-center inset-0 z-50'>
+                                <div className=' inset-0 z-50 w-full h-full'>
+                                    <FormLayout setOpenForm={setOpenForm} />
                                 </div>
+                                <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
                             </div>
+                        </div>
                         )}
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}>

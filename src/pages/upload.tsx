@@ -1,28 +1,28 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Sidebar from '../../components/sidebar'
-import SortableTable from "../../components/sortableTable";
-import HeaderButton from '../../components/headerButton';
+import Sidebar from '../components/sidebar'
+import SortableTable from "../components/sortableTable";
+import HeaderButton from '../components/headerButton';
 import React, { useState } from "react";
-import DraggableTable from "../../components/draggableTable2"
-import DonutProgress from "../../components/donutProgress2";
-import Counter from "../../components/counter";
+import DraggableTable from "../components/draggableTable2"
+import DonutProgress from "../components/donutProgress2";
+import Counter from "../components/counter";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import AnimatedProgressProvider from '../../components/AnimatedProgressProvider';
+import AnimatedProgressProvider from '../components/AnimatedProgressProvider';
 import { easeQuadInOut } from "d3-ease";
-import AreaChart from "../../components/d3AreaGraph";
-import LineGraph from '../../components/d3LineGraph';
-import ScatterGraph from '../../components/d3ScatterGraph';
-import DropdownMenu from '../../components/sortByDropdownMenu';
+import AreaChart from "../components/d3AreaGraph";
+import LineGraph from '../components/d3LineGraph';
+import ScatterGraph from '../components/d3ScatterGraph';
+import DropdownMenu from '../components/sortByDropdownMenu';
 import { Item, useSelectState } from 'react-stately';
 import Lottie from 'react-lottie';
-import animationData from '../../components/circularAnimation.json';
-import CircularAnimation from '../../components/circularAnimation';
-import FormLayout from "../../components/formLayout";
+import animationData from '../components/circularAnimation.json';
+import CircularAnimation from '../components/circularAnimation';
+import FormLayout from "../components/formLayout";
 
-const Test: NextPage = () => {
+const Home: NextPage = () => {
 
     const data = [
         {
@@ -130,7 +130,7 @@ const Test: NextPage = () => {
     const [bottomTableData, setBottomTableData] = React.useState(data);
 
     const handleSort = (key, order) => {
-        if (sort.order == "ascending") {
+        if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (a[key] < b[key]) return -1;
                 if (a[key] > b[key]) return 1;
@@ -157,11 +157,10 @@ const Test: NextPage = () => {
 
     const toggleSort = (column) => {
         if (sort.column == column) {
-            setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
+            setSort({ column, order: sort.order === 'ascending' ? 'descending' : 'ascending' });
         } else {
             setSort({ column, order: 'descending' });
         }
-        console.log(sort)
     }
 
     const handleLayoutChange = () => {
@@ -204,18 +203,7 @@ const Test: NextPage = () => {
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-md px-8 py-4">
                         <div>
                             <h5 className="text-2xl">[Client Name] Products</h5>
-                            <h6>
-                                <Link href={{ pathname: '/home' }} >
-                                    <span>
-                                        Portal /
-                                    </span>
-                                </Link>
-                                <Link href={{ pathname: '/products' }} >
-                                    <span>
-                                        &nbsp;Products&nbsp;
-                                    </span>
-                                </Link>
-                                / Overview</h6>
+                            <h6>Portal / Products / Overview</h6>
                         </div>
                         {/* <div className="flex gap-16 place-self-center">
                             <h6>Overview</h6>
@@ -420,4 +408,4 @@ const Test: NextPage = () => {
     )
 }
 
-export default Test
+export default Home

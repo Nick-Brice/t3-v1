@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import Counter from './counter'
 
 const DonutProgress = ({ data, duration, colour, backgroundColour, size }) => {
-    console.log('Data:', data);
+    // console.log('Data:', data);
 
     const ref = useRef(null);
 
