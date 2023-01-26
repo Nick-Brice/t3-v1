@@ -65,13 +65,13 @@ const Sidebar = () => {
                             <p className={root == 'upload' ? 'pl-2 rounded-lg bg-gradient-to-r from-secondary to-primary pr-2' : 'pl-2'}>Upload</p>
                         </Link>
                     </div>
-                    <div className="relative flex items-center">
+                    {/* <div className="relative flex items-center">
                         <img height="20px" className="h-[20px] z-20" src="/API_W.png" />
                         <img className={root == 'docs' ? 'absolute h-[35px] z-10 -left-[7px]' : 'absolute hidden h-[20px]'} src="/Active_Underlay.png" />
                         <Link href={{ pathname: '/docs' }} >
                             <p className={root == 'docs' ? 'pl-2 rounded-lg bg-gradient-to-r from-secondary to-primary pr-2' : 'pl-2'}>API Docs</p>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

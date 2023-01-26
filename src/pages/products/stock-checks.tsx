@@ -24,13 +24,13 @@ import FormLayout from "../../components/formLayout";
 
 const Test: NextPage = () => {
 
-    const [showMenuText, setShowMenuText] = useState<string | null>(null);
+    const [showMenuText, setShowMenuText] = useState<string|null>(null);
 
-    const handleHover = (tab: string | null) => {
+    const handleHover = (tab:string|null) => {
         setShowMenuText(tab);
     }
 
-    const data: {}[] = [
+    const data:{}[] = [
         {
             name: "Nick",
             delivered: 244443,
@@ -120,10 +120,8 @@ const Test: NextPage = () => {
             test2: 2,
             test3: 3,
             test4: 4
-        }
+        },
     ];
-
-    const first = data[0];
 
     const columnNames = Object.keys(data[0]!);
 
@@ -141,12 +139,12 @@ const Test: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key: string) => {
+    const handleSort = (key:string) => {
         if (sort.order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                    if (a[key] < b[key]) return -1;
-                    if (a[key] > b[key]) return 1;
+                if (a[key] < b[key]) return -1;
+                if (a[key] > b[key]) return 1;
                 }
                 return 0;
             });
@@ -158,8 +156,8 @@ const Test: NextPage = () => {
         } else {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                    if (a[key] > b[key]) return -1;
-                    if (a[key] < b[key]) return 1;
+                if (a[key] > b[key]) return -1;
+                if (a[key] < b[key]) return 1;
                 }
                 return 0;
             });
@@ -171,7 +169,7 @@ const Test: NextPage = () => {
         }
     };
 
-    const toggleSort = (column: string) => {
+    const toggleSort = (column:string) => {
         if (sort.column == column) {
             setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
         } else {
@@ -262,20 +260,27 @@ const Test: NextPage = () => {
                             
                         </div> */}
                         <div className="relative flex self-end justify-self-center">
-                            <Link href={{ pathname: '/products/overview' }} >
-                                <div className="relative -mr-8 z-10">
-                                    <div className="z-10 bg-primary  rounded-t-2xl text-white shadow-center-md cursor-default" onMouseOver={() => handleHover('Overview')} onMouseOut={() => handleHover(null)}>
-                                        <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[220px]  text-center">
+                        <div className="relative -mr-8 z-10">
+                                <Link href={{ pathname: '/products/overview' }} >
+                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Overview')} onMouseOut={() => handleHover(null)}>
+                                        <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[230px]  text-center">
                                             <div className="flex text-center">
-                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Tracker_W_SQ.png" />
+                                                {showMenuText !== 'Overview' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Tracker_B_SQ.png" />
+                                                )}
+                                                {showMenuText === 'Overview' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Tracker_B_SQ.png" />
 
-                                                <h3 className="leading-5 font-semibold self-center">Overview</h3>
+                                                )}
+                                                {showMenuText === 'Overview' && (
+                                                    <h3 className="leading-5 text-black self-center">Overview</h3>
 
+                                                )}
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
                             <div className="relative -mr-8 z-10">
                                 <Link href={{ pathname: '/products/deliveries' }} >
                                     <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Deliveries')} onMouseOut={() => handleHover(null)}>
@@ -299,20 +304,16 @@ const Test: NextPage = () => {
                             </div>
                             <div className="relative -mr-8 z-10">
                                 <Link href={{ pathname: '/products/stock-checks' }} >
-                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Stock Checks')} onMouseOut={() => handleHover(null)} >
+                                    <div className="z-10 bg-primary  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-default" onMouseOver={() => handleHover('Stock Checks')} onMouseOut={() => handleHover(null)} >
                                         <div className="grid place-items-center py-2 pl-6 pr-6 h-[80px] max-w-[230px]  text-center">
                                             <div className="flex text-center">
-                                                {showMenuText !== 'Stock Checks' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center" src="/Stock_B_SQ.png" />
-                                                )}
-                                                {showMenuText === 'Stock Checks' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Stock_B_SQ.png" />
 
-                                                )}
-                                                {showMenuText === 'Stock Checks' && (
-                                                    <h3 className="leading-5 text-black self-center">Stock Checks</h3>
+                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Stock_W_SQ.png" />
 
-                                                )}
+
+                                                <h3 className="leading-5 self-center font-semibold">Stock Checks</h3>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -337,7 +338,7 @@ const Test: NextPage = () => {
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => setOpenForm(!openForm)}>
                                 <p className="pr-4">
-                                    Add Product
+                                    Add Stock Check
                                 </p>
                                 <img className="pl-1 scale-75" src="/add-three.svg" />
                             </div>

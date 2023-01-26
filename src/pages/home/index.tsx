@@ -120,10 +120,8 @@ const Test: NextPage = () => {
             test2: 2,
             test3: 3,
             test4: 4
-        }
+        },
     ];
-
-    const first = data[0];
 
     const columnNames = Object.keys(data[0]!);
 
@@ -141,7 +139,7 @@ const Test: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key: string) => {
+    const handleSort = (key:string) => {
         if (sort.order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
@@ -262,14 +260,14 @@ const Test: NextPage = () => {
                             
                         </div> */}
                         <div className="relative flex self-end justify-self-center">
-                            <Link href={{ pathname: '/products/overview' }} >
+                            <Link href={{ pathname: '/home' }} >
                                 <div className="relative -mr-8 z-10">
-                                    <div className="z-10 bg-primary  rounded-t-2xl text-white shadow-center-md cursor-default" onMouseOver={() => handleHover('Overview')} onMouseOut={() => handleHover(null)}>
+                                    <div className="z-10 bg-primary  rounded-t-2xl text-white shadow-center-md cursor-default" onMouseOver={() => handleHover('Home')} onMouseOut={() => handleHover(null)}>
                                         <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[220px]  text-center">
                                             <div className="flex text-center">
-                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Tracker_W_SQ.png" />
+                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Dash_W_SQ.png" />
 
-                                                <h3 className="leading-5 font-semibold self-center">Overview</h3>
+                                                <h3 className="leading-5 font-semibold self-center">Home</h3>
 
                                             </div>
                                         </div>
@@ -277,19 +275,19 @@ const Test: NextPage = () => {
                                 </div>
                             </Link>
                             <div className="relative -mr-8 z-10">
-                                <Link href={{ pathname: '/products/deliveries' }} >
-                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Deliveries')} onMouseOut={() => handleHover(null)}>
+                                <Link href={{ pathname: '/home/account' }} >
+                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Account')} onMouseOut={() => handleHover(null)}>
                                         <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[230px]  text-center">
                                             <div className="flex text-center">
-                                                {showMenuText !== 'Deliveries' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Delivery_B_SQ.png" />
+                                                {showMenuText !== 'Account' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/User_B_SQ.png" />
                                                 )}
-                                                {showMenuText === 'Deliveries' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Delivery_B_SQ.png" />
+                                                {showMenuText === 'Account' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/User_B_SQ.png" />
 
                                                 )}
-                                                {showMenuText === 'Deliveries' && (
-                                                    <h3 className="leading-5 text-black self-center">Deliveries</h3>
+                                                {showMenuText === 'Account' && (
+                                                    <h3 className="leading-5 text-black self-center">Account</h3>
 
                                                 )}
                                             </div>
@@ -298,19 +296,19 @@ const Test: NextPage = () => {
                                 </Link>
                             </div>
                             <div className="relative -mr-8 z-10">
-                                <Link href={{ pathname: '/products/stock-checks' }} >
-                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Stock Checks')} onMouseOut={() => handleHover(null)} >
+                                <Link href={{ pathname: '/home/settings' }} >
+                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Settings')} onMouseOut={() => handleHover(null)} >
                                         <div className="grid place-items-center py-2 pl-6 pr-6 h-[80px] max-w-[230px]  text-center">
                                             <div className="flex text-center">
-                                                {showMenuText !== 'Stock Checks' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center" src="/Stock_B_SQ.png" />
+                                                {showMenuText !== 'Settings' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center" src="/Settings_B_SQ.png" />
                                                 )}
-                                                {showMenuText === 'Stock Checks' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Stock_B_SQ.png" />
+                                                {showMenuText === 'Settings' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Settings_B_SQ.png" />
 
                                                 )}
-                                                {showMenuText === 'Stock Checks' && (
-                                                    <h3 className="leading-5 text-black self-center">Stock Checks</h3>
+                                                {showMenuText === 'Settings' && (
+                                                    <h3 className="leading-5 text-black self-center">Settings</h3>
 
                                                 )}
                                             </div>
@@ -323,7 +321,7 @@ const Test: NextPage = () => {
                             </div> */}
                         </div>
                     </header>
-                    <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-40">
+                    {/* <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-40">
 
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => { handleLayoutChange() }}>
@@ -353,27 +351,27 @@ const Test: NextPage = () => {
                             </div>
                         )}
                         <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}>
+                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}> */}
 
 
-                                {/* <p className="pr-4">
+                    {/* <p className="pr-4">
                                             Sort By: 
                                         </p>
                                         <img className="pl-1 scale-75" src="/sort-one.svg" /> */}
 
 
 
-                                <DropdownMenu name="field2" label="Field 2" sort={sort}>
+                    {/* <DropdownMenu name="field2" label="Field 2" sort={sort}>
                                     {columnNames.map((col, index) => (
-                                        <option onClick={() => { toggleSort(col); handleSort(col) }} value={col}>{col}</option>
-                                    ))}
-                                    {/* <option onClick={() => { toggleSort('used'); handleSort('used', sort.order) }} value="Option 1">Option 1</option>
+                                        <option onClick={() => { toggleSort(col); handleSort(col, sort.order) }} value={col}>{col}</option>
+                                    ))} */}
+                    {/* <option onClick={() => { toggleSort('used'); handleSort('used', sort.order) }} value="Option 1">Option 1</option>
                                     <option value="Option 2">Option 2</option>
                                     <option value="Option 3">Option 3</option>
                                     <option value="Option 4">Option 4</option>
                                     <option value="Option 5">Option 5</option>
                                     <option value="Option 6">Option 6</option> */}
-                                </DropdownMenu>
+                    {/* </DropdownMenu>
 
                             </div>
                         </HeaderButton>
@@ -385,8 +383,8 @@ const Test: NextPage = () => {
                                 <img className="pl-1 scale-75" src="/download.svg" />
                             </div>
                         </HeaderButton>
-                    </div>
-                    <div className="p-8 mt-20">
+                    </div> */}
+                    <div className="px-8 mt-0">
                         {/* <CircularAnimation /> */}
                         <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
