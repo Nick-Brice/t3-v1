@@ -1,438 +1,467 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { Camera, Home as HomeIcon, Config, Equalizer, HamburgerButton, More, Search, Refresh, Share, PreviewOpen, PreviewClose, ZoomIn, ZoomOut, AllApplication, BookmarkOne, LoadingFour, Moon } from "@icon-park/react";
-import * as Popover from '@radix-ui/react-popover';
-import * as Accordion from '@radix-ui/react-accordion';
-import * as AlertDialog from '@radix-ui/react-alert-dialog';
-import * as Checkbox from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
-import Button from '../components/button';
-import ToggleButton from '../components/toggleButton';
-import { Item } from 'react-stately';
-import List from '../components/gridList';
-import Calendar from '../components/calendar';
-import { useEffect, useState } from "react";
-import { parseDate, getLocalTimeZone, today, isWeekend } from '@internationalized/date';
-import { useDateFormatter, useLocale } from 'react-aria';
-import RangeCalendar from '../components/rangerCalendar';
-import ProductCard from '../components/productcard';
-// import BarGraph from '../components/barGraph';
-import DownloadPdfButton from '../components/pdfDownload';
-import PrintButton from '../components/printButton';
-// import Counter from '../components/counter';
-// import TextAnimator from '../components/textcounter';
-// import AreaChart from '../components/d3AreaGraph';
-// import DifferentCounter from '../components/differentCounter';
-// import DifferentTextAnimator from '../components/differentTextAnimator';
-// import Modal from '../components/modal';
-// import MakeLissajour from '../components/d3animation';
-// import SortableTable from '../components/sortableTable';
+import Sidebar from '../components/sidebar'
+import SortableTable from "../components/sortableTable";
+import HeaderButton from '../components/headerButton';
+import React, { useState } from "react";
+import DraggableTable from "../components/draggableTable2"
+import DonutProgress from "../components/donutProgress2";
+import Counter from "../components/counter";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import AnimatedProgressProvider from '../components/AnimatedProgressProvider';
+import { easeQuadInOut } from "d3-ease";
+import AreaChart from "../components/d3AreaGraph";
+import LineGraph from '../components/d3LineGraph';
+import ScatterGraph from '../components/d3ScatterGraph';
+import DropdownMenu from '../components/sortByDropdownMenu';
+import { Item, useSelectState } from 'react-stately';
+import Lottie from 'react-lottie';
+import animationData from '../components/circularAnimation.json';
+import CircularAnimation from '../components/circularAnimation';
+import FormLayout from "../components/formLayout";
 
-const Home: NextPage = () => {
+const Test: NextPage = () => {
 
-  const tableData = [
-    {
-      name: "Nick",
-      used: 24,
-      captured: "Bath",
-      rate: 90
-    },
-    {
-      name: "Jack",
-      used: 26,
-      captured: "Bristol",
-      rate: 80
-    },
-    {
-      name: "Connor",
-      used: 26,
-      captured: "Bristol",
-      rate: 70
-    },
-    {
-      name: "Nick1",
-      used: 24,
-      captured: "Bath",
-      rate: 90
-    },
-    {
-      name: "Jack1",
-      used: 26,
-      captured: "Bristol",
-      rate: 80
-    },
-    {
-      name: "Connor1",
-      used: 26,
-      captured: "Bristol",
-      rate: 70
-    },
-    {
-      name: "Nick2",
-      used: 24,
-      captured: "Bath",
-      rate: 90
-    },
-    {
-      name: "Jack2",
-      used: 26,
-      captured: "Bristol",
-      rate: 80
-    },
-    {
-      name: "Connor2",
-      used: 26,
-      captured: "Bristol",
-      rate: 70
-    },
-  ];
+    const [showMenuText, setShowMenuText] = useState<string | null>(null);
 
-  var temp = new Date();
-  var dd = String(temp.getDate()).padStart(2, '0');
-  var mm = String(temp.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = temp.getFullYear();
+    const handleHover = (tab: string | null) => {
+        setShowMenuText(tab);
+    }
 
-  let todaysDate = `${yyyy}-${mm}-${dd}`;
+    const data: {}[] = [
+        {
+            name: "Nick",
+            delivered: 244443,
+            collected: 122234,
+            rate: 95,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Jack",
+            delivered: 26345,
+            collected: 222355,
+            rate: 80,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Connor",
+            delivered: 26445,
+            collected: 1234455,
+            rate: 70,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Nick1",
+            delivered: 24666,
+            collected: 123456,
+            rate: 90,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Jack1",
+            delivered: 2622,
+            collected: 445666,
+            rate: 80,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Connor1",
+            delivered: 2622,
+            collected: 5678,
+            rate: 70,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Nick2",
+            delivered: 24777,
+            collected: 77777,
+            rate: 90,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Jack2",
+            delivered: 2654,
+            collected: 8876,
+            rate: 80,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        },
+        {
+            name: "Connor2",
+            delivered: 26235,
+            collected: 45532,
+            rate: 70,
+            stream: 'Waste',
+            test2: 2,
+            test3: 3,
+            test4: 4
+        }
+    ];
 
-  let [date, setDate] = useState(parseDate(todaysDate));
-  let formatter = useDateFormatter({ dateStyle: 'full' });
+    const first = data[0];
 
-  let now = today(getLocalTimeZone());
-  let disabledRanges = [
-    [now.add({ days: 4 }), now.add({ days: 5 })],
-    [now.add({ days: 14 }), now.add({ days: 16 })],
-    [now.add({ days: 23 }), now.add({ days: 24 })]
-  ];
+    const columnNames = Object.keys(data[0]!);
 
-  let { locale } = useLocale();
-  let isDateUnavailable = (date: any) =>
-    isWeekend(date, locale) ||
-    disabledRanges.some((interval) =>
-      date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0
-    );
+    const [openForm, setOpenForm] = React.useState(false);
 
-  let [focusedDate, setFocusedDate] = useState(date);
+    const [openSortBy, setOpenSortBy] = React.useState(false);
 
-  let [rangeDate, setRangeDate] = useState({
-    start: today(getLocalTimeZone()),
-    end: today(getLocalTimeZone()).add({ days: 1 })
-  });
-  let [focusedRangeDate, setFocusedRangeDate] = useState(date)
+    const [sort, setSort] = React.useState({ column: '', order: '' });
+    const [layout, setLayout] = useState('table');
+    const [tableData, setTableData] = React.useState(data);
+    const [topTableData, setTopTableData] = React.useState(data);
+    const [bottomTableData, setBottomTableData] = React.useState(data);
 
-  const primary = "#00A2C3";
-  const primaryWhite = "#FFFFFF60";
-  const secondaryWhite = '#f6f6f6';
-  const stroke = 4;
-  const size = "200";
-  return (
-    <>
-      <Head>
-        <title>Create T3 App</title>
-        <meta name="description" content="Generated by create-t3-app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      
-      {/* <div>
-        <MakeLissajour />
-      </div>
-      <div>
-        <SortableTable data={tableData} />
-      </div>
-      
-        <div className="top-0 left-0">
+    function hasKey(obj: object, key: string): obj is { [key: string]: any } {
+        return key in obj;
+    }
 
-          <div>
-            <Modal />
-          </div>
-          <div>
-            <Counter targetValue={124455666} />
-          </div>
-          <div>
-            <TextAnimator targetText={"Hello World asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"} />
-          </div>
-        </div> */}
-        
-        <main id="print-area" className="flex flex-col items-center justify-center min-h-screen">
-          <div>
+    const handleSort = (key: string) => {
+        if (sort.order == "ascending") {
+            let sortedData = [...tableData].sort((a, b) => {
+                if (hasKey(a, key) && hasKey(b, key)) {
+                    if (a[key] < b[key]) return -1;
+                    if (a[key] > b[key]) return 1;
+                }
+                return 0;
+            });
+            let topSortedData = sortedData.slice(0, -1);
+            let bottomSortedData = sortedData.slice(-1);
+            setTableData(sortedData);
+            setTopTableData(topSortedData);
+            setBottomTableData(bottomSortedData);
+        } else {
+            let sortedData = [...tableData].sort((a, b) => {
+                if (hasKey(a, key) && hasKey(b, key)) {
+                    if (a[key] > b[key]) return -1;
+                    if (a[key] < b[key]) return 1;
+                }
+                return 0;
+            });
+            let topSortedData = sortedData.slice(0, -1);
+            let bottomSortedData = sortedData.slice(-1);
+            setTableData(sortedData);
+            setTopTableData(topSortedData);
+            setBottomTableData(bottomSortedData);
+        }
+    };
 
-            <DownloadPdfButton pdfName="my-pdf.pdf" printAreaId="print-area" />
+    const toggleSort = (column: string) => {
+        if (sort.column == column) {
+            setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
+        } else {
+            setSort({ column, order: 'descending' });
+        }
+        console.log(sort)
+    }
 
-          </div>
-          <div>
-            <PrintButton printAreaId={"print-area"} />
-          </div>
-          <div className="grid grid-cols-3 gap-4 pt-4 w-3/4">
-            <div>
-              <ProductCard title="Product Name" img="favicon.ico" used="1234" captured="3333" stream="Waste" rate="95">
-              </ProductCard>
-            </div>
-            <div>
-              <Calendar
-                aria-label="Date (controlled)"
-                minValue={today(getLocalTimeZone())}
-                isDateUnavailable={isDateUnavailable}
-                focusedValue={focusedDate}
-                onFocusChange={setFocusedDate}
-                value={date}
-                onChange={setDate} />
-              <p>Selected date: {formatter.format(date.toDate(getLocalTimeZone()))}</p>
-              <p>Current date: {formatter.format(focusedDate.toDate(getLocalTimeZone()))}</p>
-              <div>{String(date)}</div>
-            </div>
-            <div>
-              <RangeCalendar
-                aria-label="Date (controlled)"
-                minValue={today(getLocalTimeZone())}
-                isDateUnavailable={isDateUnavailable}
-                value={rangeDate}
-                onChange={setRangeDate} />
-              <p>Selected date range: {formatter.formatRange(rangeDate.start.toDate(getLocalTimeZone()), rangeDate.end.toDate(getLocalTimeZone()))}  </p>
-              <div>{String(rangeDate.start)} to {String(rangeDate.end)}</div>
-            </div>
-            <Button intent="secondary" onPress={() => alert('Button pressed!')}>
-              Press me
-            </Button>
-            <ToggleButton>
-              Pin
-            </ToggleButton>
-            <List
-              aria-label="Example List"
-              selectionMode="multiple"
-              selectionBehavior="replace"
-            >
-              <Item textValue="Stream 1">
-                Stream 1
-                <div className="p-2">
-                  <Button onPress={() => alert(`Info for Stream 1...`)}>Info</Button>
-                </div>
-              </Item>
-              <Item textValue="Stream 2">
-                Stream 2
-                <div className="p-2">
-                  <Button onPress={() => alert(`Info for Stream 2...`)}>Info</Button>
-                </div>
-              </Item>
-              <Item textValue="Stream 3">
-                Stream 3
-                <div className="p-2">
-                  <Button onPress={() => alert(`Info for Stream 3...`)}>Info</Button>
-                </div>
-              </Item>
-              <Item textValue="Stream 4">
-                Stream 4
-                <div className="p-2">
-                  <Button onPress={() => alert(`Info for Stream 4...`)}>Info</Button>
-                </div>
-              </Item>
-            </List>
-          </div>
-          <div className="grid items-center justify-center grid-cols-3 gap-4 px-4 py-16 bg-white dark:bg-secondaryblack">
-            <div>
-              <Popover.Root>
-                <Popover.Trigger className="p-2 text-white bg-black dark:bg-white rounded-xl dark:text-black">More info</Popover.Trigger>
-                <Popover.Portal>
-                  <Popover.Content className="p-2 text-white bg-primary dark:bg-primarydark rounded-xl">
-                    Some more info…
-                    <Popover.Arrow className="fill-primary dark:fill-primarydark" />
-                  </Popover.Content>
-                </Popover.Portal>
-              </Popover.Root>
-            </div>
-            <div>
-              <Accordion.Root className="w-[300px] rounded-xl bg-black text-white w" type="single" defaultValue="item-1" collapsible>
-                <Accordion.Item className="p-4 border-b border-white" value="item-1">
-                  <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
-                  <Accordion.Content className="text-primary">Yes. It adheres to the WAI-ARIA design pattern.</Accordion.Content>
-                </Accordion.Item>
+    const handleLayoutChange = () => {
+        if (layout === 'table') {
+            setLayout('grid');
+        } else {
+            setLayout('table');
+        }
+    };
 
-                <Accordion.Item className="p-4 border-t border-b border-white" value="item-2">
-                  <Accordion.Trigger>Is it unstyled?</Accordion.Trigger>
-                  <Accordion.Content className="text-primary">
-                    Yes. It's unstyled by default, giving you freedom over the look and feel.
-                  </Accordion.Content>
-                </Accordion.Item>
+    const tableData2 = [
+        { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 'n': 1400000, 1500000: 15 },
+        { 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9: 10, 10: 11, 11: 12, 12: 13, 13: 14, 'n': 1500000, 1500000: 16 }
+    ]
 
-                <Accordion.Item className="p-4 border-t border-white" value="item-3">
-                  <Accordion.Trigger>Can it be animated?</Accordion.Trigger>
-                  <Accordion.Content className="text-primary">
-                    <div className="AccordionContentText">
-                      Yes! You can animate the Accordion with CSS or JavaScript.
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+
+        isClickToPauseDisabled: true
+    };
+
+    return (
+        <>
+            <Head>
+                <title>Create T3 App</title>
+                <meta name="description" content="Generated by create-t3-app" />
+                <link rel="icon" href="/Portal_Icon.png" />
+            </Head>
+            <div className="fixed bg-secondarygrey w-full h-full -z-10"></div>
+            <div className="grid grid-cols-[auto_1fr]">
+                <Sidebar />
+                {/* <div className="fixed">
+                        <div className="flex flex-col bg-secondaryblack w-screen h-screen p-4"></div>
+                    </div> */}
+                <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
+                <main className="relative w-full bg-secondarygrey">
+                    <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
+                        <div className="px-8 py-4">
+                            <h5 className="text-2xl">[Client Name] Products</h5>
+                            <h6>
+                                <Link href={{ pathname: '/home' }} >
+                                    <span>
+                                        Portal /
+                                    </span>
+                                </Link>
+                                <Link href={{ pathname: '/products' }} >
+                                    <span>
+                                        &nbsp;Products&nbsp;
+                                    </span>
+                                </Link>
+                                / Overview</h6>
+                        </div>
+                        {/* <div className="flex gap-16 place-self-center">
+                            <h6>Overview</h6>
+                            <h6>Deliveries</h6>
+                            <h6>Stock Checks</h6>
+                        </div> */}
+                        {/* <div className="flex gap-12 place-self-center ">
+                            <div className="relative z-20">
+                                <h6 className="z-20 text-white">AAAAA</h6>
+                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red pl-7 pr-12 py-7 border-8 rounded-t-2xl text-white">AAAAAAAAAAA</div>
+                            </div>
+                            <div className="relative z-10">
+                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
+                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
+                            </div>
+                            <div className="relative z-10">
+                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
+                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
+                            </div>
+                            <div className="relative z-10">
+                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
+                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
+                            </div>
+                            <div className="relative z-10">
+                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
+                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
+                            </div>
+                            
+                        </div> */}
+                        <div className="relative flex self-end justify-self-center">
+                            <Link href={{ pathname: '/products/overview' }} >
+                                <div className="relative -mr-8 z-10">
+                                    <div className="z-10 bg-primary  rounded-t-2xl text-white shadow-center-md cursor-default" onMouseOver={() => handleHover('Overview')} onMouseOut={() => handleHover(null)}>
+                                        <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[220px]  text-center">
+                                            <div className="flex text-center">
+                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Tracker_W_SQ.png" />
+
+                                                <h3 className="leading-5 font-semibold self-center">Overview</h3>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                            <div className="relative -mr-8 z-10">
+                                <Link href={{ pathname: '/products/deliveries' }} >
+                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Deliveries')} onMouseOut={() => handleHover(null)}>
+                                        <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[230px]  text-center">
+                                            <div className="flex text-center">
+                                                {showMenuText !== 'Deliveries' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Delivery_B_SQ.png" />
+                                                )}
+                                                {showMenuText === 'Deliveries' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Delivery_B_SQ.png" />
+
+                                                )}
+                                                {showMenuText === 'Deliveries' && (
+                                                    <h3 className="leading-5 text-black self-center">Deliveries</h3>
+
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="relative -mr-8 z-10">
+                                <Link href={{ pathname: '/products/stock-checks' }} >
+                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Stock Checks')} onMouseOut={() => handleHover(null)} >
+                                        <div className="grid place-items-center py-2 pl-6 pr-6 h-[80px] max-w-[230px]  text-center">
+                                            <div className="flex text-center">
+                                                {showMenuText !== 'Stock Checks' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center" src="/Stock_B_SQ.png" />
+                                                )}
+                                                {showMenuText === 'Stock Checks' && (
+                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Stock_B_SQ.png" />
+
+                                                )}
+                                                {showMenuText === 'Stock Checks' && (
+                                                    <h3 className="leading-5 text-black self-center">Stock Checks</h3>
+
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            {/* <div className="relative -mr-8 z-10">
+                                <div className="z-10 bg-red hover:bg-blue-500 py-12 pl-6 pr-6 border-8 rounded-t-2xl text-white">AA</div>
+                            </div> */}
+                        </div>
+                    </header>
+                    <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-40">
+
+                        <HeaderButton>
+                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => { handleLayoutChange() }}>
+                                <p className="pr-4">
+                                    Change View Style
+                                </p>
+                                <img className={(layout != "grid" ? "opacity-30 pl-5 scale-75" : "pl-5 scale-75")} src="/grid-four.svg" />
+                                <img className={(layout != "table" ? "opacity-30 scale-75" : "scale-75")} src="/list.svg" />
+                            </div>
+                        </HeaderButton>
+                        <HeaderButton>
+                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => setOpenForm(!openForm)}>
+                                <p className="pr-4">
+                                    Add Product
+                                </p>
+                                <img className="pl-1 scale-75" src="/add-three.svg" />
+                            </div>
+                        </HeaderButton>
+                        {openForm && (
+                            <div className='absolute modal left-0 top-0 z-50'>
+                                <div className=' fixed grid place-content-center inset-0 z-50'>
+                                    <div className=' inset-0 z-50 w-full h-full'>
+                                        <FormLayout setOpenForm={setOpenForm} />
+                                    </div>
+                                    <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                                </div>
+                            </div>
+                        )}
+                        <HeaderButton>
+                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}>
+
+
+                                {/* <p className="pr-4">
+                                            Sort By: 
+                                        </p>
+                                        <img className="pl-1 scale-75" src="/sort-one.svg" /> */}
+
+
+
+                                <DropdownMenu name="field2" label="Field 2" sort={sort}>
+                                    {columnNames.map((col, index) => (
+                                        <option onClick={() => { toggleSort(col); handleSort(col) }} value={col}>{col}</option>
+                                    ))}
+                                    {/* <option onClick={() => { toggleSort('used'); handleSort('used', sort.order) }} value="Option 1">Option 1</option>
+                                    <option value="Option 2">Option 2</option>
+                                    <option value="Option 3">Option 3</option>
+                                    <option value="Option 4">Option 4</option>
+                                    <option value="Option 5">Option 5</option>
+                                    <option value="Option 6">Option 6</option> */}
+                                </DropdownMenu>
+
+                            </div>
+                        </HeaderButton>
+                        <HeaderButton>
+                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer">
+                                <p className="pr-4">
+                                    Download CSV
+                                </p>
+                                <img className="pl-1 scale-75" src="/download.svg" />
+                            </div>
+                        </HeaderButton>
                     </div>
-                  </Accordion.Content>
-                </Accordion.Item>
-              </Accordion.Root>
-            </div>
-            <div>
-              <AlertDialog.Root>
-                <AlertDialog.Trigger asChild>
-                  <button className="p-2 text-white bg-red-500 rounded-xl">Delete account</button>
-                </AlertDialog.Trigger>
-                <AlertDialog.Portal className="">
-                  <AlertDialog.Overlay className="fixed" />
-                  <AlertDialog.Content className="fixed p-4 text-white -translate-x-1/2 -translate-y-1/2 bg-black rounded-xl top-1/2 left-1/2">
-                    <AlertDialog.Title className="font-bold">Are you absolutely sure?</AlertDialog.Title>
-                    <AlertDialog.Description className="">
-                      This action cannot be undone. This will permanently delete your account and remove your
-                      data from our servers.
-                    </AlertDialog.Description>
-                    <div className="flex justify-around">
-                      <div className="w-[250px]"></div>
-                      <AlertDialog.Cancel asChild>
-                        <button className="pl-2 pr-2 font-semibold text-black rounded-full bg-secondarywhite">Cancel</button>
-                      </AlertDialog.Cancel>
-                      <AlertDialog.Action asChild>
-                        <button className="pl-2 pr-2 font-semibold text-white bg-red-500 rounded-full">Yes, delete account</button>
-                      </AlertDialog.Action>
-                    </div>
-                  </AlertDialog.Content>
-                </AlertDialog.Portal>
-              </AlertDialog.Root>
-            </div>
-            <div>
-              <form>
-                <div className="flex items-center text-white bg-black w-fit">
-                  <Checkbox.Root className="" defaultChecked id="c1">
-                    <Checkbox.Indicator className="">
-                      <CheckIcon className="" />
-                    </Checkbox.Indicator>
-                  </Checkbox.Root>
-                  <label className="" htmlFor="c1">
-                    Accept terms and conditions.
-                  </label>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 bg-gradient-to-b from-white to-secondarywhite dark:from-secondaryblack dark:to-black">
-            <button>
-              <Moon className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => document.getElementById('main')?.classList.toggle("dark")} /></button>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="p-6 transition duration-500 ease-in-out delay-300 drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight bg-gradient-to-br from-primarylight to-primarylight-700 dark:from-secondarylight dark:to-secondary hover:from-red-500 hover:to-accent">
-                <Camera className="w-fit" theme="two-tone" size={size} fill={[secondaryWhite, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight bg-gradient-to-br from-primarylight to-primarylight-700">
-                <HamburgerButton className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight bg-gradient-to-br from-primarylight to-primarylight-700">
-                <More className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <Search className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <Refresh className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <Share className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <HomeIcon className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <Config className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <Equalizer className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <PreviewOpen className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <PreviewClose className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <ZoomIn className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <ZoomOut className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <AllApplication className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="drop-shadow-xl rounded-3xl w-fit h-fit bg-primarylight">
-                <BookmarkOne className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-              <div className="w-fit h-fit animate-spin">
-                <LoadingFour className="w-fit" theme="two-tone" size={size} fill={[primary, primaryWhite]} strokeWidth={stroke} onClick={() => console.log("Clicked")} />
-              </div>
-            </div>
-            <table className="w-full text-sm bg-white border-collapse shadow-sm rounded-xl">
-              <thead className="text-white bg-secondaryblack">
-                <tr>
-                  <th className="p-4 font-semibold text-left rounded-l-xl">State</th>
-                  <th className="p-4 font-semibold text-left">City0000000000000000</th>
-                  <th className="p-4 font-semibold text-left">City</th>
-                  <th className="p-4 font-semibold text-left">City</th>
-                  <th className="p-4 font-semibold text-left">City</th>
-                  <th className="p-4 font-semibold text-left">City</th>
-                  <th className="p-4 font-semibold text-left">City</th>
-                  <th className="p-4 font-semibold text-left">City</th>
-                  <th className="p-4 font-semibold text-left rounded-r-xl">City</th>
-                </tr>
-              </thead>
-              <tbody className="">
-                <tr className="rounded-full hover:bg-[#ECECEC]">
-                  <td className="p-4 mb-8 font-semibold text-black border-r rounded-l-xl border-secondaryblack"><div className="rounded-l-xl">Indiana</div></td>
-                  <td className="p-4 text-black border-r border-secondaryblack"><div className="">Indianapolis</div></td>
-                  <td className="p-4 text-black border-r border-secondaryblack"><div className="">Indianapolis</div></td>
-                  <td className="p-4 text-black border-r border-secondaryblack"><div className="">Indianapolis</div></td>
-                  <td className="p-4 text-black border-r border-secondaryblack"><div className="">Indianapolis</div></td>
-                  <td className="p-4 text-black border-r border-secondaryblack"><div className="">Indianapolis</div></td>
-                  <td className="p-4 text-black border-r border-secondaryblack"><div className="">Indianapolis</div></td>
-                  <td className="p-4 text-black border-r border-secondaryblack"><div className="">Indianapolis</div></td>
-                  <td className="p-4 text-black rounded-r-xl"><div className="rounded-r-xl">Indianapolis</div></td>
-                </tr>
-                <tr className="hover:bg-[#ECECEC]">
-                  <td className="p-4 font-semibold text-black border-r rounded-l-xl border-secondaryblack">Ohio</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Columbus</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Columbus</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Columbus</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Columbus</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Columbus</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Columbus</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Columbus</td>
-                  <td className="p-4 text-black rounded-r-xl">Columbus</td>
-                </tr>
-                <tr className="hover:bg-[#ECECEC]">
-                  <td className="p-4 font-semibold text-black border-r rounded-l-xl border-secondaryblack">Michigan</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Detroit</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Detroit</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Detroit</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Detroit</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Detroit</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Detroit</td>
-                  <td className="p-4 text-black border-r border-secondaryblack">Detroit</td>
-                  <td className="p-4 text-black rounded-r-xl">Detroit</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <section className="text-gray-600 body-font">
-            <div className="container flex flex-wrap items-center px-5 py-24 mx-auto">
-              <div className="pr-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0">
-                <h1 className="text-3xl font-medium text-gray-900 title-font">Slow-carb next level shoindcgoitch ethical authentic, poko scenester</h1>
-                <p className="mt-4 leading-relaxed">Poke slow-carb mixtape knausgaard, typewriter street art gentrify hammock starladder roathse. Craies vegan tousled etsy austin.</p>
-              </div>
-              <div className="flex flex-col w-full p-8 mt-10 bg-gray-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
-                <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">Sign Up</h2>
-                <div className="relative mb-4">
-                  <label htmlFor="full-name" className="text-sm leading-7 text-gray-600">Full Name</label>
-                  <input type="text" id="full-name" name="full-name" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200" />
-                </div>
-                <div className="relative mb-4">
-                  <label htmlFor="email" className="text-sm leading-7 text-gray-600">Email</label>
-                  <input type="email" id="email" name="email" className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200" />
-                </div>
-                <button className="px-8 py-2 text-lg text-white bg-indigo-500 border-0 rounded focus:outline-none hover:bg-indigo-600">Button</button>
-                <p className="mt-3 text-xs text-gray-500">Literally you probably haven't heard of them jean shorts.</p>
-              </div>
-            </div>
-          </section>
-        </main>
-      {/* </div> */}
-    </>
-  );
-};
+                    <div className="p-8 mt-20">
+                        {/* <CircularAnimation /> */}
+                        <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
+                        {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
+                        <DropdownMenu label="Favorite Color">
+                            <Item>Red</Item>
+                            <Item>Orange</Item>
+                            <Item>Yellow</Item>
+                            <Item>Green</Item>
+                            <Item>Blue</Item>
+                            <Item>Purple</Item>
+                            <Item>Black</Item>
+                            <Item>White</Item>
+                            <Item>Lime</Item>
+                            <Item>Fushsia</Item>
+                        </DropdownMenu>
+                        <AreaChart data={[10, 11, 9, 12, 8, 13]} width={300} height={150} />
+                        <div className="p-4 bg-white w-fit mt-8">
+                            <ScatterGraph data={[
+                                { x: 0, y: 20, label: 'A' },
+                                { x: 40, y: 50, label: 'B' },
+                                { x: 30, y: 70, label: 'C' },
+                                { x: 60, y: 80, label: 'D' },
+                                { x: 90, y: 10, label: 'E' }
+                            ]} width={300} height={150} />
+                        </div>
+                        <LineGraph data={[10, 11, 9, 12, 8, 13]} width={500} height={500} />
 
-export default Home;
+                        <div className="w-[250px] h-[250px] flex place-content-center bg-white rounded-2xl mt-8">
+                            <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={250} />
+                        </div>
+                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={500} />
+                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={50} />
+                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={1000} />
+                        {/* <div className="w-[250px] h-[250px]">
+                            <svg viewBox="0 0 100 100">
+
+                                <clipPath id="clip">
+                                    <path d="M 50 0 a 50 50 0 0 1 0 100 50 50 0 0 1 0 -100 v 8 a 42 42 0 0 0 0 84 42 42 0 0 0 0 -84" />
+                                </clipPath>
+
+                                <foreignObject x="0" y="0" width="100" height="100" clip-path="url(#clip)">
+                                    <div className="gradient" />
+                                </foreignObject>
+                            </svg>
+                        </div> */}
+                        {/* <div className="w-[100px]">
+                            <AnimatedProgressProvider
+                                valueStart={0}
+                                valueEnd={66}
+                                duration={1.4}
+                                easingFunction={easeQuadInOut}
+                                repeat
+                            >
+                                {value => {
+                                    const roundedValue = Math.round(value);
+                                    return (
+                                        <CircularProgressbar
+                                            value={value}
+                                            text={`${roundedValue}%`}
+                                        
+
+                                        />
+                                    );
+                                }}
+                            </AnimatedProgressProvider>
+                            <CircularProgressbar value={60} text={`${60}%`} />
+                        </div> */}
+                    </div>
+                    <div>
+                        {/* <DonutProgress data={100} colour="#49cc73" backgroundColour="#D0D0D0" /> */}
+                    </div>
+                </main>
+            </div>
+        </>
+    )
+}
+
+export default Test
