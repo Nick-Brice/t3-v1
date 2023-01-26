@@ -24,7 +24,7 @@ import FormLayout from "../components/formLayout";
 
 const Home: NextPage = () => {
 
-    const data = [
+    const data:{}[] = [
         {
             name: "Nick",
             delivered: 244443,
@@ -117,7 +117,7 @@ const Home: NextPage = () => {
         },
     ];
 
-    const columnNames = Object.keys(data[0]);
+    const columnNames = Object.keys(data[0]!);
 
     const [openForm, setOpenForm] = React.useState(false);
 
@@ -129,11 +129,17 @@ const Home: NextPage = () => {
     const [topTableData, setTopTableData] = React.useState(data);
     const [bottomTableData, setBottomTableData] = React.useState(data);
 
-    const handleSort = (key, order) => {
+    function hasKey(obj: object, key: string): obj is { [key: string]: any } {
+        return key in obj;
+    }
+
+    const handleSort = (key:string, order:string) => {
         if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
+                if (hasKey(a, key) && hasKey(b, key)) {
                 if (a[key] < b[key]) return -1;
                 if (a[key] > b[key]) return 1;
+                }
                 return 0;
             });
             let topSortedData = sortedData.slice(0, -1);
@@ -143,8 +149,10 @@ const Home: NextPage = () => {
             setBottomTableData(bottomSortedData);
         } else {
             let sortedData = [...tableData].sort((a, b) => {
+                if (hasKey(a, key) && hasKey(b, key)) {
                 if (a[key] > b[key]) return -1;
                 if (a[key] < b[key]) return 1;
+                }
                 return 0;
             });
             let topSortedData = sortedData.slice(0, -1);
@@ -155,7 +163,7 @@ const Home: NextPage = () => {
         }
     };
 
-    const toggleSort = (column) => {
+    const toggleSort = (column:string) => {
         if (sort.column == column) {
             setSort({ column, order: sort.order === 'ascending' ? 'descending' : 'ascending' });
         } else {

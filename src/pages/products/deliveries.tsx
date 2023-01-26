@@ -24,13 +24,13 @@ import FormLayout from "../../components/formLayout";
 
 const Test: NextPage = () => {
 
-    const [showMenuText, setShowMenuText] = useState<string|null>(null);
+    const [showMenuText, setShowMenuText] = useState<string | null>(null);
 
-    const handleHover = (tab:string|null) => {
+    const handleHover = (tab: string | null) => {
         setShowMenuText(tab);
     }
 
-    const data:{}[] = [
+    const data: {}[] = [
         {
             name: "Nick",
             delivered: 244443,
@@ -139,12 +139,12 @@ const Test: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key:string) => {
+    const handleSort = (key: string) => {
         if (sort.order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] < b[key]) return -1;
-                if (a[key] > b[key]) return 1;
+                    if (a[key] < b[key]) return -1;
+                    if (a[key] > b[key]) return 1;
                 }
                 return 0;
             });
@@ -156,8 +156,8 @@ const Test: NextPage = () => {
         } else {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] > b[key]) return -1;
-                if (a[key] < b[key]) return 1;
+                    if (a[key] > b[key]) return -1;
+                    if (a[key] < b[key]) return 1;
                 }
                 return 0;
             });
@@ -169,7 +169,7 @@ const Test: NextPage = () => {
         }
     };
 
-    const toggleSort = (column:string) => {
+    const toggleSort = (column: string) => {
         if (sort.column == column) {
             setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
         } else {
