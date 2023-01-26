@@ -17,17 +17,17 @@ import { parseDate, getLocalTimeZone, today, isWeekend } from '@internationalize
 import { useDateFormatter, useLocale } from 'react-aria';
 import RangeCalendar from '../components/rangerCalendar';
 import ProductCard from '../components/productcard';
-import BarGraph from '../components/bargraph';
+// import BarGraph from '../components/barGraph';
 import DownloadPdfButton from '../components/pdfDownload';
 import PrintButton from '../components/printButton';
-import Counter from '../components/counter';
-import TextAnimator from '../components/textcounter';
-import AreaChart from '../components/d3AreaGraph';
-import DifferentCounter from '../components/differentCounter';
-import DifferentTextAnimator from '../components/differentTextAnimator';
-import Modal from '../components/modal';
-import MakeLissajour from '../components/d3animation';
-import SortableTable from '../components/sortableTable';
+// import Counter from '../components/counter';
+// import TextAnimator from '../components/textcounter';
+// import AreaChart from '../components/d3AreaGraph';
+// import DifferentCounter from '../components/differentCounter';
+// import DifferentTextAnimator from '../components/differentTextAnimator';
+// import Modal from '../components/modal';
+// import MakeLissajour from '../components/d3animation';
+// import SortableTable from '../components/sortableTable';
 
 const Home: NextPage = () => {
 
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
   ];
 
   let { locale } = useLocale();
-  let isDateUnavailable = (date) =>
+  let isDateUnavailable = (date: any) =>
     isWeekend(date, locale) ||
     disabledRanges.some((interval) =>
       date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0
