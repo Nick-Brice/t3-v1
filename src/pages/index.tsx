@@ -21,8 +21,23 @@ import Lottie from 'react-lottie';
 import animationData from '../components/circularAnimation.json';
 import CircularAnimation from '../components/circularAnimation';
 import FormLayout from "../components/formLayout";
+import { GetServerSideProps } from "next";
+import { PrismaClient } from '@prisma/client'
 
-const Test: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+    const users = await prisma?.user.findMany({
+        select: {
+            email: true,
+            name: true,
+        }
+    });
+    // console.log(users);
+    return {
+        props: { users },
+    };
+};
+
+function Home (props:any) {
 
     const [showMenuText, setShowMenuText] = useState<string | null>(null);
 
@@ -388,6 +403,9 @@ const Test: NextPage = () => {
                     </div>
                     <div className="p-8 mt-20">
                         {/* <CircularAnimation /> */}
+                        <div>
+                            {props.users[0].email}
+                        </div>
                         <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
                         <DropdownMenu label="Favorite Color">
@@ -464,4 +482,4 @@ const Test: NextPage = () => {
     )
 }
 
-export default Test
+export default Home

@@ -21,10 +21,24 @@ import Lottie from 'react-lottie';
 import animationData from '../components/circularAnimation.json';
 import CircularAnimation from '../components/circularAnimation';
 import FormLayout from "../components/formLayout";
+import { GetServerSideProps } from "next";
 
-const Home: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+    const users = await prisma?.user.findMany({
+        select: {
+            email: true,
+            name: true,
+        }
+    });
+    // console.log(users);
+    return {
+        props: { users },
+    };
+};
 
-    const data:{}[] = [
+const Home: NextPage = (props: any) => {
+
+    const data: {}[] = [
         {
             name: "Nick",
             delivered: 244443,
@@ -133,12 +147,12 @@ const Home: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key:string, order:string) => {
+    const handleSort = (key: string, order: string) => {
         if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] < b[key]) return -1;
-                if (a[key] > b[key]) return 1;
+                    if (a[key] < b[key]) return -1;
+                    if (a[key] > b[key]) return 1;
                 }
                 return 0;
             });
@@ -150,8 +164,8 @@ const Home: NextPage = () => {
         } else {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] > b[key]) return -1;
-                if (a[key] < b[key]) return 1;
+                    if (a[key] > b[key]) return -1;
+                    if (a[key] < b[key]) return 1;
                 }
                 return 0;
             });
@@ -163,7 +177,7 @@ const Home: NextPage = () => {
         }
     };
 
-    const toggleSort = (column:string) => {
+    const toggleSort = (column: string) => {
         if (sort.column == column) {
             setSort({ column, order: sort.order === 'ascending' ? 'descending' : 'ascending' });
         } else {
@@ -340,6 +354,9 @@ const Home: NextPage = () => {
                     </div>
                     <div className="p-8 mt-20">
                         {/* <CircularAnimation /> */}
+                        <div>
+                            {props.users[0].email}
+                        </div>
                         <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
                         <DropdownMenu label="Favorite Color">
