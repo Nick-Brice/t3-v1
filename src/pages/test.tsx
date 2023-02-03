@@ -35,7 +35,7 @@ import { GetServerSideProps } from "next";
 // import { useSession, getSession } from "next-auth/react";
 import { PrismaClient } from '@prisma/client'
 import { propTypes } from "react-bootstrap/esm/Image";
-import TabMenu from '../components/TabMenu';
+import TabMenu from '../components/tabMenu';
 import { useRouter } from 'next/router';
 import Sidebar from "../components/sidebar";
 import BreadCrumbs from '../components/breadcrumbs';

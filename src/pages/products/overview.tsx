@@ -22,7 +22,7 @@ import animationData from '../../components/circularAnimation.json';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
 import { VenueSidebarArray } from '../../components/venueSidebarArray';
-import TabMenu from "../../components/TabMenu";
+import TabMenu from "../../components/tabMenu";
 import { VenueProductsTabMenuArray } from '../../components/venueProductsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
