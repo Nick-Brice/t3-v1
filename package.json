@@ -46,7 +46,6 @@
     "react-chartjs-2": "^5.0.1",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "18.2.0",
-    "react-lottie": "^1.2.3",
     "react-move": "^6.5.0",
     "react-stately": "^3.19.0",
     "zod": "^3.18.0"
