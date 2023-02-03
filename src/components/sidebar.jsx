@@ -2,12 +2,12 @@ import React from "react";
 import { useRouter } from 'next/router'
 import Link from "next/link";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
 
     const router = useRouter()
     const urlPath = router.asPath;
     const splitPath = urlPath.split('/');
-    const root = splitPath[1]
+    const root = '/' + splitPath[1]
 
     const handleClick = (e, href) => {
         e.preventDefault()
@@ -23,6 +23,17 @@ const Sidebar = () => {
                     </Link>
                 </div>
                 <div className="flex flex-col gap-6 justify-center text-white">
+                    {props.data && props.data.map((link) => (
+                        <div className="relative flex items-center">
+                            <img height="20px" className="h-[20px] z-20" src={link.icon} />
+                            <img className={root == link.root ? 'absolute h-[35px] z-10 -left-[7px]' : 'absolute hidden h-[20px]'} src="/Active_Underlay.png" />
+                            <Link href={{ pathname: link.path }} >
+                                <p className={root == link.root ? 'pl-2 rounded-lg bg-gradient-to-r from-secondary to-primary pr-2' : 'pl-2'}  >{link.title}</p>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+                {/* <div className="flex flex-col gap-6 justify-center text-white">
                     <div className="relative flex items-center">
                         <img height="20px" className="h-[20px] z-20" src="/Dash_W.png" />
                         <img className={root == 'home' ? 'absolute h-[35px] z-10 -left-[7px]' : 'absolute hidden h-[20px]'} src="/Active_Underlay.png" />
@@ -65,14 +76,14 @@ const Sidebar = () => {
                             <p className={root == 'upload' ? 'pl-2 rounded-lg bg-gradient-to-r from-secondary to-primary pr-2' : 'pl-2'}>Upload</p>
                         </Link>
                     </div>
-                    {/* <div className="relative flex items-center">
+                    <div className="relative flex items-center">
                         <img height="20px" className="h-[20px] z-20" src="/API_W.png" />
                         <img className={root == 'docs' ? 'absolute h-[35px] z-10 -left-[7px]' : 'absolute hidden h-[20px]'} src="/Active_Underlay.png" />
                         <Link href={{ pathname: '/docs' }} >
                             <p className={root == 'docs' ? 'pl-2 rounded-lg bg-gradient-to-r from-secondary to-primary pr-2' : 'pl-2'}>API Docs</p>
                         </Link>
-                    </div> */}
-                </div>
+                    </div>
+                </div> */}
             </div>
         </div>
     )

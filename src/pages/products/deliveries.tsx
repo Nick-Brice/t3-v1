@@ -21,8 +21,15 @@ import Lottie from 'react-lottie';
 import animationData from '../../components/circularAnimation.json';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
+import { VenueSidebarArray } from "../../components/venueSidebarArray";
+import TabMenu from "../../components/TabMenu";
+import { VenueProductsTabMenuArray } from "../../components/venueProductsTabMenuArray";
+import { useRouter } from "next/router";
+import Breadcrumbs from "../../components/breadcrumbs";
 
 const Test: NextPage = () => {
+    const router = useRouter();
+    const urlPath = router.pathname;
 
     const [showMenuText, setShowMenuText] = useState<string | null>(null);
 
@@ -209,57 +216,16 @@ const Test: NextPage = () => {
             </Head>
             <div className="fixed bg-secondarygrey w-full h-full -z-10"></div>
             <div className="grid grid-cols-[auto_1fr]">
-                <Sidebar />
+                <Sidebar data={VenueSidebarArray} />
                 {/* <div className="fixed">
                         <div className="flex flex-col bg-secondaryblack w-screen h-screen p-4"></div>
                     </div> */}
                 <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
-                        <div className="px-8 py-4">
-                            <h5 className="text-2xl">[Client Name] Products</h5>
-                            <h6>
-                                <Link href={{ pathname: '/home' }} >
-                                    <span>
-                                        Portal /
-                                    </span>
-                                </Link>
-                                <Link href={{ pathname: '/products' }} >
-                                    <span>
-                                        &nbsp;Products&nbsp;
-                                    </span>
-                                </Link>
-                                / Overview</h6>
-                        </div>
-                        {/* <div className="flex gap-16 place-self-center">
-                            <h6>Overview</h6>
-                            <h6>Deliveries</h6>
-                            <h6>Stock Checks</h6>
-                        </div> */}
-                        {/* <div className="flex gap-12 place-self-center ">
-                            <div className="relative z-20">
-                                <h6 className="z-20 text-white">AAAAA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red pl-7 pr-12 py-7 border-8 rounded-t-2xl text-white">AAAAAAAAAAA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            
-                        </div> */}
-                        <div className="relative flex self-end justify-self-center">
+                        <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
+                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
+                        {/* <div className="relative flex self-end justify-self-center">
                             <div className="relative -mr-8 z-10">
                                 <Link href={{ pathname: '/products/overview' }} >
                                     <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Overview')} onMouseOut={() => handleHover(null)}>
@@ -314,10 +280,8 @@ const Test: NextPage = () => {
                                     </div>
                                 </Link>
                             </div>
-                            {/* <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 py-12 pl-6 pr-6 border-8 rounded-t-2xl text-white">AA</div>
-                            </div> */}
-                        </div>
+                            
+                        </div> */}
                     </header>
                     <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-40">
 

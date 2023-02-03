@@ -1,49 +1,38 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Sidebar from '../components/sidebar'
+import Sidebar from "../components/sidebar";
 import SortableTable from "../components/sortableTable";
-import HeaderButton from '../components/headerButton';
+import HeaderButton from "../components/headerButton";
 import React, { useState } from "react";
-import DraggableTable from "../components/draggableTable2"
+import DraggableTable from "../components/draggableTable2";
 import DonutProgress from "../components/donutProgress2";
 import Counter from "../components/counter";
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import AnimatedProgressProvider from '../components/AnimatedProgressProvider';
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import AnimatedProgressProvider from "../components/AnimatedProgressProvider";
 import { easeQuadInOut } from "d3-ease";
 import AreaChart from "../components/d3AreaGraph";
-import LineGraph from '../components/d3LineGraph';
-import ScatterGraph from '../components/d3ScatterGraph';
-import DropdownMenu from '../components/sortByDropdownMenu';
-import { Item, useSelectState } from 'react-stately';
-import Lottie from 'react-lottie';
-import animationData from '../components/circularAnimation.json';
-import CircularAnimation from '../components/circularAnimation';
+import LineGraph from "../components/d3LineGraph";
+import ScatterGraph from "../components/d3ScatterGraph";
+import DropdownMenu from "../components/sortByDropdownMenu";
+import { Item, useSelectState } from "react-stately";
+import Lottie from "react-lottie";
+import animationData from "../components/circularAnimation.json";
+import CircularAnimation from "../components/circularAnimation";
 import FormLayout from "../components/formLayout";
 import { GetServerSideProps } from "next";
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
+import { VenueSidebarArray } from "../components/venueSidebarArray";
+// import { Prisma } from "@prisma/client";
+import { prisma } from "../server/db/client";
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-    const users = await prisma?.user.findMany({
-        select: {
-            email: true,
-            name: true,
-        }
-    });
-    // console.log(users);
-    return {
-        props: { users },
-    };
-};
-
-function Home (props:any) {
-
+function Home(props: any) {
     const [showMenuText, setShowMenuText] = useState<string | null>(null);
 
     const handleHover = (tab: string | null) => {
         setShowMenuText(tab);
-    }
+    };
 
     const data: {}[] = [
         {
@@ -51,91 +40,91 @@ function Home (props:any) {
             delivered: 244443,
             collected: 122234,
             rate: 95,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Jack",
             delivered: 26345,
             collected: 222355,
             rate: 80,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Connor",
             delivered: 26445,
             collected: 1234455,
             rate: 70,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Nick1",
             delivered: 24666,
             collected: 123456,
             rate: 90,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Jack1",
             delivered: 2622,
             collected: 445666,
             rate: 80,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Connor1",
             delivered: 2622,
             collected: 5678,
             rate: 70,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Nick2",
             delivered: 24777,
             collected: 77777,
             rate: 90,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Jack2",
             delivered: 2654,
             collected: 8876,
             rate: 80,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
+            test4: 4,
         },
         {
             name: "Connor2",
             delivered: 26235,
             collected: 45532,
             rate: 70,
-            stream: 'Waste',
+            stream: "Waste",
             test2: 2,
             test3: 3,
-            test4: 4
-        }
+            test4: 4,
+        },
     ];
 
     const first = data[0];
@@ -146,8 +135,8 @@ function Home (props:any) {
 
     const [openSortBy, setOpenSortBy] = React.useState(false);
 
-    const [sort, setSort] = React.useState({ column: '', order: '' });
-    const [layout, setLayout] = useState('table');
+    const [sort, setSort] = React.useState({ column: "", order: "" });
+    const [layout, setLayout] = useState("table");
     const [tableData, setTableData] = React.useState(data);
     const [topTableData, setTopTableData] = React.useState(data);
     const [bottomTableData, setBottomTableData] = React.useState(data);
@@ -188,33 +177,67 @@ function Home (props:any) {
 
     const toggleSort = (column: string) => {
         if (sort.column == column) {
-            setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
+            setSort({
+                column,
+                order: sort.order == "ascending" ? "descending" : "ascending",
+            });
         } else {
-            setSort({ column, order: 'descending' });
+            setSort({ column, order: "descending" });
         }
-        console.log(sort)
-    }
+        console.log(sort);
+    };
 
     const handleLayoutChange = () => {
-        if (layout === 'table') {
-            setLayout('grid');
+        if (layout === "table") {
+            setLayout("grid");
         } else {
-            setLayout('table');
+            setLayout("table");
         }
     };
 
     const tableData2 = [
-        { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 'n': 1400000, 1500000: 15 },
-        { 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9: 10, 10: 11, 11: 12, 12: 13, 13: 14, 'n': 1500000, 1500000: 16 }
-    ]
-
+        {
+            1: 1,
+            2: 2,
+            3: 3,
+            4: 4,
+            5: 5,
+            6: 6,
+            7: 7,
+            8: 8,
+            9: 9,
+            10: 10,
+            11: 11,
+            12: 12,
+            13: 13,
+            n: 1400000,
+            1500000: 15,
+        },
+        {
+            1: 2,
+            2: 3,
+            3: 4,
+            4: 5,
+            5: 6,
+            6: 7,
+            7: 8,
+            8: 9,
+            9: 10,
+            10: 11,
+            11: 12,
+            12: 13,
+            13: 14,
+            n: 1500000,
+            1500000: 16,
+        },
+    ];
 
     const defaultOptions = {
         loop: true,
         autoplay: true,
         animationData: animationData,
 
-        isClickToPauseDisabled: true
+        isClickToPauseDisabled: true,
     };
 
     return (
@@ -224,29 +247,27 @@ function Home (props:any) {
                 <meta name="description" content="Generated by create-t3-app" />
                 <link rel="icon" href="/Portal_Icon.png" />
             </Head>
-            <div className="fixed bg-secondarygrey w-full h-full -z-10"></div>
+            <div className="fixed -z-10 h-full w-full bg-secondarygrey"></div>
             <div className="grid grid-cols-[auto_1fr]">
-                <Sidebar />
+                <Sidebar data={VenueSidebarArray} />
                 {/* <div className="fixed">
                         <div className="flex flex-col bg-secondaryblack w-screen h-screen p-4"></div>
                     </div> */}
-                <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
+                <div className="w-36"></div>{" "}
+                {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
-                    <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
+                    <header className="z-50 grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md">
                         <div className="px-8 py-4">
                             <h5 className="text-2xl">[Client Name] Products</h5>
                             <h6>
-                                <Link href={{ pathname: '/home' }} >
-                                    <span>
-                                        Portal /
-                                    </span>
+                                <Link href={{ pathname: "/home" }}>
+                                    <span>Portal /</span>
                                 </Link>
-                                <Link href={{ pathname: '/products' }} >
-                                    <span>
-                                        &nbsp;Products&nbsp;
-                                    </span>
+                                <Link href={{ pathname: "/products" }}>
+                                    <span>&nbsp;Products&nbsp;</span>
                                 </Link>
-                                / Overview</h6>
+                                / Overview
+                            </h6>
                         </div>
                         {/* <div className="flex gap-16 place-self-center">
                             <h6>Overview</h6>
@@ -277,56 +298,89 @@ function Home (props:any) {
                             
                         </div> */}
                         <div className="relative flex self-end justify-self-center">
-                            <Link href={{ pathname: '/products/overview' }} >
-                                <div className="relative -mr-8 z-10">
-                                    <div className="z-10 bg-primary  rounded-t-2xl text-white shadow-center-md cursor-default" onMouseOver={() => handleHover('Overview')} onMouseOut={() => handleHover(null)}>
-                                        <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[220px]  text-center">
+                            <Link href={{ pathname: "/products/overview" }}>
+                                <div className="relative z-10 -mr-8">
+                                    <div
+                                        className="z-10 cursor-default  rounded-t-2xl bg-primary text-white shadow-center-md"
+                                        onMouseOver={() => handleHover("Overview")}
+                                        onMouseOut={() => handleHover(null)}
+                                    >
+                                        <div className="grid h-[80px] max-w-[220px] place-items-center py-2 pl-6 pr-12  text-center">
                                             <div className="flex text-center">
-                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Tracker_W_SQ.png" />
+                                                <img
+                                                    height="20px"
+                                                    className="z-20 mr-4 h-[30px] self-center"
+                                                    src="/Tracker_W_SQ.png"
+                                                />
 
-                                                <h3 className="leading-5 font-semibold self-center">Overview</h3>
-
+                                                <h3 className="self-center font-semibold leading-5">
+                                                    Overview
+                                                </h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </Link>
-                            <div className="relative -mr-8 z-10">
-                                <Link href={{ pathname: '/products/deliveries' }} >
-                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Deliveries')} onMouseOut={() => handleHover(null)}>
-                                        <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[230px]  text-center">
+                            <div className="relative z-10 -mr-8">
+                                <Link href={{ pathname: "/products/deliveries" }}>
+                                    <div
+                                        className="z-10 cursor-pointer rounded-t-2xl  bg-secondarywhite text-white shadow-center-md transition duration-150 hover:bg-secondarygrey"
+                                        onMouseOver={() => handleHover("Deliveries")}
+                                        onMouseOut={() => handleHover(null)}
+                                    >
+                                        <div className="grid h-[80px] max-w-[230px] place-items-center py-2 pl-6 pr-12  text-center">
                                             <div className="flex text-center">
-                                                {showMenuText !== 'Deliveries' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Delivery_B_SQ.png" />
+                                                {showMenuText !== "Deliveries" && (
+                                                    <img
+                                                        height="20px"
+                                                        className="z-20 mr-4 h-[30px] self-center"
+                                                        src="/Delivery_B_SQ.png"
+                                                    />
                                                 )}
-                                                {showMenuText === 'Deliveries' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Delivery_B_SQ.png" />
-
+                                                {showMenuText === "Deliveries" && (
+                                                    <img
+                                                        height="20px"
+                                                        className="z-20 mr-4 h-[30px] self-center"
+                                                        src="/Delivery_B_SQ.png"
+                                                    />
                                                 )}
-                                                {showMenuText === 'Deliveries' && (
-                                                    <h3 className="leading-5 text-black self-center">Deliveries</h3>
-
+                                                {showMenuText === "Deliveries" && (
+                                                    <h3 className="self-center leading-5 text-black">
+                                                        Deliveries
+                                                    </h3>
                                                 )}
                                             </div>
                                         </div>
                                     </div>
                                 </Link>
                             </div>
-                            <div className="relative -mr-8 z-10">
-                                <Link href={{ pathname: '/products/stock-checks' }} >
-                                    <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Stock Checks')} onMouseOut={() => handleHover(null)} >
-                                        <div className="grid place-items-center py-2 pl-6 pr-6 h-[80px] max-w-[230px]  text-center">
+                            <div className="relative z-10 -mr-8">
+                                <Link href={{ pathname: "/products/stock-checks" }}>
+                                    <div
+                                        className="z-10 cursor-pointer rounded-t-2xl  bg-secondarywhite text-white shadow-center-md transition duration-150 hover:bg-secondarygrey"
+                                        onMouseOver={() => handleHover("Stock Checks")}
+                                        onMouseOut={() => handleHover(null)}
+                                    >
+                                        <div className="grid h-[80px] max-w-[230px] place-items-center py-2 pl-6 pr-6  text-center">
                                             <div className="flex text-center">
-                                                {showMenuText !== 'Stock Checks' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center" src="/Stock_B_SQ.png" />
+                                                {showMenuText !== "Stock Checks" && (
+                                                    <img
+                                                        height="20px"
+                                                        className="z-20 h-[30px] self-center"
+                                                        src="/Stock_B_SQ.png"
+                                                    />
                                                 )}
-                                                {showMenuText === 'Stock Checks' && (
-                                                    <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Stock_B_SQ.png" />
-
+                                                {showMenuText === "Stock Checks" && (
+                                                    <img
+                                                        height="20px"
+                                                        className="z-20 mr-4 h-[30px] self-center"
+                                                        src="/Stock_B_SQ.png"
+                                                    />
                                                 )}
-                                                {showMenuText === 'Stock Checks' && (
-                                                    <h3 className="leading-5 text-black self-center">Stock Checks</h3>
-
+                                                {showMenuText === "Stock Checks" && (
+                                                    <h3 className="self-center leading-5 text-black">
+                                                        Stock Checks
+                                                    </h3>
                                                 )}
                                             </div>
                                         </div>
@@ -338,49 +392,74 @@ function Home (props:any) {
                             </div> */}
                         </div>
                     </header>
-                    <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-40">
-
+                    <div className="absolute inset-x-8 z-40 flex justify-between rounded-2xl bg-primary p-5">
                         <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => { handleLayoutChange() }}>
-                                <p className="pr-4">
-                                    Change View Style
-                                </p>
-                                <img className={(layout != "grid" ? "opacity-30 pl-5 scale-75" : "pl-5 scale-75")} src="/grid-four.svg" />
-                                <img className={(layout != "table" ? "opacity-30 scale-75" : "scale-75")} src="/list.svg" />
+                            <div
+                                className="flex cursor-pointer select-none flex-wrap items-center text-lg"
+                                onClick={() => {
+                                    handleLayoutChange();
+                                }}
+                            >
+                                <p className="pr-4">Change View Style</p>
+                                <img
+                                    className={
+                                        layout != "grid"
+                                            ? "scale-75 pl-5 opacity-30"
+                                            : "scale-75 pl-5"
+                                    }
+                                    src="/grid-four.svg"
+                                />
+                                <img
+                                    className={
+                                        layout != "table" ? "scale-75 opacity-30" : "scale-75"
+                                    }
+                                    src="/list.svg"
+                                />
                             </div>
                         </HeaderButton>
                         <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => setOpenForm(!openForm)}>
-                                <p className="pr-4">
-                                    Add Product
-                                </p>
-                                <img className="pl-1 scale-75" src="/add-three.svg" />
+                            <div
+                                className="flex cursor-pointer select-none flex-wrap items-center text-lg"
+                                onClick={() => setOpenForm(!openForm)}
+                            >
+                                <p className="pr-4">Add Product</p>
+                                <img className="scale-75 pl-1" src="/add-three.svg" />
                             </div>
                         </HeaderButton>
                         {openForm && (
-                            <div className='absolute modal left-0 top-0 z-50'>
-                                <div className=' fixed grid place-content-center inset-0 z-50'>
-                                    <div className=' inset-0 z-50 w-full h-full'>
+                            <div className="modal absolute left-0 top-0 z-50">
+                                <div className=" fixed inset-0 z-50 grid place-content-center">
+                                    <div className=" inset-0 z-50 h-full w-full">
                                         <FormLayout setOpenForm={setOpenForm} />
                                     </div>
-                                    <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                                    <div
+                                        onClick={() => setOpenForm(false)}
+                                        className="fixed inset-0 z-10 backdrop-blur-sm backdrop-brightness-75"
+                                    ></div>
                                 </div>
                             </div>
                         )}
                         <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}>
-
-
+                            <div
+                                className="flex h-[35px] cursor-pointer select-none flex-wrap items-center text-lg"
+                                onClick={() => setOpenSortBy(!openSortBy)}
+                            >
                                 {/* <p className="pr-4">
                                             Sort By: 
                                         </p>
                                         <img className="pl-1 scale-75" src="/sort-one.svg" /> */}
 
-
-
                                 <DropdownMenu name="field2" label="Field 2" sort={sort}>
                                     {columnNames.map((col, index) => (
-                                        <option onClick={() => { toggleSort(col); handleSort(col) }} value={col}>{col}</option>
+                                        <option
+                                            onClick={() => {
+                                                toggleSort(col);
+                                                handleSort(col);
+                                            }}
+                                            value={col}
+                                        >
+                                            {col}
+                                        </option>
                                     ))}
                                     {/* <option onClick={() => { toggleSort('used'); handleSort('used', sort.order) }} value="Option 1">Option 1</option>
                                     <option value="Option 2">Option 2</option>
@@ -389,24 +468,31 @@ function Home (props:any) {
                                     <option value="Option 5">Option 5</option>
                                     <option value="Option 6">Option 6</option> */}
                                 </DropdownMenu>
-
                             </div>
                         </HeaderButton>
                         <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer">
-                                <p className="pr-4">
-                                    Download CSV
-                                </p>
-                                <img className="pl-1 scale-75" src="/download.svg" />
+                            <div className="flex cursor-pointer select-none flex-wrap items-center text-lg">
+                                <p className="pr-4">Download CSV</p>
+                                <img className="scale-75 pl-1" src="/download.svg" />
                             </div>
                         </HeaderButton>
                     </div>
-                    <div className="p-8 mt-20">
+                    <div className="mt-20 p-8">
                         {/* <CircularAnimation /> */}
-                        <div>
-                            {props.users[0].email}
-                        </div>
-                        <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
+                        {/* <div>{props.users[0].email}</div> */}
+                        <SortableTable
+                            data={tableData}
+                            layout={layout}
+                            onLayoutChange={setLayout}
+                            sort={sort}
+                            setSort={setSort}
+                            tableData={tableData}
+                            setTableData={setTableData}
+                            topTableData={topTableData}
+                            setTopTableData={setTopTableData}
+                            bottomTableData={bottomTableData}
+                            setBottomTableData={setBottomTableData}
+                        />
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
                         <DropdownMenu label="Favorite Color">
                             <Item>Red</Item>
@@ -421,23 +507,51 @@ function Home (props:any) {
                             <Item>Fushsia</Item>
                         </DropdownMenu>
                         <AreaChart data={[10, 11, 9, 12, 8, 13]} width={300} height={150} />
-                        <div className="p-4 bg-white w-fit mt-8">
-                            <ScatterGraph data={[
-                                { x: 0, y: 20, label: 'A' },
-                                { x: 40, y: 50, label: 'B' },
-                                { x: 30, y: 70, label: 'C' },
-                                { x: 60, y: 80, label: 'D' },
-                                { x: 90, y: 10, label: 'E' }
-                            ]} width={300} height={150} />
+                        <div className="mt-8 w-fit bg-white p-4">
+                            <ScatterGraph
+                                data={[
+                                    { x: 0, y: 20, label: "A" },
+                                    { x: 40, y: 50, label: "B" },
+                                    { x: 30, y: 70, label: "C" },
+                                    { x: 60, y: 80, label: "D" },
+                                    { x: 90, y: 10, label: "E" },
+                                ]}
+                                width={300}
+                                height={150}
+                            />
                         </div>
                         <LineGraph data={[10, 11, 9, 12, 8, 13]} width={500} height={500} />
 
-                        <div className="w-[250px] h-[250px] flex place-content-center bg-white rounded-2xl mt-8">
-                            <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={250} />
+                        <div className="mt-8 flex h-[250px] w-[250px] place-content-center rounded-2xl bg-white">
+                            <DonutProgress
+                                data={90}
+                                duration={750}
+                                colour="#49cc73"
+                                backgroundColour="#ececec"
+                                size={250}
+                            />
                         </div>
-                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={500} />
-                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={50} />
-                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={1000} />
+                        <DonutProgress
+                            data={90}
+                            duration={750}
+                            colour="#49cc73"
+                            backgroundColour="#ececec"
+                            size={500}
+                        />
+                        <DonutProgress
+                            data={90}
+                            duration={750}
+                            colour="#49cc73"
+                            backgroundColour="#ececec"
+                            size={50}
+                        />
+                        <DonutProgress
+                            data={90}
+                            duration={750}
+                            colour="#49cc73"
+                            backgroundColour="#ececec"
+                            size={1000}
+                        />
                         {/* <div className="w-[250px] h-[250px]">
                             <svg viewBox="0 0 100 100">
 
@@ -479,7 +593,20 @@ function Home (props:any) {
                 </main>
             </div>
         </>
-    )
+    );
 }
 
-export default Home
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+    const users = await prisma?.user.findMany({
+        select: {
+            email: true,
+            name: true,
+        },
+    });
+    // console.log(users);
+    return {
+        props: { users },
+    };
+};
+
+export default Home;

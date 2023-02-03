@@ -21,12 +21,14 @@ import Lottie from 'react-lottie';
 import animationData from '../../components/circularAnimation.json';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
+import { VenueSidebarArray } from "../../components/venueSidebarArray";
+import TabMenu from "../../components/TabMenu";
 
 const Test: NextPage = () => {
 
-    const [showMenuText, setShowMenuText] = useState<string|null>(null);
+    const [showMenuText, setShowMenuText] = useState<string | null>(null);
 
-    const handleHover = (tab:string|null) => {
+    const handleHover = (tab: string | null) => {
         setShowMenuText(tab);
     }
 
@@ -139,12 +141,12 @@ const Test: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key:string) => {
+    const handleSort = (key: string) => {
         if (sort.order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] < b[key]) return -1;
-                if (a[key] > b[key]) return 1;
+                    if (a[key] < b[key]) return -1;
+                    if (a[key] > b[key]) return 1;
                 }
                 return 0;
             });
@@ -156,8 +158,8 @@ const Test: NextPage = () => {
         } else {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] > b[key]) return -1;
-                if (a[key] < b[key]) return 1;
+                    if (a[key] > b[key]) return -1;
+                    if (a[key] < b[key]) return 1;
                 }
                 return 0;
             });
@@ -169,7 +171,7 @@ const Test: NextPage = () => {
         }
     };
 
-    const toggleSort = (column:string) => {
+    const toggleSort = (column: string) => {
         if (sort.column == column) {
             setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
         } else {
@@ -209,7 +211,7 @@ const Test: NextPage = () => {
             </Head>
             <div className="fixed bg-secondarygrey w-full h-full -z-10"></div>
             <div className="grid grid-cols-[auto_1fr]">
-                <Sidebar />
+                <Sidebar data={VenueSidebarArray} />
                 {/* <div className="fixed">
                         <div className="flex flex-col bg-secondaryblack w-screen h-screen p-4"></div>
                     </div> */}

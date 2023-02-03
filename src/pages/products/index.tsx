@@ -21,10 +21,18 @@ import Lottie from 'react-lottie';
 import animationData from '../../components/circularAnimation.json';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
+import { VenueSidebarArray } from "../../components/venueSidebarArray";
+import Breadcrumbs from "../../components/breadcrumbs";
+import TabMenu from "../../components/TabMenu";
+import { VenueProductsTabMenuArray } from "../../components/venueProductsTabMenuArray";
+import { useRouter } from "next/router";
 
 const Test: NextPage = () => {
 
-    const data:{}[] = [
+    const router = useRouter();
+    const urlPath = router.pathname;
+
+    const data: {}[] = [
         {
             name: "Nick",
             delivered: 244443,
@@ -133,12 +141,12 @@ const Test: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key:string, order:string) => {
+    const handleSort = (key: string, order: string) => {
         if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] < b[key]) return -1;
-                if (a[key] > b[key]) return 1;
+                    if (a[key] < b[key]) return -1;
+                    if (a[key] > b[key]) return 1;
                 }
                 return 0;
             });
@@ -150,8 +158,8 @@ const Test: NextPage = () => {
         } else {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] > b[key]) return -1;
-                if (a[key] < b[key]) return 1;
+                    if (a[key] > b[key]) return -1;
+                    if (a[key] < b[key]) return 1;
                 }
                 return 0;
             });
@@ -163,7 +171,7 @@ const Test: NextPage = () => {
         }
     };
 
-    const toggleSort = (column:string) => {
+    const toggleSort = (column: string) => {
         if (sort.column == column) {
             setSort({ column, order: sort.order === 'ascending' ? 'descending' : 'ascending' });
         } else {
@@ -202,14 +210,16 @@ const Test: NextPage = () => {
             </Head>
             <div className="fixed bg-secondarygrey w-full h-full -z-10"></div>
             <div className="grid grid-cols-[auto_1fr]">
-                <Sidebar />
+                <Sidebar data={VenueSidebarArray} />
                 {/* <div className="fixed">
                         <div className="flex flex-col bg-secondaryblack w-screen h-screen p-4"></div>
                     </div> */}
                 <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
-                    <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-md px-8 py-4">
-                    <div>
+                    <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
+                        <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
+                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
+                        {/* <div>
                             <h5 className="text-2xl">[Client Name] Products</h5>
                             <h6>
                                 <Link href={{ pathname: '/home' }} >
@@ -217,40 +227,12 @@ const Test: NextPage = () => {
                                         Portal /
                                     </span>
                                 </Link>
-                                
-                                    <span>
-                                        &nbsp;Products&nbsp;
-                                    </span>
-                                </h6>
+
+                                <span>
+                                    &nbsp;Products&nbsp;
+                                </span>
+                            </h6>
                         </div>
-                        {/* <div className="flex gap-16 place-self-center">
-                            <h6>Overview</h6>
-                            <h6>Deliveries</h6>
-                            <h6>Stock Checks</h6>
-                        </div> */}
-                        {/* <div className="flex gap-12 place-self-center ">
-                            <div className="relative z-20">
-                                <h6 className="z-20 text-white">AAAAA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red pl-7 pr-12 py-7 border-8 rounded-t-2xl text-white">AAAAAAAAAAA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            
-                        </div> */}
                         <div className="flex place-self-center ">
                             <div className="relative -mr-8 z-10">
                                 <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
@@ -280,12 +262,10 @@ const Test: NextPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 py-12 pl-6 pr-6 border-8 rounded-t-2xl text-white">AA</div>
-                            </div> */}
-                        </div>
+
+                        </div> */}
                     </header>
-                    <div className="absolute flex justify-between p-5 rounded-2xl bg-gradient-to-br from-primary to-tertiary inset-x-8 z-50">
+                    <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-50">
 
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => { handleLayoutChange() }}>
@@ -306,13 +286,13 @@ const Test: NextPage = () => {
                         </HeaderButton>
                         {openForm && (
                             <div className='absolute modal left-0 top-0 z-50'>
-                            <div className=' fixed grid place-content-center inset-0 z-50'>
-                                <div className=' inset-0 z-50 w-full h-full'>
-                                    <FormLayout setOpenForm={setOpenForm} />
+                                <div className=' fixed grid place-content-center inset-0 z-50'>
+                                    <div className=' inset-0 z-50 w-full h-full'>
+                                        <FormLayout setOpenForm={setOpenForm} />
+                                    </div>
+                                    <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
                                 </div>
-                                <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
                             </div>
-                        </div>
                         )}
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}>

@@ -21,6 +21,7 @@ import Lottie from 'react-lottie';
 import animationData from '../../components/circularAnimation.json';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
+import { VenueSidebarArray } from "../../components/venueSidebarArray";
 
 const Test: NextPage = () => {
 
@@ -209,7 +210,7 @@ const Test: NextPage = () => {
             </Head>
             <div className="fixed bg-secondarygrey w-full h-full -z-10"></div>
             <div className="grid grid-cols-[auto_1fr]">
-                <Sidebar />
+                <Sidebar data={VenueSidebarArray} />
                 {/* <div className="fixed">
                         <div className="flex flex-col bg-secondaryblack w-screen h-screen p-4"></div>
                     </div> */}
