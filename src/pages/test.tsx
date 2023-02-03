@@ -41,18 +41,18 @@ import Sidebar from "../components/sidebar";
 import BreadCrumbs from '../components/breadcrumbs';
 import { prisma } from '../server/db/client';
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-    const users = await prisma?.user.findMany({
-        select: {
-            email: true,
-            name: true,
-        }
-    });
-    // console.log(users);
-    return {
-        props: { users },
-    };
-};
+// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+//     const users = await prisma?.user.findMany({
+//         select: {
+//             email: true,
+//             name: true,
+//         }
+//     });
+//     // console.log(users);
+//     return {
+//         props: { users },
+//     };
+// };
 
 
 function Home(props: any) {
@@ -169,11 +169,11 @@ function Home(props: any) {
                             {user.email}
                         </div>
                     ))}
-                    {props.users.map((user: any) => (
+                    {/* {props.users.map((user: any) => (
                         <div>
                             {user.email}
                         </div>
-                    ))}
+                    ))} */}
                     {/* {data != null ? data.email : ''} */}
                 </main>
 
