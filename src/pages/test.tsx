@@ -33,6 +33,7 @@ import { GetServerSideProps } from "next";
 // import Layout from "../components/Layout";
 // import Post, { PostProps } from "../components/Post";
 // import { useSession, getSession } from "next-auth/react";
+import DonutProgress from "../components/donutProgress2";
 import { PrismaClient } from '@prisma/client'
 import { propTypes } from "react-bootstrap/esm/Image";
 import TabMenu from '../components/tabMenu';
@@ -164,6 +165,7 @@ function Home(props: any) {
                     <button onClick={handleDeleteClick} className="p-2 bg-black text-white rounded-full">Delete All Users</button>
                     <button onClick={handlePutClick} className="p-2 bg-black text-white rounded-full">Update User</button>
                     <button onClick={handleGetClick} className="p-2 bg-black text-white rounded-full">Get All Users</button>
+                    <DonutProgress data={70} duration={750} colour="#49cc73" backgroundColour="#ececec" size={80} />
                     {data != null && data.map((user: any) => (
                         <div>
                             {user.email}

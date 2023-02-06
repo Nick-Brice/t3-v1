@@ -256,7 +256,7 @@ function Home(props: any) {
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
                         <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
                     </header>
-                    <div className="absolute inset-x-8 z-50 flex justify-between rounded-2xl bg-gradient-to-br from-primary to-tertiary p-5">
+                    <div className="absolute inset-x-8 z-50 flex justify-between rounded-2xl bg-primary p-5">
                         <HeaderButton>
                             <div
                                 className="flex cursor-pointer select-none flex-wrap items-center text-lg"
@@ -343,7 +343,7 @@ function Home(props: any) {
                     </div>
                     <div className="mt-20 p-8">
                         {/* <CircularAnimation /> */}
-                        <div>{props.users[0].email}</div>
+                        {/* <div>{props.users[0].email}</div> */}
                         <SortableTable
                             data={tableData}
                             layout={layout}

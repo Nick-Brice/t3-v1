@@ -219,7 +219,7 @@ const Home: NextPage = () => {
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
                         <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
                     </header>
-                    <div className="absolute flex justify-between p-5 rounded-2xl bg-gradient-to-br from-primary to-tertiary inset-x-8 z-50">
+                    <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-50">
 
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => { handleLayoutChange() }}>

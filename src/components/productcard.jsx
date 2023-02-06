@@ -89,7 +89,7 @@ export default function ProductCard(props) {
                     </div>
                     <div className='flex place-content-center relative'>
                         <div className='r rounded-lg border bg-grey-200 w-full'>
-                            <div className='absolute left-0 top-0 h-full bg-gradient-to-r from-emerald to-secondary rounded-lg' style={{ 'width': props.rate + '%' }}></div>
+                            <div className='absolute left-0 top-0 h-full bg-gradient-to-r from-emerald to-secondary rounded-lg' style={{ 'width': '0%', 'transition': 'width 2s', 'width': props.rate + '%' }}></div>
                             <div className='relative z-10 pl-2 text-white'>
                                 <span className='text-lg font-[450]'>
                                     {props.rate}%
