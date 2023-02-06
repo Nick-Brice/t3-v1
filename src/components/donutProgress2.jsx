@@ -35,7 +35,7 @@ const DonutProgress = ({ data, duration, colour, backgroundColour, size }) => {
             .style('fill', colour)
             .attr('d', arc)
             .transition()
-            .duration(750)
+            .duration(duration)
             .attrTween('d', d => {
                 const i = d3.interpolate(d.startAngle, d.endAngle);
                 return t => {
@@ -56,9 +56,9 @@ const DonutProgress = ({ data, duration, colour, backgroundColour, size }) => {
     return (
         <svg width={size} height={size} ref={ref}>
             <foreignObject className='grid place-content-center' x="0" y="0" width={size} height={size}>
-                <div style={{width: size + 'px'}} className={` grid grid-cols-[50%] grid-rows-[50%] place-content-center place-items-center m-0 border-0 p-0 h-full`} xmlns="http://www.w3.org/1999/xhtml">
+                <div style={{ width: size + 'px' }} className={` grid grid-cols-[50%] grid-rows-[50%] place-content-center place-items-center m-0 border-0 p-0 h-full`} xmlns="http://www.w3.org/1999/xhtml">
 
-                    <div style={{fontSize: size/(80/16) + 'px'}}>
+                    <div style={{ fontSize: size / (80 / 16) + 'px' }}>
                         <Counter className='' targetValue={data} duration={duration} />
                         <span className='font-bold '>%</span>
                     </div>

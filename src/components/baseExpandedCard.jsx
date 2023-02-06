@@ -60,7 +60,7 @@ export default function BaseExpandedCard(props) {
                     Product Capture Rate
                 </div>
                 <div className='flex place-content-center pb-6'>
-                    <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={80} />
+                    <DonutProgress data={props.rate} duration={750} colour="#49cc73" backgroundColour="#ececec" size={80} />
                 </div>
             </div>
             <div className='flex flex-col place-content-center w-full h-full border bg-white rounded-2xl row-span-1 shadow-lg p-4'>

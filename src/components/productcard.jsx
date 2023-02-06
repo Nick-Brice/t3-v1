@@ -89,7 +89,7 @@ export default function ProductCard(props) {
                     </div>
                     <div className='flex place-content-center relative'>
                         <div className='r rounded-lg border bg-grey-200 w-full'>
-                            <div className='absolute left-0 top-0 h-full w-[180px] bg-gradient-to-r from-emerald to-secondary rounded-lg'></div>
+                            <div className='absolute left-0 top-0 h-full bg-gradient-to-r from-emerald to-secondary rounded-lg' style={{ 'width': props.rate + '%' }}></div>
                             <div className='relative z-10 pl-2 text-white'>
                                 <span className='text-lg font-[450]'>
                                     {props.rate}%
@@ -117,7 +117,7 @@ export default function ProductCard(props) {
 
             )}
             {isOpen && (
-                <BaseExpandedCard {...props} isOpen={isOpen} setIsOpen={setIsOpen}/>
+                <BaseExpandedCard {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
                 // <div className='bg-white rounded-2xl h-full w-full p-8 shadow-lg grid grid-cols-4 grid-rows-4 gap-2 '>
                 //     <div className='flex w-full h-full col-span-3'>
                 //         <div className='flex flex-col basis-1/4'>

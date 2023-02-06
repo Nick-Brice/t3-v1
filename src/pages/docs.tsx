@@ -21,10 +21,17 @@ import Lottie from 'react-lottie';
 import animationData from '../components/circularAnimation.json';
 import CircularAnimation from '../components/circularAnimation';
 import FormLayout from "../components/formLayout";
+import { VenueSidebarArray } from '../components/venueSidebarArray';
+import TabMenu from "../components/tabMenu";
+import { VenueProductsTabMenuArray } from '../components/venueProductsTabMenuArray';
+import { useRouter } from "next/router";
+import Breadcrumbs from "../components/breadcrumbs";
 
 const Home: NextPage = () => {
+    const router = useRouter();
+    const urlPath = router.pathname;
 
-    const data:{}[] = [
+    const data: {}[] = [
         {
             name: "Nick",
             delivered: 244443,
@@ -133,12 +140,12 @@ const Home: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key:string, order:string) => {
+    const handleSort = (key: string, order: string) => {
         if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] < b[key]) return -1;
-                if (a[key] > b[key]) return 1;
+                    if (a[key] < b[key]) return -1;
+                    if (a[key] > b[key]) return 1;
                 }
                 return 0;
             });
@@ -150,8 +157,8 @@ const Home: NextPage = () => {
         } else {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
-                if (a[key] > b[key]) return -1;
-                if (a[key] < b[key]) return 1;
+                    if (a[key] > b[key]) return -1;
+                    if (a[key] < b[key]) return 1;
                 }
                 return 0;
             });
@@ -163,7 +170,7 @@ const Home: NextPage = () => {
         }
     };
 
-    const toggleSort = (column:string) => {
+    const toggleSort = (column: string) => {
         if (sort.column == column) {
             setSort({ column, order: sort.order === 'ascending' ? 'descending' : 'ascending' });
         } else {
@@ -208,72 +215,9 @@ const Home: NextPage = () => {
                     </div> */}
                 <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
-                    <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-md px-8 py-4">
-                        <div>
-                            <h5 className="text-2xl">[Client Name] Products</h5>
-                            <h6>Portal / Products / Overview</h6>
-                        </div>
-                        {/* <div className="flex gap-16 place-self-center">
-                            <h6>Overview</h6>
-                            <h6>Deliveries</h6>
-                            <h6>Stock Checks</h6>
-                        </div> */}
-                        {/* <div className="flex gap-12 place-self-center ">
-                            <div className="relative z-20">
-                                <h6 className="z-20 text-white">AAAAA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red pl-7 pr-12 py-7 border-8 rounded-t-2xl text-white">AAAAAAAAAAA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            <div className="relative z-10">
-                                <h6 className="z-20 pl-4 pt-4 text-white">AA</h6>
-                                <div className="absolute z-10 -top-1/2 -left-1/2 bg-red py-12 px-12 border-8 rounded-t-2xl text-transparent">AA</div>
-                            </div>
-                            
-                        </div> */}
-                        <div className="flex place-self-center ">
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-12 h-[120px] max-w-[150px] text-center">
-                                        <h3>A</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-12 h-[120px] max-w-[150px] text-center">
-                                        <h3>A</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-12 h-[120px] max-w-[150px] text-center">
-                                        <h3>Add sdfsadf</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-6 h-[120px] max-w-[150px] text-center">
-                                        <h3>A</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 py-12 pl-6 pr-6 border-8 rounded-t-2xl text-white">AA</div>
-                            </div> */}
-                        </div>
+                    <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
+                        <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
+                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
                     </header>
                     <div className="absolute flex justify-between p-5 rounded-2xl bg-gradient-to-br from-primary to-tertiary inset-x-8 z-50">
 
