@@ -1,17 +1,18 @@
-import Lottie from 'react-lottie';
+// import Lottie from 'react-lottie';
 import React from 'react';
-import animationData from './circularAnimation.json';
+// import animationData from './circularAnimation.json';
 import Counter from './counter';
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
 
 export default function CircularAnimation() {
 
     const lottieRef = React.useRef(null);
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData
-    };
+    // const defaultOptions = {
+    //     loop: true,
+    //     autoplay: true,
+    //     animationData: animationData
+    // };
 
     React.useEffect(() => {
         if (lottieRef.current) {
@@ -60,8 +61,18 @@ export default function CircularAnimation() {
                     </div>
                 </div>
             </div>
-            <div className='-mr-8'>
-                <Lottie ref={lottieRef} options={defaultOptions} />
+            <div className=''>
+                <Player
+                    autoplay
+                    loop
+                    src="/circularAnimation.json"
+                    speed={0.5}
+                    ref={lottieRef}
+                // style={{ height: '300px', width: '300px' }}
+                >
+                    {/* <Controls visible={false} buttons={['play', 'repeat', 'frame', 'debug']} /> */}
+                </Player>
+                {/* <Lottie ref={lottieRef} options={defaultOptions} /> */}
             </div>
             <div className='absolute px-8 top-[425px] flex justify-around w-full'>
                 <div className='flex flex-col place-items-center place-content-center p-6 bg-white z-10 rounded-xl'>

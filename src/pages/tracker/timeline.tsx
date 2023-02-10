@@ -22,13 +22,12 @@ import Lottie from 'react-lottie';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
 import { VenueSidebarArray } from "../../components/venueSidebarArray";
-import Breadcrumbs from "../../components/breadcrumbs";
 import TabMenu from "../../components/tabMenu";
-import { VenueProductsTabMenuArray } from "../../components/venueProductsTabMenuArray";
+import { VenueTrackerTabMenuArray } from '../../components/venueTrackerTabMenuArray';
 import { useRouter } from "next/router";
+import Breadcrumbs from "../../components/breadcrumbs";
 
-const Test: NextPage = () => {
-
+const Home: NextPage = () => {
     const router = useRouter();
     const urlPath = router.pathname;
 
@@ -218,52 +217,7 @@ const Test: NextPage = () => {
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
-                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
-                        {/* <div>
-                            <h5 className="text-2xl">[Client Name] Products</h5>
-                            <h6>
-                                <Link href={{ pathname: '/home' }} >
-                                    <span>
-                                        Portal /
-                                    </span>
-                                </Link>
-
-                                <span>
-                                    &nbsp;Products&nbsp;
-                                </span>
-                            </h6>
-                        </div>
-                        <div className="flex place-self-center ">
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-12 h-[120px] max-w-[150px] text-center">
-                                        <h3>A</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-12 h-[120px] max-w-[150px] text-center">
-                                        <h3>A</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-12 h-[120px] max-w-[150px] text-center">
-                                        <h3>Add sdfsadf</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-red hover:bg-blue-500 border-2 rounded-t-2xl text-white shadow-md">
-                                    <div className="grid place-items-center py-6 pl-6 pr-6 h-[120px] max-w-[150px] text-center">
-                                        <h3>A</h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div> */}
+                        <TabMenu data={VenueTrackerTabMenuArray} urlPath={urlPath} />
                     </header>
                     <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-50">
 
@@ -406,4 +360,4 @@ const Test: NextPage = () => {
     )
 }
 
-export default Test
+export default Home

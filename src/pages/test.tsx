@@ -55,6 +55,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     };
 };
 
+function DummyInput(props: any) {
+    return (
+        <input type="text" id="name" name="name" required />
+    )
+}
 
 function Home(props: any) {
 
@@ -145,6 +150,240 @@ function Home(props: any) {
         setData(json);
     };
 
+    const handleSubmit = async (event: any) => {
+        // Stop the form from submitting and refreshing the page.
+        event.preventDefault()
+
+        // Get data from the form.
+        const data = {
+            name: event.target.name.value,
+            email: event.target.email.value,
+        }
+
+        console.log(data);
+
+        // Send the data to the server in JSON format.
+        const JSONdata = JSON.stringify(data)
+
+        // API endpoint where we send form data.
+        const endpoint = '/api/form'
+
+        // Form the request for sending data to the server.
+        const options = {
+            // The method is POST because we are sending data.
+            method: 'POST',
+            // Tell the server we're sending JSON.
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // Body of the request is the JSON data we created above.
+            body: JSONdata,
+        }
+
+        // Send the form data to our forms API on Vercel and get a response.
+        const response = await fetch(endpoint, options)
+
+        // Get the response data from server as JSON.
+        // If server returns the name submitted, that means the form works.
+        const result = await response.json()
+        alert(`Is this your name: ${result[0].name}`)
+    }
+
+    const optionArray = [
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+        {
+            value: 'A'
+        },
+        {
+            value: 'AB'
+        },
+        {
+            value: 'ABC'
+        },
+        {
+            value: 'ABCD'
+        },
+    ]
+
     return (
         <>
             <Head>
@@ -165,17 +404,66 @@ function Home(props: any) {
                     <button onClick={handleDeleteClick} className="p-2 bg-black text-white rounded-full">Delete All Users</button>
                     <button onClick={handlePutClick} className="p-2 bg-black text-white rounded-full">Update User</button>
                     <button onClick={handleGetClick} className="p-2 bg-black text-white rounded-full">Get All Users</button>
-                    <DonutProgress data={70} duration={750} colour="#49cc73" backgroundColour="#ececec" size={80} />
+                    {/* <DonutProgress data={70} duration={750} colour="#49cc73" backgroundColour="#ececec" size={80} /> */}
                     {data != null && data.map((user: any) => (
                         <div>
                             {user.email}
                         </div>
                     ))}
-                    {props.users.map((user: any) => (
+                    {/* {props.users.map((user: any) => (
                         <div>
                             {user.email}
                         </div>
-                    ))}
+                    ))} */}
+                    <form onSubmit={handleSubmit} className='bg-gradient-to-l from-primary to-secondary text-white'>
+                        {/* <div className="">
+                            <label className="" htmlFor="name">Name</label>
+                            <DummyInput />
+                        </div> */}
+
+                        {/* <label htmlFor="email">Email</label>
+                        <input type="text" id="email" name="email" defaultValue='default value' />
+                        <label htmlFor="email">Email</label>
+                        <input type="text" id="email" name="email" defaultValue='default value' /> */}
+                        <div className='flex'>
+                            <div className='flex w-[500px] justify-between rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                <div className='px-8 py-2'>
+                                    Collection Type
+                                </div>
+                                <div className='min-w-[300px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                    <input className='b bg-transparent w-full h-full p-2 text-center' type="text" name="email" />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex'>
+                            <div className='flex w-[500px] justify-between rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                <div className='px-8 py-2'>
+                                    <label htmlFor="cars">Choose a car:</label>
+                                </div>
+                                <div className='grid place-content-center min-w-[300px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                    <select className="text-white bg-transparent text-center inline-block w-[300px] h-[40px]" name="cars" id="cars">
+                                        <option disabled className="text-black text-left font-bold" value={'123'}>
+                                            Type 1
+                                        </option>
+                                        {optionArray.map((choice) => (
+                                            <option className="text-black" value={choice.value}>
+                                                {choice.value}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        {/* <label htmlFor="cars">Choose a car:</label>
+                        <select className="text-black" name="cars" id="cars" form="carform">
+                            {optionArray.map((choice) => (
+                                <option value={choice.value}>{choice.value}</option>
+                            ))}
+                        </select> */}
+
+                        <button type="submit">Submit</button>
+                    </form>
                     {/* {data != null ? data.email : ''} */}
                 </main>
 

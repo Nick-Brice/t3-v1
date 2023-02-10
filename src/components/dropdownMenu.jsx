@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Item, useSelectState} from 'react-stately';
-import {HiddenSelect, useSelect} from 'react-aria';
+import { Item, useSelectState } from 'react-stately';
+import { HiddenSelect, useSelect } from 'react-aria';
 import Button from './button';
 import ListBox from './listBox';
 import Popover from './popover';
@@ -20,13 +20,16 @@ export default function Select(props) {
     menuProps
   } = useSelect(props, state, ref);
 
-  console.log({...labelProps})
+  console.log({ ...labelProps })
 
   return (
     <div style={{ display: 'inline-block' }}>
+      {/* <input type="text" id="name" name="name" value={state.selectedItem
+        ? state.selectedItem.value
+        : 'Select an option'} /> */}
       <div
-       {...labelProps}
-       >{props.label}</div>
+        {...labelProps}
+      >{props.label}</div>
       <HiddenSelect
         state={state}
         triggerRef={ref}
@@ -38,11 +41,11 @@ export default function Select(props) {
         buttonRef={ref}
         style={{ height: 30, fontSize: 14 }}
       >
-        <span 
-        {...valueProps}
+        <span
+          {...valueProps}
         >
           {state.selectedItem
-            ? state.selectedItem.rendered
+            ? state.selectedItem.value
             : 'Select an option'}
         </span>
         <span
@@ -51,6 +54,7 @@ export default function Select(props) {
         >
           ▼
         </span>
+
       </Button>
       {state.isOpen &&
         (

@@ -1,45 +1,37 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Sidebar from "../components/sidebar";
-import SortableTable from "../components/sortableTable";
-import HeaderButton from "../components/headerButton";
+import Sidebar from "../../components/sidebar";
+import SortableTable from "../../components/sortableTable";
+import HeaderButton from "../../components/headerButton";
 import React, { useState } from "react";
-import DraggableTable from "../components/draggableTable2";
-import DonutProgress from "../components/donutProgress2";
-import Counter from "../components/counter";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+//import DraggableTable from "../components/draggableTable2";
+import DonutProgress from "../../components/donutProgress2";
+//import Counter from "../components/counter";
+//import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import AnimatedProgressProvider from "../components/AnimatedProgressProvider";
-import { easeQuadInOut } from "d3-ease";
-import AreaChart from "../components/d3AreaGraph";
-import LineGraph from "../components/d3LineGraph";
-import ScatterGraph from "../components/d3ScatterGraph";
-import DropdownMenu from "../components/sortByDropdownMenu";
+//import AnimatedProgressProvider from "../components/AnimatedProgressProvider";
+//import { easeQuadInOut } from "d3-ease";
+import AreaChart from "../../components/d3AreaGraph";
+import LineGraph from "../../components/d3LineGraph";
+import ScatterGraph from "../../components/d3ScatterGraph";
+import DropdownMenu from "../../components/sortByDropdownMenu";
 import { Item, useSelectState } from "react-stately";
 import Lottie from "react-lottie";
-// import animationData from "../components/circularAnimation.json";
-import CircularAnimation from "../components/circularAnimation";
-import FormLayout from "../components/formLayout";
+// import animationData from "../../components/circularAnimation.json";
+import CircularAnimation from "../../components/circularAnimation";
+import FormLayout from "../../components/formLayout";
 import { GetServerSideProps } from "next";
-import { PrismaClient } from "@prisma/client";
-// import { Prisma } from "@prisma/client";
-import { prisma } from "../server/db/client";
-import { VenueSidebarArray } from "../components/venueSidebarArray";
-import TabMenu from "../components/tabMenu";
-import { VenueProductsTabMenuArray } from '../components/venueProductsTabMenuArray';
+import { prisma } from "../../server/db/client";
+import { VenueSidebarArray } from "../../components/venueSidebarArray";
+import TabMenu from "../../components/tabMenu";
+import { VenueStreamsTabMenuArray } from '../../components/venueStreamsTabMenuArray';
 import { useRouter } from "next/router";
-import Breadcrumbs from "../components/breadcrumbs";
+import Breadcrumbs from "../../components/breadcrumbs";
 
 function Home(props: any) {
     const router = useRouter();
     const urlPath = router.pathname;
-
-    const [showMenuText, setShowMenuText] = useState<string | null>(null);
-
-    const handleHover = (tab: string | null) => {
-        setShowMenuText(tab);
-    };
 
     const data: {}[] = [
         {
@@ -134,8 +126,6 @@ function Home(props: any) {
         },
     ];
 
-    const first = data[0];
-
     const columnNames = Object.keys(data[0]!);
 
     const [openForm, setOpenForm] = React.useState(false);
@@ -152,8 +142,8 @@ function Home(props: any) {
         return key in obj;
     }
 
-    const handleSort = (key: string) => {
-        if (sort.order == "ascending") {
+    const handleSort = (key: string, order: string) => {
+        if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
                     if (a[key] < b[key]) return -1;
@@ -186,12 +176,11 @@ function Home(props: any) {
         if (sort.column == column) {
             setSort({
                 column,
-                order: sort.order == "ascending" ? "descending" : "ascending",
+                order: sort.order === "ascending" ? "descending" : "ascending",
             });
         } else {
             setSort({ column, order: "descending" });
         }
-        console.log(sort);
     };
 
     const handleLayoutChange = () => {
@@ -265,9 +254,9 @@ function Home(props: any) {
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
-                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
+                        <TabMenu data={VenueStreamsTabMenuArray} urlPath={urlPath} />
                     </header>
-                    <div className="absolute inset-x-8 z-40 flex justify-between rounded-2xl bg-primary p-5">
+                    <div className="absolute inset-x-8 z-50 flex justify-between rounded-2xl bg-primary p-5">
                         <HeaderButton>
                             <div
                                 className="flex cursor-pointer select-none flex-wrap items-center text-lg"
@@ -294,7 +283,7 @@ function Home(props: any) {
                         </HeaderButton>
                         <HeaderButton>
                             <div
-                                className="flex cursor-pointer select-none flex-wrap items-center text-lg"
+                                className="flex cursor-pointer select-none flex-wrap  items-center text-lg"
                                 onClick={() => setOpenForm(!openForm)}
                             >
                                 <p className="pr-4">Add Product</p>
@@ -321,7 +310,7 @@ function Home(props: any) {
                             >
                                 {/* <p className="pr-4">
                                             Sort By: 
-                                        </p>
+                                            </p>
                                         <img className="pl-1 scale-75" src="/sort-one.svg" /> */}
 
                                 <DropdownMenu name="field2" label="Field 2" sort={sort}>
@@ -329,7 +318,7 @@ function Home(props: any) {
                                         <option
                                             onClick={() => {
                                                 toggleSort(col);
-                                                handleSort(col);
+                                                handleSort(col, sort.order);
                                             }}
                                             value={col}
                                         >
@@ -341,7 +330,7 @@ function Home(props: any) {
                                     <option value="Option 3">Option 3</option>
                                     <option value="Option 4">Option 4</option>
                                     <option value="Option 5">Option 5</option>
-                                    <option value="Option 6">Option 6</option> */}
+                                <option value="Option 6">Option 6</option> */}
                                 </DropdownMenu>
                             </div>
                         </HeaderButton>
@@ -429,38 +418,38 @@ function Home(props: any) {
                         />
                         {/* <div className="w-[250px] h-[250px]">
                             <svg viewBox="0 0 100 100">
-
-                                <clipPath id="clip">
-                                    <path d="M 50 0 a 50 50 0 0 1 0 100 50 50 0 0 1 0 -100 v 8 a 42 42 0 0 0 0 84 42 42 0 0 0 0 -84" />
-                                </clipPath>
-
-                                <foreignObject x="0" y="0" width="100" height="100" clip-path="url(#clip)">
-                                    <div className="gradient" />
-                                </foreignObject>
+                            
+                            <clipPath id="clip">
+                            <path d="M 50 0 a 50 50 0 0 1 0 100 50 50 0 0 1 0 -100 v 8 a 42 42 0 0 0 0 84 42 42 0 0 0 0 -84" />
+                            </clipPath>
+                            
+                            <foreignObject x="0" y="0" width="100" height="100" clip-path="url(#clip)">
+                            <div className="gradient" />
+                            </foreignObject>
                             </svg>
                         </div> */}
                         {/* <div className="w-[100px]">
                             <AnimatedProgressProvider
-                                valueStart={0}
-                                valueEnd={66}
-                                duration={1.4}
-                                easingFunction={easeQuadInOut}
-                                repeat
+                            valueStart={0}
+                            valueEnd={66}
+                            duration={1.4}
+                            easingFunction={easeQuadInOut}
+                            repeat
                             >
-                                {value => {
-                                    const roundedValue = Math.round(value);
-                                    return (
-                                        <CircularProgressbar
-                                            value={value}
-                                            text={`${roundedValue}%`}
-                                        
-
-                                        />
+                            {value => {
+                                const roundedValue = Math.round(value);
+                                return (
+                                    <CircularProgressbar
+                                    value={value}
+                                    text={`${roundedValue}%`}
+                                    
+                                    
+                                    />
                                     );
                                 }}
-                            </AnimatedProgressProvider>
-                            <CircularProgressbar value={60} text={`${60}%`} />
-                        </div> */}
+                                </AnimatedProgressProvider>
+                                <CircularProgressbar value={60} text={`${60}%`} />
+                            </div> */}
                     </div>
                     <div>
                         {/* <DonutProgress data={100} colour="#49cc73" backgroundColour="#D0D0D0" /> */}
@@ -470,8 +459,7 @@ function Home(props: any) {
         </>
     );
 }
-
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps = async () => {
     const users = await prisma?.user.findMany({
         select: {
             email: true,

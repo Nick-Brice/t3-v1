@@ -31,7 +31,7 @@ export const VenueSidebarArray = [
     },
     {
         title: 'Upload',
-        path: '/upload',
+        path: '/upload/add-product',
         icon: '/Upload_W.png',
         root: '/upload'
     }

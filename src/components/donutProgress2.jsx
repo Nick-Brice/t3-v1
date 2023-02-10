@@ -29,10 +29,29 @@ const DonutProgress = ({ data, duration, colour, backgroundColour, size }) => {
             .style('fill', backgroundColour)
             .attr('d', arc);
 
+        // Add the gradient definition to the defs section
+        const gradient = svg.append("defs")
+            .append("linearGradient")
+            .attr("id", "gradient")
+            .attr("x1", "0%")
+            .attr("x2", "100%")
+            .attr("y1", "0%")
+            .attr("y2", "0%");
+
+        // Add two stops to the gradient
+        gradient.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", "#49cc73");
+
+        gradient.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", "#49ccb8");
+
         const foreground = g.append('path')
             .attr("id", "arc")
             .datum({ startAngle: 0, endAngle: data / 100 * 2 * Math.PI })
-            .style('fill', colour)
+            // .style('fill', colour)
+            .style('fill', "url(#gradient)")
             .attr('d', arc)
             .transition()
             .duration(duration)
@@ -45,7 +64,7 @@ const DonutProgress = ({ data, duration, colour, backgroundColour, size }) => {
             });
 
         d3.select("#arc")
-            .attr("fill", "linear-gradient(to right, #ff0000, #0000ff)");
+            .attr("fill", "linear-gradient(to right, #ff0000, #c1c1c1)");
 
         // Clean up when the component unmounts
         return () => {

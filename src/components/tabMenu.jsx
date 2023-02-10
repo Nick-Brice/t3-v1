@@ -17,8 +17,8 @@ export default function TabMenu(props) {
     };
 
     let children = props.data;
-    let firstChildren = children.slice(0, -1);
-    let lastChild = children.slice(-1);
+    // let firstChildren = children.slice(0, -1);
+    // let lastChild = children.slice(-1);
 
     return (
         <div className="relative flex self-end justify-self-center">

@@ -26,7 +26,6 @@ import TabMenu from "../../components/tabMenu";
 import { VenueHomeTabMenuArray } from '../../components/venueHomeTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
-import { Player, Controls } from '@lottiefiles/react-lottie-player';
 
 const Test: NextPage = () => {
     const router = useRouter();
@@ -264,15 +263,6 @@ const Test: NextPage = () => {
 
                     </header>
 
-                    {/* <Player
-                        autoplay
-                        loop
-                        src="/circularAnimation.json"
-                        speed={0.5}
-                    >
-                    </Player> */}
-                    {/* <iframe src="https://discord.com/widget?id=1072220379596197988&theme=dark" width="350" height="500" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe> */}
-
                     <div className="flex bg-gradient-to-b from-primary to-tertiary h-[400px] z-10 p-8">
                         <div className="flex flex-col">
                             <div className="flex items-center">
@@ -290,8 +280,7 @@ const Test: NextPage = () => {
                     <div className="z-50 -mt-[227px]">
                         <img src="/Rubbish_Border_ECECEC.svg" />
                     </div>
-                    <div className="mt-0 px-8 mr-4">
-                        <CircularAnimation />
+                    <div className="mt-0 px-8">
                     </div>
 
                 </main>

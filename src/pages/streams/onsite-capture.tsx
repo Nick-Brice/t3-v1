@@ -1,33 +1,33 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Sidebar from "../components/sidebar";
-import SortableTable from "../components/sortableTable";
-import HeaderButton from "../components/headerButton";
+import Sidebar from "../../components/sidebar";
+import SortableTable from "../../components/sortableTable";
+import HeaderButton from "../../components/headerButton";
 import React, { useState } from "react";
 //import DraggableTable from "../components/draggableTable2";
-import DonutProgress from "../components/donutProgress2";
+import DonutProgress from "../../components/donutProgress2";
 //import Counter from "../components/counter";
 //import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 //import AnimatedProgressProvider from "../components/AnimatedProgressProvider";
 //import { easeQuadInOut } from "d3-ease";
-import AreaChart from "../components/d3AreaGraph";
-import LineGraph from "../components/d3LineGraph";
-import ScatterGraph from "../components/d3ScatterGraph";
-import DropdownMenu from "../components/sortByDropdownMenu";
+import AreaChart from "../../components/d3AreaGraph";
+import LineGraph from "../../components/d3LineGraph";
+import ScatterGraph from "../../components/d3ScatterGraph";
+import DropdownMenu from "../../components/sortByDropdownMenu";
 import { Item, useSelectState } from "react-stately";
 import Lottie from "react-lottie";
-import animationData from "../components/circularAnimation.json";
-import CircularAnimation from "../components/circularAnimation";
-import FormLayout from "../components/formLayout";
+// import animationData from "../../components/circularAnimation.json";
+import CircularAnimation from "../../components/circularAnimation";
+import FormLayout from "../../components/formLayout";
 import { GetServerSideProps } from "next";
-import { prisma } from "../server/db/client";
-import { VenueSidebarArray } from "../components/venueSidebarArray";
-import TabMenu from "../components/tabMenu";
-import { VenueProductsTabMenuArray } from '../components/venueProductsTabMenuArray';
+import { prisma } from "../../server/db/client";
+import { VenueSidebarArray } from "../../components/venueSidebarArray";
+import TabMenu from "../../components/tabMenu";
+import { VenueStreamsTabMenuArray } from '../../components/venueStreamsTabMenuArray';
 import { useRouter } from "next/router";
-import Breadcrumbs from "../components/breadcrumbs";
+import Breadcrumbs from "../../components/breadcrumbs";
 
 function Home(props: any) {
     const router = useRouter();
@@ -228,13 +228,13 @@ function Home(props: any) {
         },
     ];
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
+    // const defaultOptions = {
+    //     loop: true,
+    //     autoplay: true,
+    //     animationData: animationData,
 
-        isClickToPauseDisabled: true,
-    };
+    //     isClickToPauseDisabled: true,
+    // };
 
     return (
         <>
@@ -254,7 +254,7 @@ function Home(props: any) {
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
-                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
+                        <TabMenu data={VenueStreamsTabMenuArray} urlPath={urlPath} />
                     </header>
                     <div className="absolute inset-x-8 z-50 flex justify-between rounded-2xl bg-primary p-5">
                         <HeaderButton>

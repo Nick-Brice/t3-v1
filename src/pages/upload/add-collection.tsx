@@ -18,24 +18,18 @@ import ScatterGraph from '../../components/d3ScatterGraph';
 import DropdownMenu from '../../components/sortByDropdownMenu';
 import { Item, useSelectState } from 'react-stately';
 import Lottie from 'react-lottie';
-import animationData from '../../components/circularAnimation.json';
+// import animationData from '../../components/circularAnimation.json';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
 import { VenueSidebarArray } from "../../components/venueSidebarArray";
 import TabMenu from "../../components/tabMenu";
-import { VenueHomeTabMenuArray } from '../../components/venueHomeTabMenuArray';
+import { VenueUploadTabMenuArray } from '../../components/venueUploadTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
 
-const Test: NextPage = () => {
+const Home: NextPage = () => {
     const router = useRouter();
     const urlPath = router.pathname;
-
-    const [showMenuText, setShowMenuText] = useState<string | null>(null);
-
-    const handleHover = (tab: string | null) => {
-        setShowMenuText(tab);
-    }
 
     const data: {}[] = [
         {
@@ -146,8 +140,8 @@ const Test: NextPage = () => {
         return key in obj;
     }
 
-    const handleSort = (key: string) => {
-        if (sort.order == "ascending") {
+    const handleSort = (key: string, order: string) => {
+        if (order == "ascending") {
             let sortedData = [...tableData].sort((a, b) => {
                 if (hasKey(a, key) && hasKey(b, key)) {
                     if (a[key] < b[key]) return -1;
@@ -178,11 +172,10 @@ const Test: NextPage = () => {
 
     const toggleSort = (column: string) => {
         if (sort.column == column) {
-            setSort({ column, order: sort.order == 'ascending' ? 'descending' : 'ascending' });
+            setSort({ column, order: sort.order === 'ascending' ? 'descending' : 'ascending' });
         } else {
             setSort({ column, order: 'descending' });
         }
-        console.log(sort)
     }
 
     const handleLayoutChange = () => {
@@ -199,13 +192,13 @@ const Test: NextPage = () => {
     ]
 
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
+    // const defaultOptions = {
+    //     loop: true,
+    //     autoplay: true,
+    //     animationData: animationData,
 
-        isClickToPauseDisabled: true
-    };
+    //     isClickToPauseDisabled: true
+    // };
 
     return (
         <>
@@ -224,76 +217,9 @@ const Test: NextPage = () => {
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
-                        <TabMenu data={VenueHomeTabMenuArray} urlPath={urlPath} />
-                        {/* <div className="px-8 py-4">
-                            <h5 className="text-2xl">[Client Name] Products</h5>
-                            <h6>
-                                <Link href={{ pathname: '/home' }} >
-                                    <span>
-                                        Portal /
-                                    </span>
-                                </Link>
-                                <Link href={{ pathname: '/products' }} >
-                                    <span>
-                                        &nbsp;Products&nbsp;
-                                    </span>
-                                </Link>
-                                / Overview</h6>
-                        </div>
-                        <div className="relative flex self-end justify-self-center">
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-primary  rounded-t-2xl text-white shadow-center-md cursor-default" onMouseOver={() => handleHover('Home')} onMouseOut={() => handleHover(null)}>
-                                    <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[220px]  text-center">
-                                        <div className="flex text-center">
-                                            <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Dash_W_SQ.png" />
-
-                                            <h3 className="leading-5 font-semibold self-center">Home</h3>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Account')} onMouseOut={() => handleHover(null)}>
-                                    <div className="grid place-items-center py-2 pl-6 pr-12 h-[80px] max-w-[230px]  text-center">
-                                        <div className="flex text-center">
-                                            {showMenuText !== 'Account' && (
-                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/User_B_SQ.png" />
-                                            )}
-                                            {showMenuText === 'Account' && (
-                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/User_B_SQ.png" />
-
-                                            )}
-                                            {showMenuText === 'Account' && (
-                                                <h3 className="leading-5 text-black self-center">Account</h3>
-
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="relative -mr-8 z-10">
-                                <div className="z-10 bg-secondarywhite hover:bg-secondarygrey  rounded-t-2xl text-white shadow-center-md transition duration-150 cursor-pointer" onMouseOver={() => handleHover('Settings')} onMouseOut={() => handleHover(null)} >
-                                    <div className="grid place-items-center py-2 pl-6 pr-6 h-[80px] max-w-[230px]  text-center">
-                                        <div className="flex text-center">
-                                            {showMenuText !== 'Settings' && (
-                                                <img height="20px" className="h-[30px] z-20 self-center" src="/Settings_B_SQ.png" />
-                                            )}
-                                            {showMenuText === 'Settings' && (
-                                                <img height="20px" className="h-[30px] z-20 self-center mr-4" src="/Settings_B_SQ.png" />
-
-                                            )}
-                                            {showMenuText === 'Settings' && (
-                                                <h3 className="leading-5 text-black self-center">Settings</h3>
-
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+                        <TabMenu data={VenueUploadTabMenuArray} urlPath={urlPath} />
                     </header>
-                    {/* <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-40">
+                    <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-50">
 
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => { handleLayoutChange() }}>
@@ -323,27 +249,27 @@ const Test: NextPage = () => {
                             </div>
                         )}
                         <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}> */}
+                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}>
 
 
-                    {/* <p className="pr-4">
+                                {/* <p className="pr-4">
                                             Sort By: 
                                         </p>
                                         <img className="pl-1 scale-75" src="/sort-one.svg" /> */}
 
 
 
-                    {/* <DropdownMenu name="field2" label="Field 2" sort={sort}>
+                                <DropdownMenu name="field2" label="Field 2" sort={sort}>
                                     {columnNames.map((col, index) => (
                                         <option onClick={() => { toggleSort(col); handleSort(col, sort.order) }} value={col}>{col}</option>
-                                    ))} */}
-                    {/* <option onClick={() => { toggleSort('used'); handleSort('used', sort.order) }} value="Option 1">Option 1</option>
+                                    ))}
+                                    {/* <option onClick={() => { toggleSort('used'); handleSort('used', sort.order) }} value="Option 1">Option 1</option>
                                     <option value="Option 2">Option 2</option>
                                     <option value="Option 3">Option 3</option>
                                     <option value="Option 4">Option 4</option>
                                     <option value="Option 5">Option 5</option>
                                     <option value="Option 6">Option 6</option> */}
-                    {/* </DropdownMenu>
+                                </DropdownMenu>
 
                             </div>
                         </HeaderButton>
@@ -355,8 +281,8 @@ const Test: NextPage = () => {
                                 <img className="pl-1 scale-75" src="/download.svg" />
                             </div>
                         </HeaderButton>
-                    </div> */}
-                    <div className="px-8 mt-0">
+                    </div>
+                    <div className="p-8 mt-20">
                         {/* <CircularAnimation /> */}
                         <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
@@ -434,4 +360,4 @@ const Test: NextPage = () => {
     )
 }
 
-export default Test
+export default Home

@@ -18,7 +18,7 @@ import ScatterGraph from '../../components/d3ScatterGraph';
 import DropdownMenu from '../../components/sortByDropdownMenu';
 import { Item, useSelectState } from 'react-stately';
 import Lottie from 'react-lottie';
-import animationData from '../../components/circularAnimation.json';
+// import animationData from '../../components/circularAnimation.json';
 import CircularAnimation from '../../components/circularAnimation';
 import FormLayout from "../../components/formLayout";
 import { VenueSidebarArray } from '../../components/venueSidebarArray';

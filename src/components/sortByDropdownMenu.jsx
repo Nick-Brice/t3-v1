@@ -1,7 +1,7 @@
 import { Sort } from '@icon-park/react';
 import React, { useState } from 'react';
 
-const DropdownMenu = (props) => {
+const SortByDropdownMenu = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState(null);
 
@@ -68,4 +68,4 @@ const DropdownMenu = (props) => {
     );
 }
 
-export default DropdownMenu;
+export default SortByDropdownMenu;
