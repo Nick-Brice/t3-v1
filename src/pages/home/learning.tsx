@@ -360,9 +360,9 @@ const Test: NextPage = () => {
                     </div> */}
                     <div className="px-8 mt-0">
                         {/* <CircularAnimation /> */}
-                        <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
+                        {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
-                        <DropdownMenu label="Favorite Color">
+                        {/* <DropdownMenu label="Favorite Color">
                             <Item>Red</Item>
                             <Item>Orange</Item>
                             <Item>Yellow</Item>
@@ -391,7 +391,7 @@ const Test: NextPage = () => {
                         </div>
                         <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={500} />
                         <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={50} />
-                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={1000} />
+                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={1000} /> */}
                         {/* <div className="w-[250px] h-[250px]">
                             <svg viewBox="0 0 100 100">
 

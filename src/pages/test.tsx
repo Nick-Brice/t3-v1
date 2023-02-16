@@ -41,6 +41,12 @@ import { useRouter } from 'next/router';
 import Sidebar from "../components/sidebar";
 import BreadCrumbs from '../components/breadcrumbs';
 import { prisma } from '../server/db/client';
+import FormWrapper from '../components/formWrapper';
+import DropdownInput from "../components/dropdownInput";
+import TextInput from "../components/textInput";
+import SearchInput from '../components/searchInput';
+import FormSubmit from '../components/formSubmit';
+import FormContainer from '../components/formContainer';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const users = await prisma?.user.findMany({
@@ -156,8 +162,8 @@ function Home(props: any) {
 
         // Get data from the form.
         const data = {
-            name: event.target.name.value,
-            email: event.target.email.value,
+            name: event.target['First Name'].value,
+            email: event.target.Email.value,
         }
 
         console.log(data);
@@ -415,16 +421,39 @@ function Home(props: any) {
                             {user.email}
                         </div>
                     ))} */}
-                    <form onSubmit={handleSubmit} className='bg-gradient-to-l from-primary to-secondary text-white'>
-                        {/* <div className="">
+                    <div className="w-[60%]">
+                        <FormWrapper OnSubmit={handleSubmit}>
+                            <FormContainer className='pt-8'>
+                                <TextInput label='First Name' />
+                                <TextInput label='Last Name' />
+                            </FormContainer>
+                            <FormContainer optional={true} className='bg-[#f6f6f640]'>
+                                <SearchInput options={optionArray} />
+                                <TextInput label='Email' />
+                                <DropdownInput label='Test' options={optionArray} />
+                            </FormContainer>
+                            <FormContainer className=''>
+                                {/* <TextInput label='First Name' /> */}
+                                <TextInput label='Last Name' />
+                            </FormContainer>
+                            <FormContainer className='pb-8'>
+                                <FormSubmit />
+                            </FormContainer>
+                            {/* <DropdownInput label='Test2' options={optionArray} /> */}
+
+                        </FormWrapper>
+                    </div>
+
+                    {/* <form onSubmit={handleSubmit} className='bg-gradient-to-l from-primary to-secondary text-white'>
+                        <div className="">
                             <label className="" htmlFor="name">Name</label>
                             <DummyInput />
-                        </div> */}
+                        </div>
 
-                        {/* <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input type="text" id="email" name="email" defaultValue='default value' />
                         <label htmlFor="email">Email</label>
-                        <input type="text" id="email" name="email" defaultValue='default value' /> */}
+                        <input type="text" id="email" name="email" defaultValue='default value' />
                         <div className='flex'>
                             <div className='flex w-[500px] justify-between rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
                                 <div className='px-8 py-2'>
@@ -455,15 +484,15 @@ function Home(props: any) {
 
                             </div>
                         </div>
-                        {/* <label htmlFor="cars">Choose a car:</label>
+                        <label htmlFor="cars">Choose a car:</label>
                         <select className="text-black" name="cars" id="cars" form="carform">
                             {optionArray.map((choice) => (
                                 <option value={choice.value}>{choice.value}</option>
                             ))}
-                        </select> */}
+                        </select>
 
                         <button type="submit">Submit</button>
-                    </form>
+                    </form> */}
                     {/* {data != null ? data.email : ''} */}
                 </main>
 

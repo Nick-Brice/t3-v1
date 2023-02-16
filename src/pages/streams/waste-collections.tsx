@@ -344,7 +344,7 @@ function Home(props: any) {
                     <div className="mt-20 p-8">
                         {/* <CircularAnimation /> */}
                         {/* <div>{props.users[0].email}</div> */}
-                        <SortableTable
+                        {/* <SortableTable
                             data={tableData}
                             layout={layout}
                             onLayoutChange={setLayout}
@@ -356,9 +356,9 @@ function Home(props: any) {
                             setTopTableData={setTopTableData}
                             bottomTableData={bottomTableData}
                             setBottomTableData={setBottomTableData}
-                        />
+                        /> */}
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
-                        <DropdownMenu label="Favorite Color">
+                        {/* <DropdownMenu label="Favorite Color">
                             <Item>Red</Item>
                             <Item>Orange</Item>
                             <Item>Yellow</Item>
@@ -415,7 +415,7 @@ function Home(props: any) {
                             colour="#49cc73"
                             backgroundColour="#ececec"
                             size={1000}
-                        />
+                        /> */}
                         {/* <div className="w-[250px] h-[250px]">
                             <svg viewBox="0 0 100 100">
                             

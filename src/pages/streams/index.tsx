@@ -133,7 +133,7 @@ function Home(props: any) {
     const [openSortBy, setOpenSortBy] = React.useState(false);
 
     const [sort, setSort] = React.useState({ column: "", order: "" });
-    const [layout, setLayout] = useState("table");
+    const [layout, setLayout] = useState("grid");
     const [tableData, setTableData] = React.useState(data);
     const [topTableData, setTopTableData] = React.useState(data);
     const [bottomTableData, setBottomTableData] = React.useState(data);

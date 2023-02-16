@@ -111,18 +111,18 @@ const AreaChart = ({ data, width, height }) => {
                 .attr("stroke", scC(index))
                 .attr("stroke-width", "5px");
 
-            const circles = svg
-                .selectAll(`.dot${index}`)
-                .data(group)
-                .join('circle')
-                .attr('class', 'dot')
-                .attr('cx', (d, i) => xScale(i))
-                .attr('cy', d => yScale(d))
-                .attr('r', 8)
-                .attr('fill', d => scC(index))
-                .style("z-index", 10);
+            // const circles = svg
+            //     .selectAll(`.dot${index}`)
+            //     .data(group)
+            //     .join('circle')
+            //     .attr('class', 'dot')
+            //     .attr('cx', (d, i) => xScale(i))
+            //     .attr('cy', d => yScale(d))
+            //     .attr('r', 8)
+            //     .attr('fill', d => scC(index))
+            //     .style("z-index", 10);
 
-            circles.raise();
+            // circles.raise();
         })
 
         const grid = svg

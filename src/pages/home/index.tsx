@@ -273,7 +273,7 @@ const Test: NextPage = () => {
                     </Player> */}
                     {/* <iframe src="https://discord.com/widget?id=1072220379596197988&theme=dark" width="350" height="500" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe> */}
 
-                    <div className="flex bg-gradient-to-b from-primary to-tertiary h-[400px] z-10 p-8">
+                    <div className="flex bg-gradient-to-b from-primary to-tertiary h-[300px] z-10 p-8 py-4">
                         <div className="flex flex-col">
                             <div className="flex items-center">
                                 <div className="grid place-content-center bg-white rounded-full h-[120px] w-[120px]">
@@ -287,10 +287,10 @@ const Test: NextPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="z-50 -mt-[227px]">
-                        <img src="/Rubbish_Border_ECECEC.svg" />
+                    <div className="z-50 -mt-[280px]">
+                        <img className="h-[280px] mt-12" src="/Rubbish_Border_ECECEC.svg" />
                     </div>
-                    <div className="mt-0 px-8 mr-4">
+                    <div className="-mt-24 px-32 mr-4">
                         <CircularAnimation />
                     </div>
 

@@ -96,3 +96,14 @@ html {
 .progressbar-animate{
   width:100%
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  border: none;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px inherit inset;
+  transition: background-color 0s ease-in-out 5000s;
+  font-size: inherit;
+}

@@ -18,8 +18,8 @@ export const VenueUploadTabMenuArray = [
         imgW: "/Delivery_W_SQ.png"
     },
     {
-        title: "Stock Checks",
-        page: "/products/stock-checks",
+        title: "Add New Stock Check",
+        page: "/upload/add-stock-check",
         imgB: "/Stock_B_SQ.png",
         imgW: "/Stock_W_SQ.png"
     },

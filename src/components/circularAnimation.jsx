@@ -22,75 +22,108 @@ export default function CircularAnimation() {
     }, [lottieRef]);
 
     return (
-        <div className="relative pointer-events-none py-32">
-            <div className='absolute px-8 top-6 flex justify-between w-full'>
-                <div className='flex flex-col place-items-center place-content-center p-6 bg-white z-10 rounded-xl'>
-                    <div className='mb-4'>
-                        <Counter targetValue={100000} duration={750} className="t  text-5xl" />
-                        <span className='font-semibold text-xl pl-1'>kg</span>
-                    </div>
-                    <div className='text-2xl font-light text-grey-600'>
-                        Products Delivered
-                    </div>
-                </div>
-                <div className='flex flex-col place-items-center place-content-center p-6 bg-white z-10 rounded-xl'>
-                    <div className='mb-4'>
-                        <Counter targetValue={100000} duration={750} className="t  text-5xl" />
-                        <span className='font-semibold text-xl pl-1'>kg</span>
-                    </div>
-                    <div className='text-2xl font-light text-grey-600'>
-                        Products Delivered
+        <div className="relative pointer-events-none py-0">
+            <div className='absolute px-32 top-12 flex justify-between w-full'>
+                <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
+
+                    <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
+
+                    <div className='flex flex-col place-items-center place-content-center'>
+                        <div className='mb-2'>
+                            <Counter targetValue={100000} duration={750} className="t  text-xl" />
+                            <span className='font-semibold text-base pl-1'>kg</span>
+                        </div>
+                        <div className='text-xs font-semilight text-grey-600'>
+                            Products Delivered
+                        </div>
                     </div>
                 </div>
-                <div className='flex flex-col place-items-center place-content-center p-6 bg-white z-10 rounded-xl'>
-                    <div className='mb-4'>
-                        <Counter targetValue={100000} duration={750} className="t  text-5xl" />
-                        <span className='font-semibold text-xl pl-1'>kg</span>
-                    </div>
-                    <div className='text-2xl font-light text-grey-600'>
-                        Products Delivered
-                    </div>
-                </div>
-                <div className='flex flex-col place-items-center place-content-center p-6 bg-white z-10 rounded-xl'>
-                    <div className='mb-4'>
-                        <Counter targetValue={100000} duration={750} className="t  text-5xl" />
-                        <span className='font-semibold text-xl pl-1'>kg</span>
-                    </div>
-                    <div className='text-2xl font-light text-grey-600'>
-                        Products Delivered
+
+                <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
+
+                    <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
+
+                    <div className='flex flex-col place-items-center place-content-center'>
+                        <div className='mb-2'>
+                            <Counter targetValue={100000} duration={750} className="t  text-xl" />
+                            <span className='font-semibold text-base pl-1'>kg</span>
+                        </div>
+                        <div className='text-xs font-semilight text-grey-600'>
+                            Products Delivered
+                        </div>
                     </div>
                 </div>
+
+                <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
+
+                    <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
+
+                    <div className='flex flex-col place-items-center place-content-center'>
+                        <div className='mb-2'>
+                            <Counter targetValue={100000} duration={750} className="t  text-xl" />
+                            <span className='font-semibold text-base pl-1'>kg</span>
+                        </div>
+                        <div className='text-xs font-semilight text-grey-600'>
+                            Products Delivered
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div className=''>
                 <Player
                     autoplay
                     loop
-                    src="/circularAnimation.json"
-                    speed={0.5}
+                    src="/Loop_Animation.json"
+                    speed={1}
                     ref={lottieRef}
-                // style={{ height: '300px', width: '300px' }}
+                // style={{ height: x`'100px', width: '800px' }}
                 >
                     {/* <Controls visible={false} buttons={['play', 'repeat', 'frame', 'debug']} /> */}
                 </Player>
                 {/* <Lottie ref={lottieRef} options={defaultOptions} /> */}
             </div>
-            <div className='absolute px-8 top-[425px] flex justify-around w-full'>
-                <div className='flex flex-col place-items-center place-content-center p-6 bg-white z-10 rounded-xl'>
-                    <div className='mb-4'>
-                        <Counter targetValue={100000} duration={750} className="t  text-5xl" />
-                        <span className='font-semibold text-xl pl-1'>kg</span>
-                    </div>
-                    <div className='text-2xl font-light text-grey-600'>
-                        Products Delivered
+            <div className='absolute px-[104px] top-[160px] flex justify-around w-full'>
+                <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
+
+                    <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
+
+                    <div className='flex flex-col place-items-center place-content-center'>
+                        <div className='mb-2'>
+                            <Counter targetValue={100000} duration={750} className="t  text-xl" />
+                            <span className='font-semibold text-base pl-1'>kg</span>
+                        </div>
+                        <div className='text-xs font-semilight text-grey-600'>
+                            Products Delivered
+                        </div>
                     </div>
                 </div>
-                <div className='flex flex-col place-items-center place-content-center p-6 bg-white z-10 rounded-xl'>
-                    <div className='mb-4'>
-                        <Counter targetValue={100000} duration={750} className="t  text-5xl" />
-                        <span className='font-semibold text-xl pl-1'>kg</span>
+                <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
+
+                    <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
+
+                    <div className='flex flex-col place-items-center place-content-center'>
+                        <div className='mb-2'>
+                            <Counter targetValue={100000} duration={750} className="t  text-xl" />
+                            <span className='font-semibold text-base pl-1'>kg</span>
+                        </div>
+                        <div className='text-xs font-semilight text-grey-600'>
+                            Products Delivered
+                        </div>
                     </div>
-                    <div className='text-2xl font-light text-grey-600'>
-                        Products Delivered
+                </div>
+                <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
+
+                    <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
+
+                    <div className='flex flex-col place-items-center place-content-center'>
+                        <div className='mb-2'>
+                            <Counter targetValue={100000} duration={750} className="t  text-xl" />
+                            <span className='font-semibold text-base pl-1'>kg</span>
+                        </div>
+                        <div className='text-xs font-semilight text-grey-600'>
+                            Products Delivered
+                        </div>
                     </div>
                 </div>
             </div>
