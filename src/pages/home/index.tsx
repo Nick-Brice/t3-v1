@@ -287,10 +287,10 @@ const Test: NextPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="z-50 -mt-[280px]">
-                        <img className="h-[280px] mt-12" src="/Rubbish_Border_ECECEC.svg" />
+                    <div className="z-50 -mt-[250px]">
+                        <img className="h-[210px] mt-12 object-cover" src="/Rubbish_Border_XL-07.svg" />
                     </div>
-                    <div className="-mt-24 px-32 mr-4">
+                    <div className="-mt-12 px-32 mr-4 max-w-[2000px]">
                         <CircularAnimation />
                     </div>
 
