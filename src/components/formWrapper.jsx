@@ -6,7 +6,7 @@ export default function FormWrapper(props) {
 
     return (
 
-        <form onSubmit={props.OnSubmit} className=' bg-gradient-to-l relative from-primary to-secondary text-white rounded-lg mx-4 '>
+        <form onSubmit={props.OnSubmit} className=' bg-gradient-to-b relative from-primary to-tertiary text-white rounded-lg mx-4 '>
             {props.children}
             {/* <div className="grid place-content-center">
                     <div className="flex flex-col flex-wrap items-end">

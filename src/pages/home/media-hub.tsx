@@ -26,6 +26,8 @@ import TabMenu from "../../components/tabMenu";
 import { VenueHomeTabMenuArray } from '../../components/venueHomeTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import Button from "../../components/button";
 
 const Test: NextPage = () => {
     const router = useRouter();
@@ -241,6 +243,8 @@ const Test: NextPage = () => {
     //     isClickToPauseDisabled: true,
     // };
 
+    const barRef = React.useRef();
+
     return (
         <>
             <Head>
@@ -263,8 +267,17 @@ const Test: NextPage = () => {
 
                     </header>
 
-                    <div className="flex bg-gradient-to-b from-primary to-tertiary h-[400px] z-10 p-8">
-                        <div className="flex flex-col">
+                    {/* <Player
+                        autoplay
+                        loop
+                        src="/circularAnimation.json"
+                        speed={0.5}
+                    >
+                    </Player> */}
+                    {/* <iframe src="https://discord.com/widget?id=1072220379596197988&theme=dark" width="350" height="500" frameBorder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe> */}
+
+                    <div className="flex flex-col bg-gradient-to-b from-primary to-tertiary z-10 py-8 pl-4 pr-8">
+                        {/* <div className="flex flex-col">
                             <div className="flex items-center">
                                 <div className="grid place-content-center bg-white rounded-full h-[120px] w-[120px]">
                                     <img width={60} src="/User_B_SQ.png" />
@@ -275,13 +288,154 @@ const Test: NextPage = () => {
                                     <div>Company Type</div>
                                 </div>
                             </div>
+                        </div> */}
+                        <div className="grid grid-cols-3 w-full z-50 gap-16 px-8">
+                            <div className='bg-secondaryblack text-white rounded-2xl h-full w-full p-8 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
+                                <div className='text-left font-bold text-2xl'>
+                                    Custom Media
+                                </div>
+                                <div className="l leading-4 text-sm mt-1">
+                                    Learn the best waste collection practices for festival style events in this detailed guide
+                                </div>
+                                <div className="grid place-content-center pt-2">
+                                    <img className="" width={160} src='/Media_On-Site-Posters-1.png' />
+                                </div>
+
+
+                                <div className='flex place-content-center mt-4'>
+                                    <Button className="bg-accent hover:bg-black-800 text-white rounded-full py-2 text-lg drop-shadow px-4 text-sm w-full" intent="secondary">
+                                        <div className='flex justify-center'>
+                                            <div className=''>
+                                                Request Now
+                                            </div>
+
+                                        </div>
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className='bg-white rounded-2xl h-full w-full p-8 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
+                                <div className='text-left font-bold text-2xl'>
+                                    Festival Cup Posters
+                                </div>
+                                <div className="l leading-4 text-sm mt-1">
+                                    Learn the best waste collection practices for festival style events in this detailed guide
+                                </div>
+                                <div className="grid place-content-center pt-2">
+                                    <img className="" width={160} src='/Media_On-Site-Posters-1.png' />
+                                </div>
+
+
+                                <div className='flex place-content-center mt-4'>
+                                    <Button className="bg-primary hover:bg-black-800 text-white rounded-full py-2 text-lg drop-shadow px-4 text-sm w-full" intent="secondary">
+                                        <div className='flex justify-center'>
+                                            <div className=''>
+                                                View Media
+                                            </div>
+
+                                        </div>
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className='bg-white rounded-2xl h-full w-full p-8 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
+                                <div className='text-left font-bold text-2xl'>
+                                    Festival Cup Posters
+                                </div>
+                                <div className="l leading-4 text-sm mt-1">
+                                    Learn the best waste collection practices for festival style events in this detailed guide
+                                </div>
+                                <div className="grid place-content-center pt-2">
+                                    <img className="" width={160} src='/Media_On-Site-Posters-1.png' />
+                                </div>
+
+
+                                <div className='flex place-content-center mt-4'>
+                                    <Button className="bg-primary hover:bg-black-800 text-white rounded-full py-2 text-lg drop-shadow px-4 text-sm w-full" intent="secondary">
+                                        <div className='flex justify-center'>
+                                            <div className=''>
+                                                View Media
+                                            </div>
+
+                                        </div>
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className='bg-white rounded-2xl h-full w-full p-8 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
+                                <div className='text-left font-bold text-2xl'>
+                                    Festival Cup Posters
+                                </div>
+                                <div className="l leading-4 text-sm mt-1">
+                                    Learn the best waste collection practices for festival style events in this detailed guide
+                                </div>
+                                <div className="grid place-content-center pt-2">
+                                    <img className="" width={160} src='/Media_On-Site-Posters-1.png' />
+                                </div>
+
+
+                                <div className='flex place-content-center mt-4'>
+                                    <Button className="bg-primary hover:bg-black-800 text-white rounded-full py-2 text-lg drop-shadow px-4 text-sm w-full" intent="secondary">
+                                        <div className='flex justify-center'>
+                                            <div className=''>
+                                                View Media
+                                            </div>
+
+                                        </div>
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className='bg-white rounded-2xl h-full w-full p-8 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
+                                <div className='text-left font-bold text-2xl'>
+                                    Festival Cup Posters
+                                </div>
+                                <div className="l leading-4 text-sm mt-1">
+                                    Learn the best waste collection practices for festival style events in this detailed guide
+                                </div>
+                                <div className="grid place-content-center pt-2">
+                                    <img className="" width={160} src='/Media_On-Site-Posters-1.png' />
+                                </div>
+
+
+                                <div className='flex place-content-center mt-4'>
+                                    <Button className="bg-primary hover:bg-black-800 text-white rounded-full py-2 text-lg drop-shadow px-4 text-sm w-full" intent="secondary">
+                                        <div className='flex justify-center'>
+                                            <div className=''>
+                                                View Media
+                                            </div>
+
+                                        </div>
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className='bg-white rounded-2xl h-full w-full p-8 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
+                                <div className='text-left font-bold text-2xl'>
+                                    Festival Cup Posters
+                                </div>
+                                <div className="l leading-4 text-sm mt-1">
+                                    Learn the best waste collection practices for festival style events in this detailed guide
+                                </div>
+                                <div className="grid place-content-center pt-2">
+                                    <img className="" width={160} src='/Media_On-Site-Posters-1.png' />
+                                </div>
+
+
+                                <div className='flex place-content-center mt-4'>
+                                    <Button className="bg-primary hover:bg-black-800 text-white rounded-full py-2 text-lg drop-shadow px-4 text-sm w-full" intent="secondary">
+                                        <div className='flex justify-center'>
+                                            <div className=''>
+                                                View Media
+                                            </div>
+
+                                        </div>
+                                    </Button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="z-40 -mb-8 -mt-16 -ml-4 -mr-8">
+                            <img className="h-[210px] mt-12 object-cover" src="/Rubbish_Border_XL-07.svg" />
                         </div>
                     </div>
-                    <div className="z-50 -mt-[227px]">
-                        <img src="/Rubbish_Border_ECECEC.svg" />
-                    </div>
-                    <div className="mt-0 px-8">
-                    </div>
+                    {/* <div className="-mt-12 px-32 mr-4 max-w-[2000px]">
+                        <CircularAnimation />
+                    </div> */}
 
                 </main>
             </div>
