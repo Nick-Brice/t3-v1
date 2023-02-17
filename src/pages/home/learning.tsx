@@ -325,7 +325,7 @@ const Test: NextPage = () => {
 
                                 <div className='flex place-content-center relative mt-4'>
                                     <div className='r rounded-lg border bg-grey-200 w-full'>
-                                        <div ref={barRef} className='absolute progressbar-wrapper left-0 top-0 h-full bg-gradient-to-r rounded-lg ' style={{ 'width': 60 + '%' }}>
+                                        <div className='absolute progressbar-wrapper left-0 top-0 h-full bg-gradient-to-r rounded-lg ' style={{ 'width': 60 + '%' }}>
                                             <div className='absolute progressbar left-0 top-0 h-full bg-gradient-to-r from-emerald to-secondary rounded-lg transition-[width] duration-[1.25s] w-0'></div>
                                         </div>
                                         <div className='relative z-10 pl-2 text-white'>
