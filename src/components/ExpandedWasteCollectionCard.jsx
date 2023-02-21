@@ -18,6 +18,7 @@ export default function ExpandedWasteCollectionCard(props) {
         }
     }, [props.isOpen]);
 
+
     return (
         <div className='bg-white rounded-2xl h-full w-full p-8 shadow-lg grid grid-cols-4 grid-rows-4 gap-2 '>
             <div className='flex w-full h-full col-span-3'>
