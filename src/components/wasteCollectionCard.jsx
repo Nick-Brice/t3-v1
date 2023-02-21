@@ -5,7 +5,7 @@ import DonutProgress from './donutProgress2';
 import Counter from './counter';
 import ExpandedWasteCollectionCard from './expandedWasteCollectionCard';
 
-export default function StreamCard(props) {
+export default function WasteCollectionCard(props) {
 
     const barRef = React.useRef();
 
