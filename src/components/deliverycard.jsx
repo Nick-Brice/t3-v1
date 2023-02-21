@@ -5,7 +5,7 @@ import DonutProgress from './donutProgress2';
 import Counter from './counter';
 import BaseExpandedCard from './baseExpandedCard';
 
-export default function ProductCard(props) {
+export default function DeliveryCard(props) {
 
 
     const [isOpen, setIsOpen] = React.useState(false);
@@ -56,7 +56,7 @@ export default function ProductCard(props) {
                                     <span className='f text-lg font-[450]'>
                                         500ml rPET Cup
                                     </span>
-                                    
+
                                 </div>
 
                             </div>
@@ -66,10 +66,10 @@ export default function ProductCard(props) {
                                     <span className='f text-lg font-[450]'>
                                         Distributor
                                     </span>
-                                    
+
                                 </div>
                             </div>
-                            
+
                             <div className='flex h-[24px]'>
                                 <img className='opacity-30' width="24" src={"/Collection_B_SQ.png"}></img>
                                 <div className='ml-2'>
@@ -125,7 +125,7 @@ export default function ProductCard(props) {
 
             )}
             {isOpen && (
-                <BaseExpandedCard {...props} isOpen={isOpen} setIsOpen={setIsOpen}/>
+                <BaseExpandedCard {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
                 // <div className='bg-white rounded-2xl h-full w-full p-8 shadow-lg grid grid-cols-4 grid-rows-4 gap-2 '>
                 //     <div className='flex w-full h-full col-span-3'>
                 //         <div className='flex flex-col basis-1/4'>

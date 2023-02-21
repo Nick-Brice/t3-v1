@@ -28,6 +28,7 @@ import TabMenu from "../../components/tabMenu";
 import { VenueStreamsTabMenuArray } from '../../components/venueStreamsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
+import StreamsTable from '../../components/streamsTable'
 
 function Home(props: any) {
     const router = useRouter();
@@ -344,7 +345,7 @@ function Home(props: any) {
                     <div className="mt-20 p-8">
                         {/* <CircularAnimation /> */}
                         {/* <div>{props.users[0].email}</div> */}
-                        <SortableTable
+                        <StreamsTable
                             data={tableData}
                             layout={layout}
                             onLayoutChange={setLayout}

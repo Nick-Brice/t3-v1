@@ -1,10 +1,10 @@
 import { Towel } from '@icon-park/react';
 import React, { useCallback, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
-import DeliveryCard from './deliverycard';
-import ExpandedCard from './expandedCard';
+import EventCard from './eventCard';
+import ExpandedEventCard from './expandedEventCard';
 
-const DeliveryTable = ({ data, layout, onLayoutChange, sort, setSort, tableData, setTableData, topTableData, setTopTableData, bottomTableData, setBottomTableData }) => {
+const EventsTable = ({ data, layout, onLayoutChange, sort, setSort, tableData, setTableData, topTableData, setTopTableData, bottomTableData, setBottomTableData }) => {
 
     // const [tableData, setTableData] = React.useState(data);
     // const [topTableData, setTopTableData] = React.useState(data);
@@ -204,7 +204,7 @@ const DeliveryTable = ({ data, layout, onLayoutChange, sort, setSort, tableData,
                 <div className='absolute modal left-0 top-0 z-50'>
                     <div className=' fixed grid place-content-center inset-0 z-50'>
                         <div className='w-[600px] h-[550px] inset-0 z-50'>
-                            <ExpandedCard {...selectedData} isOpen={showModal} setIsOpen={setShowModal} />
+                            <ExpandedEventCard {...selectedData} isOpen={showModal} setIsOpen={setShowModal} />
                         </div>
                         <div onClick={() => setShowModal(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
                     </div>
@@ -223,8 +223,8 @@ const DeliveryTable = ({ data, layout, onLayoutChange, sort, setSort, tableData,
                     </ProductCard> */}
                     {tableData.map((row) => (
 
-                        <DeliveryCard title={row.name} img="/Cup_PET.png" delivered={row.delivered} collected={row.collected} stream={row.stream} rate={row.rate} key={row.name}>
-                        </DeliveryCard>
+                        <EventCard title={row.name} img="/Cup_PET.png" delivered={row.delivered} collected={row.collected} stream={row.stream} rate={row.rate} key={row.name}>
+                        </EventCard>
 
                     ))}
                 </div>
@@ -233,4 +233,4 @@ const DeliveryTable = ({ data, layout, onLayoutChange, sort, setSort, tableData,
     );
 };
 
-export default DeliveryTable;
+export default EventsTable;

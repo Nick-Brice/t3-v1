@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 export default function Breadcrumbs(props) {
+    // const router = Router();
 
     const urlcrumbs = props.urlPath.split('/');
     const textcrumbs = props.urlPath.replace('-', ' ').split('/');
@@ -27,16 +28,29 @@ export default function Breadcrumbs(props) {
                         Portal&nbsp;
                     </span>
                 </Link>/
-                {textcrumbs.map((child, index) => (
+                {textcrumbs.map((child, index) =>
+
+                (
                     <span>
-                        <Link href={{ pathname: partialURL(index) }} >
-                            <span className='capitalize'>
-                                &nbsp;{child}&nbsp;
-                            </span>
-                        </Link>
+                        {!child.startsWith('[') && (
+                            <Link href={{ pathname: partialURL(index) }} >
+                                <span className='capitalize'>
+                                    &nbsp;{child}&nbsp;
+                                </span>
+                            </Link>
+                        )}
+                        {child.startsWith('[') && (
+                            <Link href={{ pathname: partialURL(index) }} >
+                                <span className='capitalize'>
+                                    &nbsp;{props.router.query[`${child.slice(1, -1)}`]}&nbsp;
+                                </span>
+                            </Link>
+                        )}
                         {index != textcrumbs.length - 1 && ('/')}
                     </span>
                 )
+
+
                 )}
                 {/* <Link href={{ pathname: '/home' }} >
                     <span>

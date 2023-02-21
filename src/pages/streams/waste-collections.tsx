@@ -28,6 +28,7 @@ import TabMenu from "../../components/tabMenu";
 import { VenueStreamsTabMenuArray } from '../../components/venueStreamsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
+import WasteCollectionsTable from '../../components/wasteCollectionsTable'
 
 function Home(props: any) {
     const router = useRouter();
@@ -133,7 +134,7 @@ function Home(props: any) {
     const [openSortBy, setOpenSortBy] = React.useState(false);
 
     const [sort, setSort] = React.useState({ column: "", order: "" });
-    const [layout, setLayout] = useState("table");
+    const [layout, setLayout] = useState("grid");
     const [tableData, setTableData] = React.useState(data);
     const [topTableData, setTopTableData] = React.useState(data);
     const [bottomTableData, setBottomTableData] = React.useState(data);
@@ -344,7 +345,7 @@ function Home(props: any) {
                     <div className="mt-20 p-8">
                         {/* <CircularAnimation /> */}
                         {/* <div>{props.users[0].email}</div> */}
-                        {/* <SortableTable
+                        <WasteCollectionsTable
                             data={tableData}
                             layout={layout}
                             onLayoutChange={setLayout}
@@ -356,7 +357,7 @@ function Home(props: any) {
                             setTopTableData={setTopTableData}
                             bottomTableData={bottomTableData}
                             setBottomTableData={setBottomTableData}
-                        /> */}
+                        />
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
                         {/* <DropdownMenu label="Favorite Color">
                             <Item>Red</Item>

@@ -26,6 +26,12 @@ import TabMenu from "../../components/tabMenu";
 import { VenueUploadTabMenuArray } from '../../components/venueUploadTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
+import FormWrapper from "../../components/formWrapper";
+import FormContainer from "../../components/formContainer";
+import TextInput from "../../components/textInput";
+import DropdownInput from "../../components/dropdownInput";
+import FormSubmit from "../../components/formSubmit";
+import SearchInput from "../../components/searchInput";
 
 const Home: NextPage = () => {
     const router = useRouter();
@@ -282,78 +288,35 @@ const Home: NextPage = () => {
                             </div>
                         </HeaderButton>
                     </div>
-                    <div className="p-8 mt-20">
-                        {/* <CircularAnimation /> */}
-                        {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}
-                        {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
-                        {/* <DropdownMenu label="Favorite Color">
-                            <Item>Red</Item>
-                            <Item>Orange</Item>
-                            <Item>Yellow</Item>
-                            <Item>Green</Item>
-                            <Item>Blue</Item>
-                            <Item>Purple</Item>
-                            <Item>Black</Item>
-                            <Item>White</Item>
-                            <Item>Lime</Item>
-                            <Item>Fushsia</Item>
-                        </DropdownMenu>
-                        <AreaChart data={[10, 11, 9, 12, 8, 13]} width={300} height={150} />
-                        <div className="p-4 bg-white w-fit mt-8">
-                            <ScatterGraph data={[
-                                { x: 0, y: 20, label: 'A' },
-                                { x: 40, y: 50, label: 'B' },
-                                { x: 30, y: 70, label: 'C' },
-                                { x: 60, y: 80, label: 'D' },
-                                { x: 90, y: 10, label: 'E' }
-                            ]} width={300} height={150} />
+                    <div className="grid grid-cols-[1fr_1.5fr] relative p-8 mt-20">
+                        <div className="p-4">
+
+                            {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}
                         </div>
-                        <LineGraph data={[10, 11, 9, 12, 8, 13]} width={500} height={500} />
 
-                        <div className="w-[250px] h-[250px] flex place-content-center bg-white rounded-2xl mt-8">
-                            <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={250} />
+                        <div className="">
+                            <FormWrapper>
+                                <div className="text-xs absolute right-16 p-4">*Required</div>
+                                <FormContainer className='pt-8'>
+                                    <DropdownInput label='Product Type' options={[{ value: 'Plastic Cup' }, { value: 'Paper Cup' }]} />
+                                    <SearchInput label='Product Name' options={[{ value: 'A1234 rPET Cup' }, { value: 'b333 PET Cup' }]} />
+                                </FormContainer>
+                                <FormContainer optional={true} className='bg-[#f6f6f640]'>
+                                    <DropdownInput label='Distributor' options={[{ value: 'Distributor 1' }, { value: 'Distributor 2' }]} />
+                                    <TextInput label='Custom Product Name' />
+                                    <TextInput label='Custom Product Manufacturer' />
+                                    <TextInput label='Custom Product Weight' />
+                                    <TextInput label='Custom Product Image' />
+                                    <TextInput label='Custom Product Datasheet' />
+
+                                </FormContainer>
+                                <FormContainer className='pb-8'>
+                                    <FormSubmit />
+                                </FormContainer>
+                            </FormWrapper>
                         </div>
-                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={500} />
-                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={50} />
-                        <DonutProgress data={90} duration={750} colour="#49cc73" backgroundColour="#ececec" size={1000} /> */}
-                        {/* <div className="w-[250px] h-[250px]">
-                            <svg viewBox="0 0 100 100">
-
-                                <clipPath id="clip">
-                                    <path d="M 50 0 a 50 50 0 0 1 0 100 50 50 0 0 1 0 -100 v 8 a 42 42 0 0 0 0 84 42 42 0 0 0 0 -84" />
-                                </clipPath>
-
-                                <foreignObject x="0" y="0" width="100" height="100" clip-path="url(#clip)">
-                                    <div className="gradient" />
-                                </foreignObject>
-                            </svg>
-                        </div> */}
-                        {/* <div className="w-[100px]">
-                            <AnimatedProgressProvider
-                                valueStart={0}
-                                valueEnd={66}
-                                duration={1.4}
-                                easingFunction={easeQuadInOut}
-                                repeat
-                            >
-                                {value => {
-                                    const roundedValue = Math.round(value);
-                                    return (
-                                        <CircularProgressbar
-                                            value={value}
-                                            text={`${roundedValue}%`}
-                                        
-
-                                        />
-                                    );
-                                }}
-                            </AnimatedProgressProvider>
-                            <CircularProgressbar value={60} text={`${60}%`} />
-                        </div> */}
                     </div>
-                    <div>
-                        {/* <DonutProgress data={100} colour="#49cc73" backgroundColour="#D0D0D0" /> */}
-                    </div>
+
                 </main>
             </div>
         </>

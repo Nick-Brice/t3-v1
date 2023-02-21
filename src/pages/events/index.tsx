@@ -26,6 +26,7 @@ import TabMenu from "../../components/tabMenu";
 import { VenueEventsTabMenuArray } from '../../components/venueEventsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
+import EventsTable from "../../components/eventsTable"
 
 const Home: NextPage = () => {
     const router = useRouter();
@@ -131,7 +132,7 @@ const Home: NextPage = () => {
     const [openSortBy, setOpenSortBy] = React.useState(false);
 
     const [sort, setSort] = React.useState({ column: '', order: '' });
-    const [layout, setLayout] = useState('table');
+    const [layout, setLayout] = useState('grid');
     const [tableData, setTableData] = React.useState(data);
     const [topTableData, setTopTableData] = React.useState(data);
     const [bottomTableData, setBottomTableData] = React.useState(data);
@@ -284,7 +285,7 @@ const Home: NextPage = () => {
                     </div>
                     <div className="p-8 mt-20">
                         {/* <CircularAnimation /> */}
-                        {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}
+                        <EventsTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} />
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}
                         {/* <DropdownMenu label="Favorite Color">
                             <Item>Red</Item>

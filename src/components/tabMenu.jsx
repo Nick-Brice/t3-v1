@@ -19,6 +19,7 @@ export default function TabMenu(props) {
     let children = props.data;
     // let firstChildren = children.slice(0, -1);
     // let lastChild = children.slice(-1);
+    // console.log(props.router.query['ServiceProviderID'])
 
     return (
         <div className="relative flex self-end justify-self-center">
@@ -26,7 +27,14 @@ export default function TabMenu(props) {
                 <div className="relative z-10 -mr-8">
                     {/* {console.log(child.page)} */}
                     {urlPath == child.page && (
-                        <Link href={{ pathname: child.page }}>
+                        <Link href={{
+                            pathname: child.page,
+                            // query: {
+                            //     ServiceProviderID: props.router.query['ServiceProviderID'],
+                            //     CompanyID: props.router.query['CompanyID'],
+                            //     ManagedCompanyID: props.router.query['ManagedCompanyID']
+                            // }
+                        }}>
                             <div
                                 className="z-10 cursor-default  rounded-t-2xl bg-primary text-white shadow-center-md"
                                 onMouseOver={() => handleHover(child.title)}
@@ -48,7 +56,14 @@ export default function TabMenu(props) {
                         </Link>
                     )}
                     {urlPath != child.page && (
-                        <Link href={{ pathname: child.page }}>
+                        <Link href={{
+                            pathname: child.page,
+                            // query: {
+                            //     ServiceProviderID: props.router.query['ServiceProviderID'],
+                            //     CompanyID: props.router.query['CompanyID'],
+                            //     ManagedCompanyID: props.router.query['ManagedCompanyID']
+                            // }
+                        }}>
                             <div
                                 className="z-10 cursor-pointer rounded-t-2xl  bg-secondarywhite text-white shadow-center-md transition duration-150 hover:bg-secondarygrey"
                                 onMouseOver={() => handleHover(child.title)}

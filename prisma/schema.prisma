@@ -49,6 +49,13 @@ model User {
   image         String?
 }
 
+model Company {
+  id      String  @id @default(cuid())
+  Company String  @unique
+  type    String
+  logo    String?
+}
+
 model VerificationToken {
   identifier String
   token      String   @unique

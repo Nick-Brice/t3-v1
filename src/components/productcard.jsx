@@ -24,23 +24,25 @@ export default function ProductCard(props) {
 
 
     React.useEffect(() => {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const progressbar = entry.target.querySelector('.progressbar');
-                console.log('entry', entry)
+        if (barRef.current != undefined) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const progressbar = entry.target.querySelector('.progressbar');
+                    console.log('entry', entry)
 
-                if (entry.isIntersecting) {
-                    progressbar.classList.add('progressbar-animate');
-                    return; // if we added the class, exit the function
-                }
+                    if (entry.isIntersecting) {
+                        progressbar.classList.add('progressbar-animate');
+                        return; // if we added the class, exit the function
+                    }
 
-                // We're not intersecting, so remove the class!
-                progressbar.classList.remove('progressbar-animate');
+                    // We're not intersecting, so remove the class!
+                    progressbar.classList.remove('progressbar-animate');
+                });
             });
-        });
-        // observer.observe(document.querySelector('.progressbar-wrapper'));
-        observer.observe(barRef.current);
-    }, [])
+            // observer.observe(document.querySelector('.progressbar-wrapper'));
+            observer.observe(barRef.current);
+        }
+    }, [barRef.current])
 
 
     return (
@@ -60,7 +62,7 @@ export default function ProductCard(props) {
                 //         <Button onClick={() => toggleIsOpen()} intent="secondary">See More / Modify</Button>
                 //     </div>
                 // </div>
-                <div className='bg-white rounded-2xl h-full w-full p-4 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
+                <div className='bg-white rounded-2xl h-full w-full p-4 flex flex-col justify-between shadow-lg hover:scale-105 transition duration-200'>
                     <div className='text-center font-bold'>
                         {props.title}
                     </div>
