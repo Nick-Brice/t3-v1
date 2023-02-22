@@ -405,8 +405,8 @@ function Home(props: any) {
                 <div className="w-36"></div>
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white px-8 py-4 shadow-md">
-                        <BreadCrumbs title={'Test Title'} urlPath={urlPath} />
-                        <TabMenu data={dataArray} urlPath={urlPath} />
+                        {/* <BreadCrumbs title={'Test Title'} urlPath={urlPath} />
+                        <TabMenu data={dataArray} urlPath={urlPath} /> */}
                     </header>
                     <button onClick={handlePostClick} className="p-2 bg-black text-white rounded-full">Add User</button>
                     <button onClick={handleDeleteClick} className="p-2 bg-black text-white rounded-full">Delete All Users</button>

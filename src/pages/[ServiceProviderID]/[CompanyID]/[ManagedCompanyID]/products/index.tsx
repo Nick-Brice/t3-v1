@@ -217,8 +217,8 @@ const Test: NextPage = () => {
                 <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
-                        <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} router={router} />
-                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} router={router} />
+                        {/* <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} router={router} />
+                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} router={router} /> */}
                         {/* <div>
                             <h5 className="text-2xl">[Client Name] Products</h5>
                             <h6>

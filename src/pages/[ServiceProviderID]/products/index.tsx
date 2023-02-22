@@ -208,8 +208,8 @@ const Overview: NextPage = () => {
                 <div className="w-36"></div> {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
-                        <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
-                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} />
+                        {/* <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
+                        <TabMenu data={VenueProductsTabMenuArray} urlPath={urlPath} /> */}
                     </header>
                     <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-40">
                         <HeaderButton>
