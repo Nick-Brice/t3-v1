@@ -15,7 +15,7 @@ const Sidebar = (props) => {
     }
 
     return (
-        <div className="fixed">
+        <div className="fixed print:hidden">
             <div className="flex flex-col bg-secondaryblack w-36 h-screen p-4">
                 <div className="flex justify-center p-4 pb-8">
                     <Link href={{ pathname: '/home' }} >

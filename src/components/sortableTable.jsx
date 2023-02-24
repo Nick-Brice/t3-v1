@@ -2,7 +2,7 @@ import { Towel } from '@icon-park/react';
 import React, { useCallback, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import ProductCard from './productcard';
-import ExpandedCard from './expandedCard';
+import BaseExpandedCard from './baseExpandedCard';
 
 const SortableTable = ({ data, layout, onLayoutChange, sort, setSort, tableData, setTableData, topTableData, setTopTableData, bottomTableData, setBottomTableData }) => {
 
@@ -203,8 +203,8 @@ const SortableTable = ({ data, layout, onLayoutChange, sort, setSort, tableData,
             {showModal && (
                 <div className='absolute modal left-0 top-0 z-50'>
                     <div className=' fixed grid place-content-center inset-0 z-50'>
-                        <div className='w-[600px] h-[550px] inset-0 z-50'>
-                            <ExpandedCard {...selectedData} isOpen={showModal} setIsOpen={setShowModal} />
+                        <div className='w-[620px] h-[575px] inset-0 z-50'>
+                            <BaseExpandedCard {...selectedData} isOpen={showModal} setIsOpen={setShowModal} />
                         </div>
                         <div onClick={() => setShowModal(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
                     </div>

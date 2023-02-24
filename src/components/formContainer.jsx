@@ -9,7 +9,7 @@ export default function FormContainer(props) {
             {props.optional == true && !open && (
                 <button className="absolute -top-2 left-3 text-xs h-2 z-50" type="button" onClick={() => setOpen(!open)}>+ &nbsp;&nbsp;&nbsp;advanced fields</button>
             )}
-            {props.optional == true && open && (<button className="absolute top-0 left-[13px] text-xs h-2" type="button" onClick={() => setOpen(!open)}>- &nbsp;&nbsp;&nbsp;minimise advanced fields</button>)}
+            {props.optional == true && open && (<button className="absolute top-0 left-[13px] text-xs h-2 z-50" type="button" onClick={() => setOpen(!open)}>- &nbsp;&nbsp;&nbsp;minimise advanced fields</button>)}
             {props.optional == true && (
                 <div className={open ? "relative flex flex-col flex-wrap items-end" : "relative flex-col flex-wrap items-end hidden"}>
                     {props.children}

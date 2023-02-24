@@ -47,6 +47,8 @@ import TextInput from "../components/textInput";
 import SearchInput from '../components/searchInput';
 import FormSubmit from '../components/formSubmit';
 import FormContainer from '../components/formContainer';
+import DownloadCSV from '../components/downloadCSV2';
+import UploadCSV from '../components/uploadCSV';
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const users = await prisma?.user.findMany({
@@ -421,6 +423,30 @@ function Home(props: any) {
                             {user.email}
                         </div>
                     ))} */}
+                    <UploadCSV />
+                    <DownloadCSV data={
+                        dataArray
+                        // [
+                        //     {
+                        //         name: 'Nick',
+                        //         age: 25,
+                        //         city: "Bath",
+                        //         company: "The Rubbish Project"
+                        //     },
+                        //     {
+                        //         name: 'Jack',
+                        //         age: 27,
+                        //         city: "Bristol",
+                        //         company: "The Rubbish Project"
+                        //     },
+                        //     {
+                        //         name: 'Connor',
+                        //         age: 27,
+                        //         city: "Bristol",
+                        //         company: "The Rubbish Project"
+                        //     }
+                        // ]
+                    } />
                     <div className="w-[60%]">
                         <FormWrapper OnSubmit={handleSubmit}>
                             <FormContainer className='pt-8'>

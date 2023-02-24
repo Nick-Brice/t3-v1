@@ -2,8 +2,13 @@ import Button from './button';
 import DonutProgress from './donutProgress2';
 import Counter from './counter';
 import React from 'react';
+import DeliveryForm from './deliveryForm';
+import StockCheckForm from './stockCheckForm';
 
 export default function BaseExpandedCard(props) {
+
+    const [showDeliveryModal, setShowDeliveryModal] = React.useState(false);
+    const [showStockCheckModal, setShowStockCheckModal] = React.useState(false);
 
     const handleIsOpen = () => {
         props.setIsOpen(!props.isOpen);
@@ -20,6 +25,26 @@ export default function BaseExpandedCard(props) {
 
     return (
         <div className='relative bg-white rounded-2xl h-full w-full p-8 shadow-lg'>
+            {showDeliveryModal && (
+                <div className='absolute modal left-0 top-0 z-40'>
+                    <div className=' fixed grid place-content-center inset-0 z-40'>
+                        <div className='w-[750px] inset-0 z-50'>
+                            <DeliveryForm {...props} isOpen={showDeliveryModal} setIsOpen={setShowDeliveryModal} />
+                        </div>
+                        <div onClick={() => setShowDeliveryModal(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                    </div>
+                </div>
+            )}
+            {showStockCheckModal && (
+                <div className='absolute modal left-0 top-0 z-40'>
+                    <div className=' fixed grid place-content-center inset-0 z-40'>
+                        <div className='w-[750px] inset-0 z-50'>
+                            <StockCheckForm {...props} isOpen={showStockCheckModal} setIsOpen={setShowStockCheckModal} />
+                        </div>
+                        <div onClick={() => setShowStockCheckModal(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                    </div>
+                </div>
+            )}
             <div className='cursor-pointer absolute right-4 top-2 text-lg text-grey font-semibold' onClick={handleIsOpen}>
                 x
             </div>
@@ -44,7 +69,7 @@ export default function BaseExpandedCard(props) {
                 </div>
                 <div className='flex flex-col col-span-2'>
                     <div className='cursor-pointer select-none relative rounded-3xl px-4 py-6 text-white text-center  bg-gradient-to-r from-[#00a2c3cc] to-[#7571e1cc] hover:from-[#00a2c3] hover:to-[#7571e1]'>
-                        <div className='absolute pointer-events-none z-50 rounded-full -left-12 -top-4 border-4 border-primary bg-white'>
+                        <div className='absolute pointer-events-none  rounded-full -left-12 -top-4 border-4 border-primary bg-white'>
                             <div className='p-4'>
                                 <img className=' w-[65px] h-[65px] self-center opacity-100' src={"/Cup_PET.png"}></img>
                             </div>
@@ -60,7 +85,7 @@ export default function BaseExpandedCard(props) {
                     </div>
                     <div className='grid grid-cols-2 justify-between gap-2 mt-6 text-white'>
 
-                        <Button className='text-sm p-4 bg-gradient-to-r from-[#00a2c3cc] to-[#7571e1cc] hover:from-[#00a2c3] hover:to-[#7571e1] rounded-2xl'>
+                        <Button className='text-sm p-4 bg-gradient-to-r from-[#00a2c3cc] to-[#7571e1cc] hover:from-[#00a2c3] hover:to-[#7571e1] rounded-2xl' onClick={() => setShowDeliveryModal(true)}>
                             <div>
                                 Add Delivery
                             </div>
@@ -70,7 +95,7 @@ export default function BaseExpandedCard(props) {
                         </Button>
 
 
-                        <Button className='text-sm p-4 bg-gradient-to-r from-[#00a2c3cc] to-[#7571e1cc] hover:from-[#00a2c3] hover:to-[#7571e1] rounded-2xl'>
+                        <Button className='text-sm p-4 bg-gradient-to-r from-[#00a2c3cc] to-[#7571e1cc] hover:from-[#00a2c3] hover:to-[#7571e1] rounded-2xl' onClick={() => setShowStockCheckModal(true)}>
                             <div>
                                 Add Stock
                             </div>

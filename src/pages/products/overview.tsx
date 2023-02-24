@@ -26,8 +26,9 @@ import TabMenu from "../../components/tabMenu";
 import { VenueProductsTabMenuArray } from '../../components/venueProductsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
+import ProductForm from "../../components/productForm";
 
-const Overview: NextPage = () => {
+const Overview: NextPage = (props) => {
     const router = useRouter();
     const urlPath = router.pathname;
 
@@ -232,8 +233,8 @@ const Overview: NextPage = () => {
                         {openForm && (
                             <div className='absolute modal left-0 top-0 z-50'>
                                 <div className=' fixed grid place-content-center inset-0 z-50'>
-                                    <div className=' inset-0 z-50 w-full h-full'>
-                                        <FormLayout setOpenForm={setOpenForm} />
+                                    <div className='w-[750px] inset-0 z-50 h-full'>
+                                        <ProductForm {...props} isOpen={openForm} setIsOpen={setOpenForm} />
                                     </div>
                                     <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
                                 </div>

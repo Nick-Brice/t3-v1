@@ -24,23 +24,25 @@ export default function StreamCard(props) {
 
 
     React.useEffect(() => {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const progressbar = entry.target.querySelector('.progressbar');
-                console.log('entry', entry)
+        if (barRef.current != undefined) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const progressbar = entry.target.querySelector('.progressbar');
+                    console.log('entry', entry)
 
-                if (entry.isIntersecting) {
-                    progressbar.classList.add('progressbar-animate');
-                    return; // if we added the class, exit the function
-                }
+                    if (entry.isIntersecting) {
+                        progressbar.classList.add('progressbar-animate');
+                        return; // if we added the class, exit the function
+                    }
 
-                // We're not intersecting, so remove the class!
-                progressbar.classList.remove('progressbar-animate');
+                    // We're not intersecting, so remove the class!
+                    progressbar.classList.remove('progressbar-animate');
+                });
             });
-        });
-        // observer.observe(document.querySelector('.progressbar-wrapper'));
-        observer.observe(barRef.current);
-    }, [])
+            // observer.observe(document.querySelector('.progressbar-wrapper'));
+            observer.observe(barRef.current);
+        }
+    }, [barRef.current])
 
 
     return (
@@ -110,9 +112,9 @@ export default function StreamCard(props) {
                     <div className='flex place-content-center relative'>
                         <div className='r rounded-lg border bg-grey-200 w-full'>
                             <div ref={barRef} className='absolute progressbar-wrapper left-0 top-0 h-full bg-gradient-to-r rounded-lg ' style={{ 'width': props.rate + '%' }}>
-                                <div className='absolute progressbar left-0 top-0 h-full bg-gradient-to-r from-emerald to-secondary rounded-lg transition-[width] duration-[1.25s] w-0'></div>
+                                <div className='absolute progressbar left-0 top-0 h-full bg-gradient-to-r from-emerald to-secondary print:from-black print:to-black rounded-lg transition-[width] duration-[1.25s] w-0'></div>
                             </div>
-                            <div className='relative z-10 pl-2 text-white'>
+                            <div className='relative z-10 pl-2 text-white print:text-red'>
                                 <span className='text-lg font-[450]'>
                                     {props.rate}%
                                 </span>

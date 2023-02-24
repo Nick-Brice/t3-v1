@@ -28,7 +28,8 @@ import TabMenu from "../../components/tabMenu";
 import { VenueStreamsTabMenuArray } from '../../components/venueStreamsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
-import StreamsTable from '../../components/streamsTable'
+import StreamsTable from '../../components/streamsTable';
+import StreamForm from '../../components/streamForm';
 
 function Home(props: any) {
     const router = useRouter();
@@ -237,6 +238,28 @@ function Home(props: any) {
     //     isClickToPauseDisabled: true,
     // };
 
+    interface UnsafeType {
+        [key: string]: any;
+    }
+
+
+    const handleDownload = () => {
+        if (data[0] != undefined) {
+            const keys = Object.keys(data[0]);
+            const capitalizedKeys = keys.map(key => key.charAt(0).toUpperCase() + key.slice(1));
+            const csvData = [
+                capitalizedKeys.join(','),
+                ...data.map((row: UnsafeType) => keys.map(key => row[key]).join(','))
+            ];
+            const blob = new Blob([csvData.join('\n')], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'data.csv';
+            link.click();
+        }
+    };
+
     return (
         <>
             <Head>
@@ -250,14 +273,14 @@ function Home(props: any) {
                 {/* <div className="fixed">
                         <div className="flex flex-col bg-secondaryblack w-screen h-screen p-4"></div>
                     </div> */}
-                <div className="w-36"></div>{" "}
+                <div className="w-36 print:hidden"></div>{" "}
                 {/* So that the main content lines up with the sidebar */}
                 <main className="relative w-full bg-secondarygrey">
                     <header className="grid grid-cols-[auto_1fr] grid-rows-1 bg-white shadow-center-md z-50">
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
                         <TabMenu data={VenueStreamsTabMenuArray} urlPath={urlPath} />
                     </header>
-                    <div className="absolute inset-x-8 z-50 flex justify-between rounded-2xl bg-primary p-5">
+                    <div className="absolute inset-x-8 z-40 flex justify-between rounded-2xl bg-primary p-5">
                         <HeaderButton>
                             <div
                                 className="flex cursor-pointer select-none flex-wrap items-center text-lg"
@@ -287,20 +310,17 @@ function Home(props: any) {
                                 className="flex cursor-pointer select-none flex-wrap  items-center text-lg"
                                 onClick={() => setOpenForm(!openForm)}
                             >
-                                <p className="pr-4">Add Product</p>
+                                <p className="pr-4">Add Stream</p>
                                 <img className="scale-75 pl-1" src="/add-three.svg" />
                             </div>
                         </HeaderButton>
                         {openForm && (
-                            <div className="modal absolute left-0 top-0 z-50">
-                                <div className=" fixed inset-0 z-50 grid place-content-center">
-                                    <div className=" inset-0 z-50 h-full w-full">
-                                        <FormLayout setOpenForm={setOpenForm} />
+                            <div className='absolute modal left-0 top-0 z-50'>
+                                <div className=' fixed grid place-content-center inset-0 z-50'>
+                                    <div className='w-[750px] inset-0 z-50 h-full'>
+                                        <StreamForm {...props} isOpen={openForm} setIsOpen={setOpenForm} />
                                     </div>
-                                    <div
-                                        onClick={() => setOpenForm(false)}
-                                        className="fixed inset-0 z-10 backdrop-blur-sm backdrop-brightness-75"
-                                    ></div>
+                                    <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
                                 </div>
                             </div>
                         )}
@@ -336,7 +356,7 @@ function Home(props: any) {
                             </div>
                         </HeaderButton>
                         <HeaderButton>
-                            <div className="flex cursor-pointer select-none flex-wrap items-center text-lg">
+                            <div className="flex cursor-pointer select-none flex-wrap items-center text-lg" onClick={() => handleDownload()}>
                                 <p className="pr-4">Download CSV</p>
                                 <img className="scale-75 pl-1" src="/download.svg" />
                             </div>
