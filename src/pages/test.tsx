@@ -72,7 +72,13 @@ function DummyInput(props: any) {
 function Home(props: any) {
 
     const [data, setData] = useState<any>(null);
-
+    const [openCSV, setOpenCSV] = useState<any>(false);
+    const [CSVData, setCSVData] = useState<any>(null);
+    const [CSVSteps, setCSVSteps] = useState(1);
+    const [CSVType, setCSVType] = useState(null);
+    const [columnNames, setColumnNames] = useState(null);
+    const [submitError, setSubmitError] = useState<any>(null);
+    const [fileName, setFileName] = useState<any>(null);
     const router = useRouter();
     const urlPath = router.pathname;
 
@@ -195,6 +201,39 @@ function Home(props: any) {
         // If server returns the name submitted, that means the form works.
         const result = await response.json()
         alert(`Is this your name: ${result[0].name}`)
+    }
+
+    const handleCSVSubmit = async (event: any) => {
+        event.preventDefault();
+
+        // Get data from the form.
+
+        const name = event.target['uploadType'].value;
+
+        console.log(columnNames);
+
+        setCSVType(name);
+        setCSVSteps(2);
+    }
+
+    const handleCSVStep2 = async (event: any) => {
+        event.preventDefault();
+
+        // Get data from the form.
+
+        const streamName = event.target['Stream Name'].value;
+        const materials = event.target['Materials'].value;
+        const linkedProducts = event.target['Linked Products'].value;
+        const wasteCollector = event.target['Waste Collector'].value;
+
+        console.log(streamName);
+        console.log(materials);
+        console.log(linkedProducts);
+        console.log(wasteCollector);
+
+        setSubmitError("Error")
+
+        setCSVSteps(3);
     }
 
     const optionArray = [
@@ -412,6 +451,156 @@ function Home(props: any) {
                     <button onClick={handleDeleteClick} className="p-2 bg-black text-white rounded-full">Delete All Users</button>
                     <button onClick={handlePutClick} className="p-2 bg-black text-white rounded-full">Update User</button>
                     <button onClick={handleGetClick} className="p-2 bg-black text-white rounded-full">Get All Users</button>
+                    <button onClick={() => { setOpenCSV(true); setCSVSteps(1); }} className="p-2 bg-black text-white rounded-full">Upload via CSV</button>
+                    {CSVData != undefined && (
+                        <ul>
+                            {CSVData.map((row: any, index: any) => (
+                                <li key={index}>{JSON.stringify(row)}</li>
+                            ))}
+                        </ul>
+                    )}
+                    {openCSV && CSVSteps == 1 && (
+                        <div className='absolute modal left-0 top-0 z-50'>
+                            <div className=' fixed grid place-content-center inset-0 z-50'>
+                                <div className='w-[750px] inset-0 z-50 h-full'>
+                                    <div className="flex flex-col bg-gradient-to-r from-primary to-tertiary text-white rounded-2xl p-12">
+                                        <form className="" onSubmit={handleCSVSubmit}>
+                                            <div className="font-bold text-lg mb-2">
+                                                Upload via CSV
+                                            </div>
+                                            <div>
+                                                Use this uploader to add bulk data from your spreadsheets quickly and easily. Make sure you check the layout matches the requirements in the <b>CSV uploader Manual</b>, or it will fail to submit the data.
+                                            </div>
+                                            <div className="flex mt-2">
+                                                <div className="grid place-content-center mr-4">Select type to upload:</div>
+                                                <div className='grid place-content-center min-w-[300px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                                    <select className="appearance-none text-white bg-transparent text-center inline-block w-[300px] h-[40px]" name="uploadType" id="uploadType">
+                                                        <option className="text-black bg-transparent focus:text-red" value='delivery'>
+                                                            Delivery
+                                                        </option>
+                                                        <option className="text-black bg-transparent focus:text-red" value='collection'>
+                                                            Collection
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className="-my-4">
+                                                <UploadCSV CSVData={CSVData} setCSVData={setCSVData} columnNames={columnNames} setColumnNames={setColumnNames} fileName={fileName} setFileName={setFileName} />
+                                            </div>
+
+                                            <button className="self-center relative my-3 bg-white text-black px-4 py-2 rounded-xl w-full " type="submit">
+                                                <div>
+                                                    Submit
+                                                </div>
+                                            </button>
+                                            {submitError != null && (
+
+                                                <div className="relative w-full bg-accent font-semibold text-white rounded-lg p-4  text-center">
+                                                    Please select a file!
+                                                </div>
+
+                                            )}
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div onClick={() => setOpenCSV(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                            </div>
+                        </div>
+                    )}
+                    {openCSV && CSVSteps == 2 && (
+                        <div className='absolute modal left-0 top-0 z-50'>
+                            <div className=' fixed grid place-content-center inset-0 z-50'>
+                                <div className='w-[850px] inset-0 z-50 h-full'>
+                                    <div className="">
+                                        <form className="bg-gradient-to-b relative from-primary to-tertiary text-white rounded-lg" onSubmit={handleCSVStep2}>
+                                            <div className="text-xl font-semibold px-8 py-4">
+                                                Upload delivery via CSV
+                                            </div>
+                                            <div className="text-xs absolute top-4 right-16 p-4">*Required</div>
+                                            <div className='flex justify-between px-16'>
+                                                <div className="pl-24">
+                                                    Required Column
+                                                </div>
+                                                <div className="pl-16">
+                                                    Your Column
+                                                </div>
+                                                <div className="pr-2">
+                                                    Your Units
+                                                </div>
+
+                                            </div>
+                                            <FormContainer className=''>
+                                                <div className="flex">
+                                                    <DropdownInput label='Stream Name' options={columnNames} />
+                                                    <div className='my-3 ml-2'>
+
+                                                        <div className='grid place-content-center min-w-[100px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                                            <select className="appearance-none text-white bg-transparent text-center inline-block w-[100px] h-[40px]" name="uploadType" id="uploadType">
+                                                                <option className="text-black bg-transparent focus:text-red" value='delivery'>
+                                                                    KG
+                                                                </option>
+                                                                <option className="text-black bg-transparent focus:text-red" value='collection'>
+                                                                    Tonnes
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex">
+                                                    <DropdownInput label='Materials' options={columnNames} />
+                                                    <div className='my-3 ml-2'>
+
+                                                        <div className='grid place-content-center min-w-[100px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                                            <select className="appearance-none text-white bg-transparent text-center inline-block w-[100px] h-[40px]" name="uploadType" id="uploadType">
+                                                                <option className="text-black bg-transparent focus:text-red" value='delivery'>
+                                                                    KG
+                                                                </option>
+                                                                <option className="text-black bg-transparent focus:text-red" value='collection'>
+                                                                    Tonnes
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </FormContainer>
+                                            <FormContainer optional={true} className='bg-[#f6f6f640]'>
+                                                <div className="flex">
+                                                    <DropdownInput label='Linked Products' options={columnNames} />
+                                                    <div className='my-3 ml-2'>
+
+                                                        <div className='grid place-content-center min-w-[100px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="flex">
+                                                    <DropdownInput label='Waste Collector' options={columnNames} />
+                                                    <div className='my-3 ml-2'>
+
+                                                        <div className='grid place-content-center min-w-[100px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </FormContainer>
+                                            <FormContainer className='pb-8'>
+                                                <FormSubmit />
+                                                {submitError != null && (
+
+                                                    <div className="relative w-[80%] bg-accent text-white rounded-lg p-4  text-center">
+                                                        There are errors on rows 12,14-17,22 in columns Name, Stream
+                                                    </div>
+
+                                                )}
+                                            </FormContainer>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div onClick={() => setOpenCSV(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                            </div>
+                        </div>
+                    )}
                     {/* <DonutProgress data={70} duration={750} colour="#49cc73" backgroundColour="#ececec" size={80} /> */}
                     {data != null && data.map((user: any) => (
                         <div>
@@ -423,7 +612,7 @@ function Home(props: any) {
                             {user.email}
                         </div>
                     ))} */}
-                    <UploadCSV />
+                    {/* <UploadCSV /> */}
                     <DownloadCSV data={
                         dataArray
                         // [

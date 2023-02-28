@@ -107,3 +107,7 @@ input:-webkit-autofill:active {
   transition: background-color 0s ease-in-out 5000s;
   font-size: inherit;
 }
+
+/* input[type="file"] {
+  display: none;
+} */

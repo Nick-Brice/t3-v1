@@ -290,8 +290,10 @@ const Test: NextPage = () => {
                     <div className="z-50 -mt-[250px]">
                         <img className="h-[210px] mt-12 object-cover" src="/Rubbish_Border_XL-07.svg" />
                     </div>
-                    <div className="-mt-12 px-32 mr-4 max-w-[2000px]">
-                        <CircularAnimation />
+                    <div className="grid place-content-center">
+                        <div className="-mt-12 px-32 mr-4 max-w-[2000px]">
+                            <CircularAnimation />
+                        </div>
                     </div>
 
                 </main>

@@ -63,3 +63,406 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model example {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  name1     String
+  name2     String
+  number    Int
+}
+
+model On_Site_Capture {
+  record_id                    String   @id @db.VarChar(255)
+  date                         String?  @db.VarChar(255)
+  venue                        String?  @db.VarChar(255) // link to Venues
+  stream                       String?  @db.VarChar(255) // link to Streams
+  collection_id                String   @db.VarChar(255) // link to Collections
+  weight                       Decimal? @db.Decimal(16, 4)
+  products_collected           String?  @db.VarChar(255)
+  number_of_products_collected Int?
+  method                       String?  @db.VarChar(255)
+  contamination_estimate       Decimal? @db.Decimal(16, 4)
+  smart_tracking_id            String?  @db.VarChar(255)
+  collected                    Boolean?
+}
+
+model Organisers {
+  record_id                    String   @id @db.VarChar(255)
+  name                         String   @db.VarChar(255)
+  venues                       String?  @db.LongText // link to venues
+  number_of_venues             Int?
+  products_tracked             String?  @db.LongText
+  number_of_streams            Int?
+  number_of_products           Int?
+  number_of_product_types      Int?
+  number_of_restocks           Int?
+  number_of_deliveries         Int?
+  number_of_collections        Int?
+  number_of_products_delivered Int?
+  number_of_products_used      Int?
+  number_of_products_captured  Int? // number of products from best source
+  weight_delivered             Int?
+  weight_used                  Int?
+  weight_collected             Int?
+  weight_sorted                Int?
+  weight_processed             Int?
+  weight_manufactured          Int?
+  average_contamination        Decimal? @db.Decimal(16, 2)
+  average_capture_rate         Decimal? @db.Decimal(16, 2)
+  weighted_capture_rate        Decimal? @db.Decimal(16, 2)
+  users                        Int? // link to users  
+}
+
+model Waste_Processors {
+  record_id                     String   @id @db.VarChar(255)
+  name                          String   @db.VarChar(255)
+  number_of_material_deliveries Int?
+  number_of_material_sales      Int?
+  weight_delivered              Int?
+  weight_processed              Int?
+  weight_sorted                 Int?
+  weight_manufactured           Int?
+  number_of_products_captured   Int? // number of products from best source
+  average_contamination         Decimal? @db.Decimal(16, 2)
+  users                         Int? // link to users  
+}
+
+model Manufacturers {
+  record_id                    String   @id @db.VarChar(255)
+  name                         String   @db.VarChar(255)
+  venues                       String?  @db.LongText // link to venues
+  number_of_venues             Int?
+  products                     String?  @db.LongText // link to product list
+  number_of_products           Int?
+  number_of_product_types      Int?
+  number_of_products_delivered Int?
+  number_of_products_used      Int?
+  number_of_products_captured  Int? // number of products from best source
+  weight_delivered             Int?
+  weight_used                  Int?
+  weight_collected             Int?
+  weight_sorted                Int?
+  weight_processed             Int?
+  weight_manufactured          Int?
+  average_contamination        Decimal? @db.Decimal(16, 2)
+  average_capture_rate         Decimal? @db.Decimal(16, 2)
+  weighted_capture_rate        Decimal? @db.Decimal(16, 2)
+  users                        Int? // link to users  
+}
+
+model Waste_Managers {
+  record_id                   String   @id @db.VarChar(255)
+  name                        String   @db.VarChar(255)
+  venues                      String?  @db.LongText // link to venues
+  number_of_venues            Int?
+  number_of_streams           Int?
+  number_of_products          Int?
+  number_of_product_types     Int?
+  number_of_restocks          Int?
+  number_of_collections       Int?
+  number_of_sorting_runs      Int?
+  number_of_products_captured Int? // number of products from best source
+  weight_delivered            Int?
+  weight_used                 Int?
+  weight_collected            Int?
+  weight_sorted               Int?
+  weight_processed            Int?
+  weight_manufactured         Int?
+  average_contamination       Decimal? @db.Decimal(16, 2)
+  average_capture_rate        Decimal? @db.Decimal(16, 2)
+  weighted_capture_rate       Decimal? @db.Decimal(16, 2)
+  users                       Int? // link to users
+}
+
+model Product_List {
+  record_id        String   @id @db.VarChar(255)
+  name             String   @db.VarChar(255)
+  type             String?  @db.VarChar(255)
+  material         String?  @db.VarChar(255)
+  product_code     String?  @db.VarChar(255)
+  description      String?  @db.VarChar(255)
+  capacity         Int?
+  weight           Decimal? @db.Decimal(16, 4)
+  wet_weight       Int?
+  brand            String?  @db.VarChar(255)
+  recycled_content Float?   @db.Float
+  carbon_rate      String?  @db.VarChar(255) // need to look into how to do this
+  embodied_carbon  Decimal? @db.Decimal(16, 4)
+  venues           String?  @db.VarChar(255) // link to venues
+  manufacturer     String?  @db.VarChar(255) // link to manufacturer
+  manufacture_id   String?  @map("7manufacture") @db.VarChar(255) // might not need
+}
+
+model Dropdowns {
+  name     String? @db.VarChar(255)
+  type     String? @db.VarChar(255)
+  recordid String  @id @db.VarChar(255)
+}
+
+model Manufacturing_Stats {
+  name                                          String?  @db.VarChar(255)
+  companyname                                   String?  @db.VarChar(255)
+  address                                       String?  @db.Text
+  companytype                                   String?  @db.VarChar(255)
+  recordid                                      String   @id @db.VarChar(255)
+  producttypesfromproductlist                   String?  @db.VarChar(255)
+  materialsusedfromproductlist                  String?  @db.VarChar(255)
+  totaldeliveredfromproductlist                 Int?
+  totalusedfromproductlist                      Int?
+  totalproductscollectedfromproductlist         Int?
+  totallostfromproductlist                      Int?
+  averagecaptureratefromproductlist             Decimal? @db.Decimal(16, 4)
+  totalcollectedweightestimatekgfromproductlist Int?
+  totalcarbonkgfromproductlist                  Int?
+  unusedstockinmarketfromproductlist            Int?
+}
+
+model Organiser_List {
+  name                             String?   @db.VarChar(255)
+  namefromeventvenueorganiser      String?   @db.VarChar(255)
+  totalnumberofvenues              Decimal?  @db.Decimal(16, 4)
+  totalcapturerate                 Decimal?  @db.Decimal(16, 4)
+  averagecapturerate               Decimal?  @db.Decimal(16, 4)
+  noproducttypesfromvenues         Decimal?  @db.Decimal(16, 4)
+  numberofdeliveriesfromvenues     Decimal?  @db.Decimal(16, 4)
+  numberofcollectionsfromvenues    Decimal?  @db.Decimal(16, 4)
+  totalproductsdeliveredfromvenues Decimal?  @db.Decimal(16, 4)
+  totalproductscollectedfromvenues Decimal?  @db.Decimal(16, 4)
+  totalweightcapturedkgfromvenues  Decimal?  @db.Decimal(16, 4)
+  totaldeliveredweightkgfromvenues Decimal?  @db.Decimal(16, 4)
+  totalproductsusedkg              Decimal?  @db.Decimal(16, 4)
+  totalcollectedfromvenues         Decimal?  @db.Decimal(16, 4)
+  totalsortedfromvenues            Decimal?  @db.Decimal(16, 4)
+  averagecontaminationfromvenues   Decimal?  @db.Decimal(16, 4)
+  nostreamsfromvenues              Decimal?  @db.Decimal(16, 4)
+  recordid                         String    @id @db.VarChar(255)
+  lastmodified                     DateTime? @db.Date
+}
+
+model Material_Processing {
+  supplyid                         String?   @db.VarChar(255)
+  date                             DateTime? @db.Date
+  quantityprocessedtonnes          Decimal?  @db.Decimal(16, 4)
+  namefromwasteprocessor           String?   @db.VarChar(255)
+  finalproductform                 String?   @db.VarChar(255)
+  quantitytrackedmaterialtonnes    Decimal?  @db.Decimal(16, 4)
+  materialstreamfromwastesortingid String?   @db.MediumText
+  fromaddress                      String?   @db.VarChar(255)
+  latitudelongitudefrom            String?   @db.VarChar(255)
+  latitudelongitudeto              String?   @db.VarChar(255)
+  toaddress                        String?   @db.Text
+  recordid                         String    @id @db.VarChar(255)
+  lastmodified                     DateTime? @db.Date
+  distancekm                       Decimal?  @db.Decimal(16, 4)
+  emissionskgco2e                  Decimal?  @db.Decimal(16, 4)
+  tracked                          Decimal?  @db.Decimal(16, 4)
+}
+
+model Documentation {
+  name          String? @db.VarChar(255)
+  notes         String? @db.Text
+  type          String? @db.VarChar(255)
+  documenturl   String? @db.VarChar(510)
+  recordid      String  @id @db.VarChar(255)
+  wastemanager  String? @db.VarChar(255)
+  venueid       String? @db.VarChar(255)
+  venuelocation String? @db.VarChar(255)
+  dateadded     String? @db.VarChar(255)
+}
+
+model Events {
+  stream               String?  @db.VarChar(255)
+  name                 String?  @db.VarChar(255)
+  venue                String?  @db.VarChar(255)
+  notes                String?  @db.Text
+  weightcollected      Float?   @db.Float
+  weightsorted         Float?   @db.Float
+  weightdelivered      Float?   @db.Float
+  weightusedproducts   Float?   @db.Float
+  weightstockremaining Float?   @db.Float
+  streamcapturerate    Float?   @db.Float
+  contaminationrate    Decimal? @db.Decimal(16, 4)
+  recordid             String   @id @db.VarChar(255)
+  datecollected        String?  @db.VarChar(255)
+  datedelivered        String?  @db.VarChar(255)
+}
+
+model Venue_Products {
+  record_id                    String   @id @db.VarChar(255)
+  name                         String   @db.VarChar(255)
+  venue                        String?  @db.VarChar(255)
+  product_code                 String?  @db.VarChar(255)
+  product_weight               Decimal? @db.Decimal(16, 4)
+  product_type                 String?  @db.VarChar(255)
+  manufacture_site             String?  @db.VarChar(255)
+  brand                        String?  @db.VarChar(255)
+  number_of_deliveries         Int?
+  number_of_products_delivered Int?
+  number_of_products_collected Int?
+  number_of_products_used      Int?
+  number_of_products_lost      Int?
+  stock_remaining              Int?
+  version_number               Int?
+  weight_delivered             Decimal? @db.Decimal(16, 4)
+  weight_used                  Decimal? @db.Decimal(16, 4)
+  weight_collected             Decimal? @db.Decimal(16, 4)
+  stream                       String?  @db.VarChar(255) // link to Venue_Streams
+  stream_make_up_percentage    Decimal? @db.Decimal(16, 4)
+  capture_rate                 Decimal? @db.Decimal(16, 4)
+  image                        String?  @db.VarChar(255)
+  qrurl                        String?  @db.VarChar(2000)
+  productterminated            String?  @db.VarChar(255)
+
+  totalcollectedviadepositscheme        String?  @db.VarChar(255)
+  quantitycollectedviadepositsingle     Int?
+  collectedbasedonsingledeposit         Decimal? @db.Decimal(16, 4)
+  productscollectedmultiproductestimate Int?
+  collectedbasedonmultideposit          Decimal? @db.Decimal(16, 4)
+}
+
+model Venue_Streams {
+  record_id                       String   @id @db.VarChar(255)
+  name                            String   @db.VarChar(255)
+  venue                           String?  @db.VarChar(255)
+  description                     String?  @db.Text
+  materials                       String?  @db.VarChar(255)
+  products                        String?  @db.VarChar(510) // link to Venue_Products
+  number_of_products_delivered    Int?
+  number_of_products_used         Int?
+  number_of_products_collected    Int?
+  weight_delivered                Decimal? @db.Decimal(16, 4)
+  weight_used                     Decimal? @db.Decimal(16, 4)
+  weight_captured_on_site         Decimal? @db.Decimal(16, 4)
+  weight_collected                Decimal? @db.Decimal(16, 4)
+  weight_sorted                   Decimal? @db.Decimal(16, 4)
+  best_capture_rate               Decimal? @db.Decimal(16, 4)
+  on_site_capture_rate            Decimal? @db.Decimal(16, 4)
+  collection_capture_rate         Decimal? @db.Decimal(16, 4)
+  sorting_capture_rate            Decimal? @db.Decimal(16, 4)
+  capture_rate_in_use             String?  @default("No Data") @db.VarChar(255)
+  contamination                   Int?
+  number_of_waste_collections     Int?
+  number_of_sorting_runs          Int?
+  venue_latitude_longitude        String?  @db.VarChar(255) // probably will only need to be in Venues
+  processing_location_assumption  String?  @db.VarChar(255)
+  manufacture_location_assumption String?  @db.VarChar(255)
+  image                           String?  @db.VarChar(255)
+  stream_terminated               String?  @db.VarChar(255)
+}
+
+model Venues {
+  record_id                    Int       @id @default(autoincrement())
+  name                         String?   @db.VarChar(255)
+  address                      String?   @db.Text
+  message                      String?   @db.LongText
+  organiser_name               String?   @db.VarChar(255)
+  start_date                   DateTime? @db.Date
+  end_date                     DateTime? @db.Date
+  number_of_streams            Int?
+  number_of_products           Int?
+  number_of_product_types      Int?
+  number_of_deliveries         Int?
+  number_of_collections        Int?
+  number_of_restocks           Int?
+  weight_delivered             Int?
+  weight_used                  Int?
+  weight_collected             Int?
+  weight_sorted                Int?
+  weight_processed             Int?
+  weight_manufactured          Int?
+  number_of_products_delivered Int?
+  number_of_products_used      Int?
+  number_of_products_captured  Int? // number of products from best source
+  capture_rate                 Decimal?  @db.Decimal(16, 2)
+  contamination_rate           Decimal?  @db.Decimal(16, 2)
+  embodied_carbon              Int?
+  tokens_earned                Int?
+
+  totalreusablescollected     Int?
+  averagereusablecarbonperuse Decimal? @db.Decimal(16, 2)
+  totalreusableproductsinuse  Int?
+  averagereusablelossrate     Decimal? @db.Decimal(16, 2)
+  totalreusablesdelivered     Int?
+  totalreusablestock          Int?
+  averagemaxcupsuses          Decimal? @db.Decimal(16, 2)
+}
+
+model Deliveries {
+  record_id                    String   @id @db.VarChar(255)
+  delivery_id                  String   @db.VarChar(255)
+  venue                        String?  @db.VarChar(255) // link to Venues
+  date                         String?  @db.VarChar(255) //input
+  product_delivered            String?  @db.VarChar(255) //input // link to Venue_Products
+  number_of_products_delivered Int? //input
+  weight_delivered             Decimal? @db.Decimal(16, 4)
+  stream                       String?  @db.VarChar(255) // link to Venue_Streams
+  embodied_carbon              Int?
+  transport_carbon_emissions   Decimal? @db.Decimal(16, 4)
+  distance                     Int?
+  distributor                  String?  @db.VarChar(255) //input // link to Distributors
+  manufacture_site             String?  @db.VarChar(255) // might not need
+  to_address                   String?  @db.Text // might not need
+  coordinates_to               String?  @db.VarChar(255) // might not need
+  from_address                 String?  @db.Text // might not need
+  coordinates_from             String?  @db.VarChar(255) // might not need
+}
+
+model Waste_Collection {
+  record_id                  String    @id @db.VarChar(255)
+  venue                      String?   @db.VarChar(255) // link to venue
+  date                       DateTime? @db.Date
+  stream                     String?   @db.VarChar(255) // link to streams
+  weight_collected           Decimal?  @db.Decimal(16, 4)
+  waste_collector            String?   @db.VarChar(255) // link to waste collector
+  sorted                     Boolean?
+  transport_carbon_emissions Decimal?  @db.Decimal(16, 4)
+  from_address               String?   @db.Text
+  to_address                 String?   @db.Text
+  coordinates_to             String?   @db.VarChar(255)
+  coordinates_from           String?   @db.VarChar(255)
+  distance                   Int?
+  capture_id                 String    @db.VarChar(255) // link to on site capture
+  sorting_id                 String    @db.VarChar(255) // link to sorting
+}
+
+model Waste_Sorting {
+  record_id                  String    @id @db.VarChar(255)
+  date                       DateTime? @db.Date
+  stream                     String?   @db.VarChar(255) // link to streams  // also consider sorting for multiple streams of different venues
+  venue                      String?   @db.VarChar(255) // link to venues
+  weight_sorted              Decimal?  @db.Decimal(16, 4)
+  manufacturing_makeup       Decimal?  @db.Decimal(16, 4)
+  collection_id              String?   @db.VarChar(255) // link to collections
+  original_weight            Decimal?  @db.Decimal(16, 4)
+  sorting_id                 String    @db.VarChar(255)
+  waste_sorter               String?   @db.VarChar(255) // link to waste managers
+  products_seperated         String?   @db.VarChar(255) // sorting individual products within a single stream
+  tokens_awarded             Int?
+  material                   String?   @db.VarChar(255)
+  contamination_rate         Decimal?  @db.Decimal(16, 4)
+  processed                  Boolean?
+  transport_carbon_emissions Decimal?  @db.Decimal(16, 4)
+  quantity_processed         Decimal?  @db.Decimal(16, 4)
+  quantity_manufactured      Decimal?  @db.Decimal(16, 4)
+  fromaddress                String?   @db.Text
+  toaddress                  String?   @db.Text
+  coordinatesfrom            String?   @db.VarChar(255)
+  coordinatesto              String?   @db.VarChar(255)
+  distance                   Int?
+}
+
+model Members {
+  recordid        String  @id @db.VarChar(255)
+  wordpressid     Int?
+  username        String? @db.VarChar(255)
+  fullname        String? @db.VarChar(255)
+  venueaccesslist String? @db.LongText
+  membershiplevel String? @db.VarChar(255)
+  companyid       String? @db.VarChar(255)
+  organiservenues String? @db.VarChar(255)
+  contactemail    String? @db.VarChar(2000)
+  contactnumber   String? @db.VarChar(255)
+  jobrole         String? @db.VarChar(255)
+}

@@ -22,8 +22,8 @@ export default function CircularAnimation() {
     }, [lottieRef]);
 
     return (
-        <div className="relative pointer-events-none py-0">
-            <div className='absolute px-32 top-12 flex justify-between w-full'>
+        <div className="relative flex flex-col justify-between pointer-events-none py-0">
+            <div className='px-32 -mb-36 2xl:px-40 2xl:-mb-40 flex justify-between w-full'>
                 <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
 
                     <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
@@ -83,7 +83,7 @@ export default function CircularAnimation() {
                 </Player>
                 {/* <Lottie ref={lottieRef} options={defaultOptions} /> */}
             </div>
-            <div className='absolute px-[104px] top-[160px] flex justify-around w-full'>
+            <div className='px-32 -mt-36 2xl:px-40 2xl:-mt-40 flex justify-between w-full'>
                 <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
 
                     <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
@@ -98,6 +98,7 @@ export default function CircularAnimation() {
                         </div>
                     </div>
                 </div>
+
                 <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
 
                     <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
@@ -112,6 +113,7 @@ export default function CircularAnimation() {
                         </div>
                     </div>
                 </div>
+
                 <div className='relative flex items-center p-6 bg-white z-10 rounded-xl'>
 
                     <img className="h-[45px] z-20 pr-4" src='/Delivery_B_SQ.png' c />
@@ -126,6 +128,7 @@ export default function CircularAnimation() {
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     )
