@@ -441,31 +441,31 @@ const Home: NextPage = (props) => {
     )
 }
 
-// export const getServerSideProps = async () => {
-//     const data = await prisma?.venue_Streams.findMany({
-//         select: {
-//             record_id: true,
-//             name: true
-//         },
-//     });
-//     const streamsData = JSON.stringify(data);
-//     console.log(streamsData);
+export const getServerSideProps = async () => {
+    const data = await prisma?.venue_Streams.findMany({
+        select: {
+            record_id: true,
+            name: true
+        },
+    });
+    const streamsData = JSON.stringify(data);
+    console.log(streamsData);
 
-//     const data2 = await prisma?.facility.findMany({
-//         where: {
-//             type: 'Waste Collector',
-//         },
-//         select: {
-//             record_id: true,
-//             name: true,
-//             company: true
-//         },
-//     });
-//     const facilitiesData = JSON.stringify(data2);
-//     console.log(facilitiesData);
-//     return {
-//         props: { streamsData, facilitiesData },
-//     };
-// };
+    const data2 = await prisma?.facility.findMany({
+        where: {
+            type: 'Waste Collector',
+        },
+        select: {
+            record_id: true,
+            name: true,
+            company: true
+        },
+    });
+    const facilitiesData = JSON.stringify(data2);
+    console.log(facilitiesData);
+    return {
+        props: { streamsData, facilitiesData },
+    };
+};
 
 export default Home

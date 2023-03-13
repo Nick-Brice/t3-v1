@@ -80,35 +80,35 @@ async function uploadToS3(e: ChangeEvent<HTMLFormElement>) {
     return key;
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-    const users = await prisma?.user.findMany({
-        select: {
-            email: true,
-            name: true,
-        }
-    });
+// export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+//     const users = await prisma?.user.findMany({
+//         select: {
+//             email: true,
+//             name: true,
+//         }
+//     });
 
-    const imageArray = await fetch('http://localhost:3000/api/getImages', {
-        method: 'GET'
-    }).then((response) => response.json()).then((response) => {
-        console.log(response["uploadUrlArray"]);
-        return response["uploadUrlArray"];
-    }) as any;
+//     const imageArray = await fetch('http://localhost:3000/api/getImages', {
+//         method: 'GET'
+//     }).then((response) => response.json()).then((response) => {
+//         console.log(response["uploadUrlArray"]);
+//         return response["uploadUrlArray"];
+//     }) as any;
 
-    // const imageArray = await fetch('http://localhost:3000/api/getImages', {
-    //     method: 'GET'
-    // }) as any;
+//     // const imageArray = await fetch('http://localhost:3000/api/getImages', {
+//     //     method: 'GET'
+//     // }) as any;
 
-    // console.log(imageArray)
+//     // console.log(imageArray)
 
-    // const jsonImageArray = imageArray.uploadUrlArray;
+//     // const jsonImageArray = imageArray.uploadUrlArray;
 
-    // console.log(jsonImageArray);
-    // console.log(users);
-    return {
-        props: { users, imageArray },
-    };
-};
+//     // console.log(jsonImageArray);
+//     // console.log(users);
+//     return {
+//         props: { users, imageArray },
+//     };
+// };
 
 function DummyInput(props: any) {
     return (
@@ -540,7 +540,7 @@ function Home(props: any) {
         console.log(props.imageArray)
     }
 
-    const arrayDataItems = props.imageArray.map((imageUrl: string) => <img src={imageUrl} />);
+    // const arrayDataItems = props.imageArray.map((imageUrl: string) => <img src={imageUrl} />);
 
     return (
         <>
@@ -601,7 +601,7 @@ function Home(props: any) {
                             <img src={imageUrl} />
                         })
                     } */}
-                    {arrayDataItems}
+                    {/* {arrayDataItems} */}
                     {/* <img src={props.imageArray[0]} /> */}
                     {openCSV && CSVSteps == 1 && (
                         <div className='absolute modal left-0 top-0 z-50'>
