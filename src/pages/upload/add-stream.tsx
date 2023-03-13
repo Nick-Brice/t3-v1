@@ -241,6 +241,7 @@ const Home: NextPage = (props) => {
         const products = event.target['Linked Products'].value;
         // const productWeight = productsData[`${name}`].weight;
         // const productWeight = JSON.parse(props.productsData).find(item => item.name == products)?.weight;
+        // @ts-expect-error
         const record_id = JSON.parse(props.productsData).find(item => item.name == products)?.record_id;
         const venue = session.venue;
 
@@ -377,7 +378,8 @@ const Home: NextPage = (props) => {
                                     <DropdownInput label='Materials' options={['PET', 'rPET', 'Aluminium', 'PVC']} />
                                 </FormContainer>
                                 <FormContainer optional={true} className='bg-[#f6f6f640]'>
-                                    <SearchInput label='Linked Products' options={JSON.parse(props.productsData)} />
+                                    <SearchInput label='Linked Products' options={// @ts-expect-error
+                                        JSON.parse(props.productsData)} />
                                     <DropdownInput label='Waste Collector' options={['Waste Collector 1', 'Waste Collector 2']} />
                                 </FormContainer>
                                 <FormContainer className='pb-8'>

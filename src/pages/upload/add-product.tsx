@@ -230,6 +230,7 @@ const Home: NextPage = (props) => {
 
         const name = event.target['Product Name'].value;
         // const productWeight = productsData[`${name}`].weight;
+        // @ts-expect-error
         const productWeight = parseInt(JSON.parse(props.productsData).find(item => item.name == name)?.weight);
         const venue = session.venue;
 
@@ -365,18 +366,21 @@ const Home: NextPage = (props) => {
 
                             {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}
                         </div>
-                        {props.productsData != null && (
-                            <div className="bg-red text-black">
-                                {JSON.parse(props.productsData)[0].name}
-                            </div>
-                        )}
+                        {// @ts-expect-error
+                            props.productsData != null && (
+                                <div className="bg-red text-black">
+                                    {// @ts-expect-error
+                                        JSON.parse(props.productsData)[0].name}
+                                </div>
+                            )}
 
                         <div className="">
                             <form className="bg-gradient-to-b relative from-primary to-tertiary text-white rounded-lg" onSubmit={handleSubmit}>
                                 <div className="text-xs absolute right-16 p-4">*Required</div>
                                 <FormContainer className='pt-8'>
                                     <DropdownInput label='Product Type' options={[{ value: 'Plastic Cup' }, { value: 'Paper Cup' }]} />
-                                    <SearchInput label='Product Name' options={JSON.parse(props.productsData)} />
+                                    <SearchInput label='Product Name' options={// @ts-expect-error
+                                        JSON.parse(props.productsData)} />
                                 </FormContainer>
                                 <FormContainer optional={true} className='bg-[#f6f6f640]'>
                                     <DropdownInput label='Distributor' options={[{ value: 'Distributor 1' }, { value: 'Distributor 2' }]} />

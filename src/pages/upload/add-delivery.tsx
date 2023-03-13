@@ -241,7 +241,9 @@ const Home: NextPage = (props) => {
         const quantityDelivered = parseInt(event.target['Quantity Delivered'].value);
         const date = event.target['Date'].value;
         // const productWeight = productsData[`${name}`].weight;
+        // @ts-expect-error
         const productWeight = parseInt(JSON.parse(props.productsData).find(item => item.name == product)?.product_weight);
+        // @ts-expect-error
         const stream = JSON.parse(props.productsData).find(item => item.name == product)?.stream;
         const venue = session.venue;
         // const record_id = JSON.parse(props.productsData).find(item => item.name == product)?.stream_id;
@@ -378,6 +380,7 @@ const Home: NextPage = (props) => {
                             <form className="bg-gradient-to-b relative from-primary to-tertiary text-white rounded-lg" onSubmit={handleSubmit}>
                                 <div className="text-xs absolute right-16 p-4">*Required</div>
                                 <FormContainer className='pt-8'>
+                                    {/* @ts-expect-error */}
                                     <SearchInput label='Product' options={JSON.parse(props.productsData)} />
                                     <TextInput label='Quantity Delivered' />
                                     <TextInput label='Date' />
