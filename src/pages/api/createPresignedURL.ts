@@ -24,6 +24,7 @@ const test = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const userId = 'abc123';
     const image = await prisma.image.create({
+        // @ts-expect-error
         data: {
             user_id: userId
         }
