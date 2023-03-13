@@ -145,30 +145,30 @@ const Home: NextPage = (props) => {
     const [facilitiesArray, setFacilitiesArray] = React.useState<any>(null);
     const [companiesArray, setCompaniesArray] = React.useState<any>(null);
 
-    React.useEffect(() => {
-        if (facilitiesArray == null || companiesArray == null) {
-            // @ts-expect-error
-            setFacilitiesArray(JSON.parse(props.facilitiesData));
-            // @ts-expect-error
-            JSON.parse(props.facilitiesData).forEach((facility) => {
-                let set = new Set();
-                set.add(facility.company);
-                const newArray = Array.from(set);
-                setCompaniesArray(newArray);
-            })
-        } else {
-            // @ts-expect-error
-            let newArray = [];
-            // @ts-expect-error
-            JSON.parse(props.facilitiesData).forEach((facility: any) => {
-                if (facility.company == company) {
-                    newArray.push(facility)
-                }
-            })
-            // @ts-expect-error
-            setFacilitiesArray(newArray);
-        }
-    }, [company])
+    // React.useEffect(() => {
+    //     if (facilitiesArray == null || companiesArray == null) {
+    //         // @ts-expect-error
+    //         setFacilitiesArray(JSON.parse(props.facilitiesData));
+    //         // @ts-expect-error
+    //         JSON.parse(props.facilitiesData).forEach((facility) => {
+    //             let set = new Set();
+    //             set.add(facility.company);
+    //             const newArray = Array.from(set);
+    //             setCompaniesArray(newArray);
+    //         })
+    //     } else {
+    //         // @ts-expect-error
+    //         let newArray = [];
+    //         // @ts-expect-error
+    //         JSON.parse(props.facilitiesData).forEach((facility: any) => {
+    //             if (facility.company == company) {
+    //                 newArray.push(facility)
+    //             }
+    //         })
+    //         // @ts-expect-error
+    //         setFacilitiesArray(newArray);
+    //     }
+    // }, [company])
 
     // React.useEffect(() => {
     //     console.log(company);
