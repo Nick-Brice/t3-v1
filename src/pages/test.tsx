@@ -49,6 +49,36 @@ import FormSubmit from '../components/formSubmit';
 import FormContainer from '../components/formContainer';
 import DownloadCSV from '../components/downloadCSV2';
 import UploadCSV from '../components/uploadCSV';
+import PdfViewer from '../components/pdfViewer';
+import { useSession, signIn, signOut } from "next-auth/react";
+
+// const PDFViewer = dynamic(import('../../components/PDFViewer'), { ssr: false });
+// import { Document, Page } from 'react-pdf';
+// import S3 from 'aws-sdk/clients/s3';
+
+import axios from "axios";
+import { ChangeEvent } from "react";
+
+async function uploadToS3(e: ChangeEvent<HTMLFormElement>) {
+    const formData = new FormData(e.target);
+
+    const file = formData.get("file");
+
+    if (!file) {
+        return null;
+    }
+
+    // @ts-ignore
+    const fileType = encodeURIComponent(file.type);
+
+    const { data } = await axios.get(`/api/createPresignedURL2?fileType=${fileType}`);
+
+    const { uploadUrl, key } = data;
+
+    await axios.put(uploadUrl, file);
+
+    return key;
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const users = await prisma?.user.findMany({
@@ -57,9 +87,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
             name: true,
         }
     });
+
+    const imageArray = await fetch('http://localhost:3000/api/getImages', {
+        method: 'GET'
+    }).then((response) => response.json()).then((response) => {
+        console.log(response["uploadUrlArray"]);
+        return response["uploadUrlArray"];
+    }) as any;
+
+    // const imageArray = await fetch('http://localhost:3000/api/getImages', {
+    //     method: 'GET'
+    // }) as any;
+
+    // console.log(imageArray)
+
+    // const jsonImageArray = imageArray.uploadUrlArray;
+
+    // console.log(jsonImageArray);
     // console.log(users);
     return {
-        props: { users },
+        props: { users, imageArray },
     };
 };
 
@@ -81,6 +128,15 @@ function Home(props: any) {
     const [fileName, setFileName] = useState<any>(null);
     const router = useRouter();
     const urlPath = router.pathname;
+
+    const { data: session } = useSession();
+
+    // const [numPages, setNumPages] = useState(null);
+    // const [pageNumber, setPageNumber] = useState(1);
+
+    // function onDocumentLoadSuccess({ numPages }) {
+    //     setNumPages(numPages);
+    // }
 
     const dataArray: any = [
         {
@@ -431,6 +487,61 @@ function Home(props: any) {
         },
     ]
 
+    const [file, setFile] = React.useState<any>(null);
+
+    const onFileChange = (e: React.FormEvent<HTMLInputElement>) => {
+        setFile(e.currentTarget.files?.[0])
+        console.log(file);
+    }
+
+    const uploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const { url, fields } = await fetch('/api/createPresignedURL2', {
+            method: 'GET'
+        }) as any;
+        const data = {
+            ...fields,
+            'Content-Type': file.type,
+            file
+        };
+        console.log(data);
+        const formData = new FormData();
+        for (const name in data) {
+            formData.append(name, data[name]);
+        }
+        console.log(formData);
+        await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+
+    }
+
+    async function handleSubmit2(e: ChangeEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const key = await uploadToS3(e);
+    }
+
+    console.log(props.jsonImageArray);
+
+    async function dummyFetch() {
+        const imageArray = await fetch('http://localhost:3000/api/getImages', {
+            method: 'GET'
+        })
+            .then((response) => response.json()).then((response) => {
+                console.log(response["uploadUrlArray"]);
+                return response["uploadUrlArray"];
+            }) as any;
+
+        // const parsedArray = JSON.parse(imageArray);
+
+        // console.log(parsedArray)
+        console.log(props.imageArray)
+    }
+
+    const arrayDataItems = props.imageArray.map((imageUrl: string) => <img src={imageUrl} />);
+
     return (
         <>
             <Head>
@@ -447,11 +558,37 @@ function Home(props: any) {
                         <BreadCrumbs title={'Test Title'} urlPath={urlPath} />
                         <TabMenu data={dataArray} urlPath={urlPath} />
                     </header>
+                    {session && (
+                        <>
+                            Signed in as {// @ts-expect-error 
+                                session.user.company} <br />
+                            <button onClick={() => signOut()}>Sign out</button>
+                        </>
+                    )}
+                    {!session && (
+                        <>
+                            Not signed in <br />
+                            <button onClick={() => signIn()}>Sign in</button>
+                        </>
+                    )}
+                    <button type="button" onClick={() => router.push('/')}>
+                        Send me Home
+                    </button>
                     <button onClick={handlePostClick} className="p-2 bg-black text-white rounded-full">Add User</button>
                     <button onClick={handleDeleteClick} className="p-2 bg-black text-white rounded-full">Delete All Users</button>
                     <button onClick={handlePutClick} className="p-2 bg-black text-white rounded-full">Update User</button>
                     <button onClick={handleGetClick} className="p-2 bg-black text-white rounded-full">Get All Users</button>
                     <button onClick={() => { setOpenCSV(true); setCSVSteps(1); }} className="p-2 bg-black text-white rounded-full">Upload via CSV</button>
+                    {/* <form onSubmit={handleSubmit}>
+
+                        <input onChange={onFileChange} type='file'></input>
+                        <button type='submit'>Upload</button>
+                    </form> */}
+                    <form onSubmit={handleSubmit2}>
+                        <input type="file" accept="image/jpeg image/png" name="file" />
+                        <button type="submit">Upload</button>
+                    </form>
+
                     {CSVData != undefined && (
                         <ul>
                             {CSVData.map((row: any, index: any) => (
@@ -459,6 +596,13 @@ function Home(props: any) {
                             ))}
                         </ul>
                     )}
+                    {/* {
+                        props.imageArray != undefined && props.imageArray.map((imageUrl: string) => {
+                            <img src={imageUrl} />
+                        })
+                    } */}
+                    {arrayDataItems}
+                    {/* <img src={props.imageArray[0]} /> */}
                     {openCSV && CSVSteps == 1 && (
                         <div className='absolute modal left-0 top-0 z-50'>
                             <div className=' fixed grid place-content-center inset-0 z-50'>
@@ -636,6 +780,22 @@ function Home(props: any) {
                         //     }
                         // ]
                     } />
+                    <div>
+                        <button onClick={dummyFetch}>Fetch Images</button>
+                    </div>
+                    {/* <div>
+                        <Document file="/dummypdf.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+                            <Page pageNumber={pageNumber} />
+                        </Document>
+                        <p>
+                            Page {pageNumber} of {numPages}
+                        </p>
+                    </div> */}
+                    {/* <PdfViewer /> */}
+                    <iframe src='/dummypdf.pdf' />
+                    <div className="w-full h-[1651px]">
+                        <embed className="pr-4" src="/dummypdf.pdf#view=fitH,top&scrollbar=0&toolbar=0&statusbar=0&navpanes=0" width='100%' height='100%' />
+                    </div>
                     <div className="w-[60%]">
                         <FormWrapper OnSubmit={handleSubmit}>
                             <FormContainer className='pt-8'>

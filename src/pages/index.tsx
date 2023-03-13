@@ -4,7 +4,7 @@ import Link from "next/link";
 import Sidebar from "../components/sidebar";
 import SortableTable from "../components/sortableTable";
 import HeaderButton from "../components/headerButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DraggableTable from "../components/draggableTable2";
 import DonutProgress from "../components/donutProgress2";
 import Counter from "../components/counter";
@@ -30,6 +30,7 @@ import TabMenu from "../components/tabMenu";
 import { VenueProductsTabMenuArray } from '../components/venueProductsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../components/breadcrumbs";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 function Home(props: any) {
     const router = useRouter();
@@ -246,6 +247,35 @@ function Home(props: any) {
 
     //     isClickToPauseDisabled: true,
     // };
+
+    const { data: session } = useSession();
+
+    React.useEffect(() => {
+        if (session) {
+            // @ts-expect-error
+            if (session.user.service_provider) {
+                // @ts-expect-error
+                if (session.user.company_type == 'organiser') {
+                    // @ts-expect-error
+                    router.push(`/${session.user.service_provider}/home`)
+                    // @ts-expect-error
+                } else if (session.user.company_type == 'venue') {
+                    // @ts-expect-error
+                    router.push(`/${session.user.service_provider}/${session.user.company}/home`)
+                }
+            }
+            // @ts-expect-error
+            else if (!session.user.service_provider) {
+                // @ts-expect-error
+                if (session.user.company_type == 'organiser') {
+                    router.push('/home')
+                    // @ts-expect-error
+                } else if (session.user.company_type == 'venue') {
+                    router.push('/The-Rubbish-Project/Grist')
+                }
+            }
+        }
+    })
 
     return (
         <>

@@ -26,6 +26,7 @@ import TabMenu from "../../../../components/tabMenu";
 import { VenueProductsTabMenuArray } from '../../../../components/venueProductsTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../../../components/breadcrumbs";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Overview: NextPage = () => {
     const router = useRouter();
@@ -194,6 +195,19 @@ const Overview: NextPage = () => {
             setLayout('table');
         }
     };
+
+    const { data: session } = useSession();
+
+    React.useEffect(() => {
+        if (session) {
+            // @ts-expect-error
+            if (router.query.CompanyID != session?.user.company) {
+                router.push('/')
+            }
+        }
+        // @ts-expect-error
+        console.log(session?.user.company);
+    }, [session])
 
     return (
         <>

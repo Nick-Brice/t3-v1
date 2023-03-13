@@ -31,8 +31,9 @@ import FormContainer from "../../components/formContainer";
 import TextInput from "../../components/textInput";
 import DropdownInput from "../../components/dropdownInput";
 import FormSubmit from "../../components/formSubmit";
+import SearchInput from "../../components/searchInput";
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
     const router = useRouter();
     const urlPath = router.pathname;
 
@@ -205,6 +206,81 @@ const Home: NextPage = () => {
     //     isClickToPauseDisabled: true
     // };
 
+    const productsData = [
+        {
+            record_id: '1',
+            name: 'rPET Cup 200ml',
+            weight: '15'
+        },
+        {
+            record_id: '2',
+            name: 'rPET Cup 300ml',
+            weight: '18'
+        },
+        {
+            record_id: '3',
+            name: 'A1234 rPET Cup',
+            weight: '10'
+        },
+        {
+            record_id: '4',
+            name: 'b333 PET Cup',
+            weight: '12'
+        }
+    ]
+
+    const session = {
+        venue: 'Example Venue'
+    }
+
+    const handleSubmit = async (event: any) => {
+        // Stop the form from submitting and refreshing the page.
+        event.preventDefault()
+
+        const name = event.target['Stream Name'].value;
+        const products = event.target['Linked Products'].value;
+        // const productWeight = productsData[`${name}`].weight;
+        // const productWeight = JSON.parse(props.productsData).find(item => item.name == products)?.weight;
+        const record_id = JSON.parse(props.productsData).find(item => item.name == products)?.record_id;
+        const venue = session.venue;
+
+        // Get data from the form.
+        const data = {
+            name: name,
+            venue: venue,
+            products: products,
+            record_id: record_id
+        }
+
+        console.log(data);
+
+        // Send the data to the server in JSON format.
+        const JSONdata = JSON.stringify(data)
+
+        // API endpoint where we send form data.
+        const endpoint = '/api/add-stream'
+
+        // Form the request for sending data to the server.
+        const options = {
+            // The method is POST because we are sending data.
+            method: 'POST',
+            // Tell the server we're sending JSON.
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // Body of the request is the JSON data we created above.
+            body: JSONdata,
+        }
+
+        // Send the form data to our forms API on Vercel and get a response.
+        const response = await fetch(endpoint, options)
+
+        // Get the response data from server as JSON.
+        // If server returns the name submitted, that means the form works.
+        const result = await response.json()
+        alert(`Is this your name: ${result[0].name}`)
+    }
+
     return (
         <>
             <Head>
@@ -294,20 +370,20 @@ const Home: NextPage = () => {
                         </div>
 
                         <div className="relative">
-                            <FormWrapper>
+                            <form className="bg-gradient-to-b relative from-primary to-tertiary text-white rounded-lg" onSubmit={handleSubmit}>
                                 <div className="text-xs absolute right-16 p-4">*Required</div>
                                 <FormContainer className='pt-8'>
                                     <TextInput label='Stream Name' />
                                     <DropdownInput label='Materials' options={['PET', 'rPET', 'Aluminium', 'PVC']} />
                                 </FormContainer>
                                 <FormContainer optional={true} className='bg-[#f6f6f640]'>
-                                    <DropdownInput label='Linked Products' options={['Product 1', 'Product 2']} />
+                                    <SearchInput label='Linked Products' options={JSON.parse(props.productsData)} />
                                     <DropdownInput label='Waste Collector' options={['Waste Collector 1', 'Waste Collector 2']} />
                                 </FormContainer>
                                 <FormContainer className='pb-8'>
                                     <FormSubmit />
                                 </FormContainer>
-                            </FormWrapper>
+                            </form>
                         </div>
                     </div>
 
@@ -316,5 +392,23 @@ const Home: NextPage = () => {
         </>
     )
 }
+
+export const getServerSideProps = async () => {
+    const data = await prisma?.venue_Products.findMany({
+        where: {
+            venue: 'Example Venue',
+        },
+        select: {
+            record_id: true,
+            name: true,
+            product_weight: true
+        },
+    });
+    const productsData = JSON.stringify(data);
+    console.log(productsData);
+    return {
+        props: { productsData },
+    };
+};
 
 export default Home
