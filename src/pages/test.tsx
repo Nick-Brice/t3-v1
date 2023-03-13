@@ -107,7 +107,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     // console.log(users);
     return {
         props: {
-            // users,
+            users,
             imageArray
         },
     };
