@@ -26,6 +26,7 @@ import TabMenu from "../../components/tabMenu";
 import { VenueUploadTabMenuArray } from '../../components/venueUploadTabMenuArray';
 import { useRouter } from "next/router";
 import Breadcrumbs from "../../components/breadcrumbs";
+import { prisma } from '../../server/db/client';
 
 const Home: NextPage = () => {
     const router = useRouter();

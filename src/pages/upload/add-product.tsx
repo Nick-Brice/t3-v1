@@ -32,6 +32,7 @@ import TextInput from "../../components/textInput";
 import DropdownInput from "../../components/dropdownInput";
 import FormSubmit from "../../components/formSubmit";
 import SearchInput from "../../components/searchInput";
+import { prisma } from '../../server/db/client';
 
 const Home: NextPage = (props) => {
     const router = useRouter();
