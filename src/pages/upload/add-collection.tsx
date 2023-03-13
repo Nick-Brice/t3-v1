@@ -413,8 +413,8 @@ const Home: NextPage = (props) => {
                                 <div className="text-xs absolute right-16 p-4">*Required</div>
                                 <FormContainer className='pt-8'>
                                     <DropdownInput label='Collection Type' options={[{ value: 'On-site Capture' }, { value: 'Waste Manager Pickup' }, { value: 'Deposit Figures' }]} />
-                                    {/* @ts-expect-error */}
-                                    <SearchInput label='Stream' variable="name" options={JSON.parse(props.streamsData)} />
+                                    {/* ts-expect-error */}
+                                    {/* <SearchInput label='Stream' variable="name" options={JSON.parse(props.streamsData)} /> */}
                                     <TextInput label='Date' />
                                     <TextInput label='Weight Collected' />
                                     <SearchInput label='Collector' variable="company" options={companiesArray} setSelection={setCompany} />
