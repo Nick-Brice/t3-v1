@@ -81,12 +81,12 @@ async function uploadToS3(e: ChangeEvent<HTMLFormElement>) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-    // const users = await prisma?.user.findMany({
-    //     select: {
-    //         email: true,
-    //         name: true,
-    //     }
-    // });
+    const users = await prisma?.user.findMany({
+        select: {
+            email: true,
+            name: true,
+        }
+    });
 
     const imageArray = await fetch('https://t3-v1.vercel.app/api/getImages', {
         method: 'GET'
