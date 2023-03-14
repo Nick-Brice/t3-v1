@@ -201,7 +201,7 @@ export default function AddNewInput(props) {
 
     return (
         <div className='flex justify-between my-3'>
-            <button onClick={() => props.router.push(props.urlPath)} className=" bg-white px-4 py-2 text-black rounded-xl text-xs mr-4">Add New {props.label}</button>
+            <button type='button' onClick={() => props.router.push(props.urlPath)} className=" bg-white px-4 py-2 text-black rounded-xl text-xs mr-4">Add New {props.label}</button>
             <div className='flex justify-between rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
                 <div className='px-8 py-2  text-right'>
                     <label htmlFor={props.label}>{props.label}</label>

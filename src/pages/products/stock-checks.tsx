@@ -225,7 +225,7 @@ const Overview: NextPage = () => {
                         <HeaderButton>
                             <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => setOpenForm(!openForm)}>
                                 <p className="pr-4">
-                                    Add Product
+                                    Add Stock Check
                                 </p>
                                 <img className="pl-1 scale-75" src="/add-three.svg" />
                             </div>

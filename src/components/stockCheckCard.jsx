@@ -3,13 +3,14 @@ import Button from './button';
 import classNames from 'classnames';
 import DonutProgress from './donutProgress2';
 import Counter from './counter';
-import ExpandedStockCheckCard from './expandedStockCheckCard';
+import BaseExpandedCard from './baseExpandedCard';
+import ModifyStockCheck from './modifyStockCheck';
 
-export default function StreamCard(props) {
+export default function DeliveryCard(props) {
 
-    const barRef = React.useRef();
 
     const [isOpen, setIsOpen] = React.useState(false);
+    const [isModify, setIsModify] = React.useState(false);
 
     let className = classNames(
         isOpen == false
@@ -22,25 +23,6 @@ export default function StreamCard(props) {
         setIsOpen(!isOpen);
     }
 
-
-    React.useEffect(() => {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const progressbar = entry.target.querySelector('.progressbar');
-                console.log('entry', entry)
-
-                if (entry.isIntersecting) {
-                    progressbar.classList.add('progressbar-animate');
-                    return; // if we added the class, exit the function
-                }
-
-                // We're not intersecting, so remove the class!
-                progressbar.classList.remove('progressbar-animate');
-            });
-        });
-        // observer.observe(document.querySelector('.progressbar-wrapper'));
-        observer.observe(barRef.current);
-    }, [])
 
 
     return (
@@ -62,9 +44,9 @@ export default function StreamCard(props) {
                 // </div>
                 <div className='bg-white rounded-2xl h-full w-full p-4 flex flex-col shadow-lg hover:scale-105 transition duration-200'>
                     <div className='text-center font-bold'>
-                        {props.title}
+                        stock check id
                     </div>
-                    <div className='flex  self-center my-4'>
+                    <div className='flex  self-center mt-4'>
                         <div className='basis-16'>
                             <img className='' height="100%" src={props.img}></img>
                         </div>
@@ -74,14 +56,14 @@ export default function StreamCard(props) {
                                 <img className='opacity-30' width="24" src={"/Delivery_B_SQ.png"}></img>
                                 <div className='ml-2'>
                                     <span className='f text-lg font-[450]'>
-                                        {props.delivered}
+                                        500ml rPET Cup
                                     </span>
-                                    <span className='f text-xs'>
-                                        &nbsp;Delivered
-                                    </span>
+
                                 </div>
 
                             </div>
+
+
                             <div className='flex h-[24px]'>
                                 <img className='opacity-30' width="24" src={"/Collection_B_SQ.png"}></img>
                                 <div className='ml-2'>
@@ -89,29 +71,28 @@ export default function StreamCard(props) {
                                         {props.collected}
                                     </span>
                                     <span className='f text-xs'>
-                                        &nbsp;Collected
+                                        &nbsp;Quantity
                                     </span>
                                 </div>
                             </div>
+
                             <div className='flex h-[24px]'>
-                                <img className='opacity-30' width="24" src={"/Streams_B_SQ.png"}></img>
+                                <img className='opacity-30' width="24" src={"/Event_B_SQ.png"}></img>
                                 <div className='ml-2'>
                                     <span className='f text-lg font-[450]'>
-                                        {props.stream}
+                                        20-01-23
                                     </span>
                                     <span className='f text-xs'>
-                                        &nbsp;Stream
+                                        &nbsp;
                                     </span>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    <div className='flex place-content-center relative'>
+                    {/* <div className='flex place-content-center relative'>
                         <div className='r rounded-lg border bg-grey-200 w-full'>
-                            <div ref={barRef} className='absolute progressbar-wrapper left-0 top-0 h-full bg-gradient-to-r rounded-lg ' style={{ 'width': props.rate + '%' }}>
-                                <div className='absolute progressbar left-0 top-0 h-full bg-gradient-to-r from-emerald to-secondary rounded-lg transition-[width] duration-[1.25s] w-0'></div>
-                            </div>
+                            <div className='absolute left-0 top-0 h-full w-[180px] bg-gradient-to-r from-emerald to-secondary rounded-lg'></div>
                             <div className='relative z-10 pl-2 text-white'>
                                 <span className='text-lg font-[450]'>
                                     {props.rate}%
@@ -121,25 +102,34 @@ export default function StreamCard(props) {
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='flex place-content-center mt-4'>
-                        <Button className="bg-white hover:bg-white-100 rounded-full py-1 drop-shadow px-4 text-sm" onClick={() => toggleIsOpen()} intent="secondary">
+                        <Button className="bg-white hover:bg-white-100 rounded-full py-1 drop-shadow px-4 text-sm" onClick={() => setIsModify(true)} intent="secondary">
                             <div className='flex place-content-center'>
                                 <div className='mr-2 self-center'>
-                                    More
+                                    Modify
                                 </div>
                                 <div className='self-center'>
-                                    <img className='opacity-60 w-[10px] h-[10px] self-center' width="15" height="15" src={"/Expand_B_SQ.png"}></img>
+                                    <img className='opacity-60 w-[10px] h-[10px] self-center' width="15" height="15" src={"/Edit_B_SQ.png"}></img>
                                 </div>
                             </div>
                         </Button>
                     </div>
                 </div>
 
-
+            )}
+            {isModify && (
+                <div className='absolute modal left-0 top-0 z-50'>
+                    <div className=' fixed grid place-content-center inset-0 z-50'>
+                        <div className=' inset-0 z-50 w-full h-full'>
+                            <ModifyStockCheck setOpenForm={setIsModify} {...props} />
+                        </div>
+                        <div onClick={() => setIsModify(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                    </div>
+                </div>
             )}
             {isOpen && (
-                <ExpandedStockCheckCard {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
+                <BaseExpandedCard {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
                 // <div className='bg-white rounded-2xl h-full w-full p-8 shadow-lg grid grid-cols-4 grid-rows-4 gap-2 '>
                 //     <div className='flex w-full h-full col-span-3'>
                 //         <div className='flex flex-col basis-1/4'>

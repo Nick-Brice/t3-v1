@@ -33,6 +33,7 @@ import DropdownInput from "../../components/dropdownInput";
 import FormSubmit from "../../components/formSubmit";
 import SearchInput from "../../components/searchInput";
 import { prisma } from '../../server/db/client';
+import AddNewInput from "../../components/addNewInput";
 
 const Home: NextPage = (props) => {
     const router = useRouter();
@@ -323,7 +324,7 @@ const Home: NextPage = (props) => {
                                         JSON.parse(props.productsData)} />
                                 </FormContainer>
                                 <FormContainer optional={true} className='bg-[#f6f6f640]'>
-                                    <DropdownInput label='Stream' options={[{ value: 'Stream 1' }, { value: 'Stream 2' }]} />
+                                    <AddNewInput label='Stream' options={[{ value: 'Stream 1' }, { value: 'Stream 2' }]} router={router} urlPath='/upload/add-stream' />
                                     <DropdownInput label='Distributor' options={[{ value: 'Distributor 1' }, { value: 'Distributor 2' }]} />
                                     <TextInput label='Custom Product Name' />
                                     <TextInput label='Custom Product Manufacturer' />

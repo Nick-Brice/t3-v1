@@ -4,11 +4,13 @@ import classNames from 'classnames';
 import DonutProgress from './donutProgress2';
 import Counter from './counter';
 import BaseExpandedCard from './baseExpandedCard';
+import ModifyDelivery from './modifyDelivery';
 
 export default function DeliveryCard(props) {
 
 
     const [isOpen, setIsOpen] = React.useState(false);
+    const [isModify, setIsModify] = React.useState(false);
 
     let className = classNames(
         isOpen == false
@@ -92,6 +94,17 @@ export default function DeliveryCard(props) {
                                     </span>
                                 </div>
                             </div>
+                            <div className='flex h-[24px]'>
+                                <img className='opacity-30' width="24" src={"/Event_B_SQ.png"}></img>
+                                <div className='ml-2'>
+                                    <span className='f text-lg font-[450]'>
+                                        20-01-23
+                                    </span>
+                                    <span className='f text-xs'>
+                                        &nbsp;
+                                    </span>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -109,10 +122,10 @@ export default function DeliveryCard(props) {
                         </div>
                     </div> */}
                     <div className='flex place-content-center mt-4'>
-                        <Button className="bg-white hover:bg-white-100 rounded-full py-1 drop-shadow px-4 text-sm" onClick={() => toggleIsOpen()} intent="secondary">
+                        <Button className="bg-white hover:bg-white-100 rounded-full py-1 drop-shadow px-4 text-sm" onClick={() => setIsModify(true)} intent="secondary">
                             <div className='flex place-content-center'>
                                 <div className='mr-2 self-center'>
-                                    Request Modification
+                                    Modify
                                 </div>
                                 <div className='self-center'>
                                     <img className='opacity-60 w-[10px] h-[10px] self-center' width="15" height="15" src={"/Edit_B_SQ.png"}></img>
@@ -122,7 +135,16 @@ export default function DeliveryCard(props) {
                     </div>
                 </div>
 
-
+            )}
+            {isModify && (
+                <div className='absolute modal left-0 top-0 z-50'>
+                    <div className=' fixed grid place-content-center inset-0 z-50'>
+                        <div className=' inset-0 z-50 w-full h-full'>
+                            <ModifyDelivery setOpenForm={setIsModify} {...props} />
+                        </div>
+                        <div onClick={() => setIsModify(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
+                    </div>
+                </div>
             )}
             {isOpen && (
                 <BaseExpandedCard {...props} isOpen={isOpen} setIsOpen={setIsOpen} />
