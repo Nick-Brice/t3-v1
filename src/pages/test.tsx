@@ -51,6 +51,7 @@ import DownloadCSV from '../components/downloadCSV2';
 import UploadCSV from '../components/uploadCSV';
 import PdfViewer from '../components/pdfViewer';
 import { useSession, signIn, signOut } from "next-auth/react";
+import FileInput from '../components/fileInput'
 
 // const PDFViewer = dynamic(import('../../components/PDFViewer'), { ssr: false });
 // import { Document, Page } from 'react-pdf';
@@ -496,29 +497,50 @@ function Home(props: any) {
         setFile(e.currentTarget.files?.[0])
         console.log(file);
     }
+    // @ts-expect-error
+    const handleFileChange = event => {
+        const file = event.target.files[0];
+        // const reader = new FileReader();
+        // reader.onload = event => {
+        //     const text = event.target.result;
+        //     const rows = text.split('\n');
+        //     const keys = rows[0].split(',');
+        //     const parsedData = rows.slice(1).map(row => {
+        //         const values = row.split(',');
+        //         return keys.reduce((obj, key, index) => ({ ...obj, [key]: values[index] }), {});
+        //     });
+        //     setCSVData(parsedData);
+        //     setColumnNames(keys);
+        //     // perform your logic on the data here
+        // };
+        // reader.readAsText(file);
 
-    const uploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const { url, fields } = await fetch('/api/createPresignedURL2', {
-            method: 'GET'
-        }) as any;
-        const data = {
-            ...fields,
-            'Content-Type': file.type,
-            file
-        };
-        console.log(data);
-        const formData = new FormData();
-        for (const name in data) {
-            formData.append(name, data[name]);
-        }
-        console.log(formData);
-        await fetch(url, {
-            method: 'POST',
-            body: formData
-        });
+        // Set the file name to state
+        setFileName(file.name);
+    };
 
-    }
+    // const uploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     const { url, fields } = await fetch('/api/createPresignedURL2', {
+    //         method: 'GET'
+    //     }) as any;
+    //     const data = {
+    //         ...fields,
+    //         'Content-Type': file.type,
+    //         file
+    //     };
+    //     console.log(data);
+    //     const formData = new FormData();
+    //     for (const name in data) {
+    //         formData.append(name, data[name]);
+    //     }
+    //     console.log(formData);
+    //     await fetch(url, {
+    //         method: 'POST',
+    //         body: formData
+    //     });
+
+    // }
 
     async function handleSubmit2(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -589,22 +611,22 @@ function Home(props: any) {
                     </form> */}
                     <form onSubmit={handleSubmit2}>
                         <input type="file" accept="image/jpeg image/png" name="file" />
-                        <button type="submit">Upload</button>
+                        <button type="submit">Upload!</button>
                     </form>
 
-                    {CSVData != undefined && (
+                    {/* {CSVData != undefined && (
                         <ul>
                             {CSVData.map((row: any, index: any) => (
                                 <li key={index}>{JSON.stringify(row)}</li>
                             ))}
                         </ul>
-                    )}
+                    )} */}
                     {/* {
                         props.imageArray != undefined && props.imageArray.map((imageUrl: string) => {
                             <img src={imageUrl} />
                         })
                     } */}
-                    {arrayDataItems}
+                    {/* {arrayDataItems} */}
                     {/* <img src={props.imageArray[0]} /> */}
                     {openCSV && CSVSteps == 1 && (
                         <div className='absolute modal left-0 top-0 z-50'>
@@ -749,11 +771,11 @@ function Home(props: any) {
                         </div>
                     )}
                     {/* <DonutProgress data={70} duration={750} colour="#49cc73" backgroundColour="#ececec" size={80} /> */}
-                    {data != null && data.map((user: any) => (
+                    {/* {data != null && data.map((user: any) => (
                         <div>
                             {user.email}
                         </div>
-                    ))}
+                    ))} */}
                     {/* {props.users.map((user: any) => (
                         <div>
                             {user.email}
@@ -795,10 +817,10 @@ function Home(props: any) {
                         </p>
                     </div> */}
                     {/* <PdfViewer /> */}
-                    <iframe src='/dummypdf.pdf' />
+                    {/* <iframe src='/dummypdf.pdf' />
                     <div className="w-full h-[1651px]">
                         <embed className="pr-4" src="/dummypdf.pdf#view=fitH,top&scrollbar=0&toolbar=0&statusbar=0&navpanes=0" width='100%' height='100%' />
-                    </div>
+                    </div> */}
                     <div className="w-[60%]">
                         <FormWrapper OnSubmit={handleSubmit}>
                             <FormContainer className='pt-8'>
@@ -813,6 +835,31 @@ function Home(props: any) {
                             <FormContainer className=''>
                                 {/* <TextInput label='First Name' /> */}
                                 <TextInput label='Last Name' />
+                                <FileInput allowedTypes="image/jpeg image/png" label="document" />
+                                {/* <div className='flex relative my-3 h-[40px]'>
+                                    <div className='flex  justify-between rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                        <div className='px-8 py-2'>
+                                            Attach Document
+                                        </div>
+                                        <div className='min-w-[300px] relative rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                            <label htmlFor="file" className=" absolute grid place-content-center m-auto inset-0 w-full h-[40px] p-2  rounded-xl hover:text-red text-white">
+                                                {fileName == null && (
+                                                    <>
+                                                        Drop File Here
+                                                    </>
+                                                )}
+                                                {fileName != null && (
+                                                    <>
+                                                        {fileName}
+                                                    </>
+
+                                                )}
+                                            </label>
+                                            <input className='cursor-pointer absolute m-auto inset-0 w-full h-40 opacity-0' type="file" accept="image/jpeg image/png" onChange={handleFileChange} name="file" />
+                                            <input className='b bg-transparent w-full h-full p-2 text-center appearance-none' type="text" name={props.label} />
+                                        </div>
+                                    </div>
+                                </div> */}
                             </FormContainer>
                             <FormContainer className='pb-8'>
                                 <FormSubmit />

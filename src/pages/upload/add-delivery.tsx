@@ -308,69 +308,7 @@ const Home: NextPage = (props) => {
                         <Breadcrumbs title={'[Client Name] Products'} urlPath={urlPath} />
                         <TabMenu data={VenueUploadTabMenuArray} urlPath={urlPath} />
                     </header>
-                    <div className="absolute flex justify-between p-5 rounded-2xl bg-primary inset-x-8 z-50">
 
-                        <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => { handleLayoutChange() }}>
-                                <p className="pr-4">
-                                    Change View Style
-                                </p>
-                                <img className={(layout != "grid" ? "opacity-30 pl-5 scale-75" : "pl-5 scale-75")} src="/grid-four.svg" />
-                                <img className={(layout != "table" ? "opacity-30 scale-75" : "scale-75")} src="/list.svg" />
-                            </div>
-                        </HeaderButton>
-                        <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer" onClick={() => setOpenForm(!openForm)}>
-                                <p className="pr-4">
-                                    Add Product
-                                </p>
-                                <img className="pl-1 scale-75" src="/add-three.svg" />
-                            </div>
-                        </HeaderButton>
-                        {openForm && (
-                            <div className='absolute modal left-0 top-0 z-50'>
-                                <div className=' fixed grid place-content-center inset-0 z-50'>
-                                    <div className=' inset-0 z-50 w-full h-full'>
-                                        <FormLayout setOpenForm={setOpenForm} />
-                                    </div>
-                                    <div onClick={() => setOpenForm(false)} className='fixed inset-0 backdrop-blur-sm backdrop-brightness-75 z-10'></div>
-                                </div>
-                            </div>
-                        )}
-                        <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer h-[35px]" onClick={() => setOpenSortBy(!openSortBy)}>
-
-
-                                {/* <p className="pr-4">
-                                            Sort By: 
-                                        </p>
-                                        <img className="pl-1 scale-75" src="/sort-one.svg" /> */}
-
-
-
-                                <DropdownMenu name="field2" label="Field 2" sort={sort}>
-                                    {columnNames.map((col, index) => (
-                                        <option onClick={() => { toggleSort(col); handleSort(col, sort.order) }} value={col}>{col}</option>
-                                    ))}
-                                    {/* <option onClick={() => { toggleSort('used'); handleSort('used', sort.order) }} value="Option 1">Option 1</option>
-                                    <option value="Option 2">Option 2</option>
-                                    <option value="Option 3">Option 3</option>
-                                    <option value="Option 4">Option 4</option>
-                                    <option value="Option 5">Option 5</option>
-                                    <option value="Option 6">Option 6</option> */}
-                                </DropdownMenu>
-
-                            </div>
-                        </HeaderButton>
-                        <HeaderButton>
-                            <div className="flex flex-wrap items-center text-lg select-none cursor-pointer">
-                                <p className="pr-4">
-                                    Download CSV
-                                </p>
-                                <img className="pl-1 scale-75" src="/download.svg" />
-                            </div>
-                        </HeaderButton>
-                    </div>
                     <div className="grid grid-cols-[1fr_1.5fr] relative p-8 mt-20">
                         <div className="p-4">
 

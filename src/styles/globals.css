@@ -108,6 +108,10 @@ input:-webkit-autofill:active {
   font-size: inherit;
 }
 
-/* input[type="file"] {
-  display: none;
-} */
+ input[type="file"] {
+  cursor: inherit
+}
+
+::-webkit-file-upload-button {
+   cursor:pointer; 
+  }

@@ -28,7 +28,7 @@ export default function UploadCSV({ CSVData, setCSVData, columnNames, setColumnN
 
         <div className='relative h-60'>
 
-            <label for="CSVfile" className=" absolute grid place-content-center m-auto inset-0 w-full h-40 p-2 bg-white rounded-xl hover:text-red text-black">
+            <label htmlFor="CSVfile" className=" absolute grid place-content-center m-auto inset-0 w-full h-40 p-2 bg-white rounded-xl hover:text-red text-black">
                 {fileName == null && (
                     <div className='flex items-center'>
                         <span className='mr-2 inline-block bg-secondarygrey p-2 rounded-full'>Choose a File</span> or drag it here <span className='inline-block ml-6'><img className='w-[100px]' src='/Upload_B_SQ.png' /></span>
