@@ -300,18 +300,19 @@ const Home: NextPage = (props) => {
                         <TabMenu data={VenueUploadTabMenuArray} urlPath={urlPath} />
                     </header>
 
-                    <div className="grid grid-cols-[1fr_1.5fr] relative p-8 mt-20">
+                    <div className="grid grid-cols-[1fr_2fr] relative px-8 ">
                         <div className="p-4">
 
                             {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}
                         </div>
-                        {// @ts-expect-error
-                            props.productsData != null && (
-                                <div className="bg-red text-black">
-                                    {// @ts-expect-error
-                                        JSON.parse(props.productsData)[0].name}
-                                </div>
-                            )}
+                        {// ts-expect-error
+                            // props.productsData != null && (
+                            //     <div className="bg-red text-black">
+                            //         {// ts-expect-error
+                            //             JSON.parse(props.productsData)[0].name}
+                            //     </div>
+                            // )
+                        }
 
                         <div className="">
                             <form className="bg-gradient-to-b relative from-primary to-tertiary text-white rounded-lg" onSubmit={handleSubmit}>
@@ -322,6 +323,7 @@ const Home: NextPage = (props) => {
                                         JSON.parse(props.productsData)} />
                                 </FormContainer>
                                 <FormContainer optional={true} className='bg-[#f6f6f640]'>
+                                    <DropdownInput label='Stream' options={[{ value: 'Stream 1' }, { value: 'Stream 2' }]} />
                                     <DropdownInput label='Distributor' options={[{ value: 'Distributor 1' }, { value: 'Distributor 2' }]} />
                                     <TextInput label='Custom Product Name' />
                                     <TextInput label='Custom Product Manufacturer' />

@@ -221,7 +221,7 @@ const Home: NextPage = () => {
                         <TabMenu data={VenueUploadTabMenuArray} urlPath={urlPath} />
                     </header>
 
-                    <div className="p-8 mt-20">
+                    <div className="px-8">
                         {/* <CircularAnimation /> */}
                         {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}
                         {/* <SortableTable data={tableData2} layout={layout} onLayoutChange={setLayout} /> */}

@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function FormContainer(props) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     return (
         // <div className={`grid place-content-center ${props.className} rounded-lg`}>

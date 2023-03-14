@@ -51,7 +51,8 @@ import DownloadCSV from '../components/downloadCSV2';
 import UploadCSV from '../components/uploadCSV';
 import PdfViewer from '../components/pdfViewer';
 import { useSession, signIn, signOut } from "next-auth/react";
-import FileInput from '../components/fileInput'
+import FileInput from '../components/fileInput';
+import AddNewInput from '../components/addNewInput';
 
 // const PDFViewer = dynamic(import('../../components/PDFViewer'), { ssr: false });
 // import { Document, Page } from 'react-pdf';
@@ -836,6 +837,33 @@ function Home(props: any) {
                                 {/* <TextInput label='First Name' /> */}
                                 <TextInput label='Last Name' />
                                 <FileInput allowedTypes="image/jpeg image/png" label="document" />
+                                <AddNewInput label='Collector' options={optionArray} router={router} urlPath='/upload/add-facility' />
+                                <div className=' my-3'>
+                                    <div className='flex justify-between rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                        <div className='px-8 py-2 min-w-[300px] text-right'>
+                                            <label htmlFor={props.label}>{props.label}</label>
+                                        </div>
+                                        <div className='grid place-content-center min-w-[300px] rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
+                                            <select className="appearance-none text-white bg-transparent text-center inline-block w-[300px] h-[40px]" name={props.label} id={props.label} multiple>
+                                                {/* <option disabled className="text-black text-left font-bold" value={'123'}>
+                            Type 1
+                        </option> */}
+
+                                                <option className="text-black " value='Product 1'>
+                                                    Product 1
+                                                </option>
+                                                <option className="text-black " value='Product 2'>
+                                                    Product 2
+                                                </option>
+                                                <option className="text-black " value='Product 3'>
+                                                    Product 3
+                                                </option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
                                 {/* <div className='flex relative my-3 h-[40px]'>
                                     <div className='flex  justify-between rounded-lg shadow-[inset_0_0px_8px_0px_#f6f6f6]'>
                                         <div className='px-8 py-2'>

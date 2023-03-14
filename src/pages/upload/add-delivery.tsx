@@ -309,7 +309,7 @@ const Home: NextPage = (props) => {
                         <TabMenu data={VenueUploadTabMenuArray} urlPath={urlPath} />
                     </header>
 
-                    <div className="grid grid-cols-[1fr_1.5fr] relative p-8 mt-20">
+                    <div className="grid grid-cols-[1fr_1.5fr] relative px-8 ">
                         <div className="p-4">
 
                             {/* <SortableTable data={tableData} layout={layout} onLayoutChange={setLayout} sort={sort} setSort={setSort} tableData={tableData} setTableData={setTableData} topTableData={topTableData} setTopTableData={setTopTableData} bottomTableData={bottomTableData} setBottomTableData={setBottomTableData} /> */}

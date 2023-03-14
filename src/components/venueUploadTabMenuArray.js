@@ -41,4 +41,11 @@ export const VenueUploadTabMenuArray = [
         imgB: "/Supplier_B_SQ.png",
         imgW: "/Supplier_W_SQ.png"
     },
+    {
+        title: "Add New Supplier",
+        page: "/upload/add-supplier",
+        imgB: "/Supplier_B_SQ.png",
+        imgW: "/Supplier_W_SQ.png"
+    },
+
 ]
